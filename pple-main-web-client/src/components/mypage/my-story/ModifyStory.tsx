@@ -62,9 +62,11 @@ const ModifyStory: React.FC<Props> = ({
   handlePhoneNumber,
   handleBloodProduction,
 }) => {
-  const { title, content, patient, phoneNumber } = ownDonation;
+  const { title, donationContent, patient, phoneNumber, bloodProduct } =
+    ownDonation;
   return (
     <Block>
+      {console.log(bloodProduct)}
       <div>
         <MyPageElementHeader title="정보수정" />
         <Divider />
@@ -84,7 +86,7 @@ const ModifyStory: React.FC<Props> = ({
             placeholder="내용"
             variant="standard"
             name="content"
-            value={content}
+            value={donationContent}
             onChange={handleText}
           />
           <BloodTypeGroup
@@ -93,7 +95,10 @@ const ModifyStory: React.FC<Props> = ({
             rh={patient.blood.rh}
             handleRh={handleRh}
           />
-          <BloodDonationType handleBloodProduction={handleBloodProduction} />
+          <BloodDonationType
+            currentBloodProduct={bloodProduct}
+            handleBloodProduction={handleBloodProduction}
+          />
           <PhoneInput
             first={phoneNumber.slice(0, 3)}
             second={phoneNumber.slice(3, 7)}
