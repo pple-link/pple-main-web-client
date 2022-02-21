@@ -101,7 +101,7 @@ const ChangeBloodProductValue = (bloodProduct: string) => {
 
 const FilterBloodProduct = (bloodProduct: string, contentArray: any) => {
   return contentArray.map((content, idx) =>
-    content.bloodProduct[0] == ChangeBloodProductValue(bloodProduct) ? (
+    content.bloodProduct == ChangeBloodProductValue(bloodProduct) ? (
       <CardComponent
         key={content.uuid}
         title={content.title}
