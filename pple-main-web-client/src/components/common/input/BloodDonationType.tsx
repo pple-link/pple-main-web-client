@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Label from '../Label';
 import { ToggleButton, styled } from '@mui/material';
 import palette from '../../../lib/styles/palette';
@@ -24,12 +24,14 @@ const StyleToggleButton = styled(ToggleButton)({
   },
 });
 
-interface IBloodProduce {
-  handleBloodProduction?: any;
+interface IBloodProduct {
+  handleBloodProduction: any;
+  currentBloodProduct?: string;
 }
 
-const BloodDonationType: React.FC<IBloodProduce> = ({
+const BloodDonationType: React.FC<IBloodProduct> = ({
   handleBloodProduction,
+  currentBloodProduct,
 }) => {
   const [selected1, setSelected1] = useState(false);
   const [selected2, setSelected2] = useState(false);
@@ -37,20 +39,52 @@ const BloodDonationType: React.FC<IBloodProduce> = ({
   const [selected4, setSelected4] = useState(false);
   const [selected5, setSelected5] = useState(false);
 
+  const setSelectedByCurrentBloodProduct = (currentBloodProduct: string) => {
+    switch (currentBloodProduct) {
+      case 'WHOLE':
+        setSelected1(true);
+        break;
+      case 'PLATELET':
+        setSelected2(true);
+        break;
+      case 'LEUKOCYTE':
+        setSelected3(true);
+        break;
+      case 'PACKED_RED_BLOOD_CELL':
+        setSelected4(true);
+        break;
+      case 'LEUKOCYTE_REDUCED_RED_BLOOD_CELL':
+        setSelected5(true);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const resetSelected = () => {
+    setSelected1(false);
+    setSelected2(false);
+    setSelected3(false);
+    setSelected4(false);
+    setSelected5(false);
+  };
+
   const handleSelect =
     (
       selected: boolean,
       setSelect: React.Dispatch<React.SetStateAction<boolean>>,
     ) =>
     (e: React.ChangeEvent<HTMLButtonElement>) => {
-      setSelected1(false);
-      setSelected2(false);
-      setSelected3(false);
-      setSelected4(false);
-      setSelected5(false);
+      resetSelected();
       setSelect(!selected);
       handleBloodProduction(e);
     };
+
+  useEffect(() => {
+    if (currentBloodProduct != '') {
+      setSelectedByCurrentBloodProduct(currentBloodProduct);
+    }
+  });
 
   return (
     <BloodDonationTypeBlock>
