@@ -27,8 +27,8 @@ const HomeCardTemplateForm: React.FC = () => {
       .get('/api/v1/donation/all')
       .then(res => {
         console.log(res);
-        const newArray = res.data.content;
-        // setContentArray(newArray);
+        const newArray = res.data;
+        setContentArray(newArray);
       })
       .catch(err => {
         console.log(err);
