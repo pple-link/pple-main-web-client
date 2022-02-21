@@ -154,7 +154,7 @@ const RegisterForm = () => {
     return true;
   };
   const setRegisterBody = () => {
-    if (isFilledUserInfo) {
+    if (isFilledUserInfo()) {
       const body = {
         uuid: uuid,
         displayName: user.nickname,
@@ -177,23 +177,24 @@ const RegisterForm = () => {
       return;
     }
     const body = setRegisterBody();
+    console.log(body);
     if (body == false) {
       alert('모든 정보를 입력해주세요');
       return;
     }
 
-    customAxios
-      .patch('/api/v1/account', body, {
-        headers: { 'X-AUTH-TOKEN': `${jwt}` },
-      })
-      .then(() => {
-        console.log('success');
-        navigate('/');
-      })
-      .catch(e => {
-        console.log('ERROR');
-        console.log(e);
-      });
+    // customAxios
+    //   .patch('/api/v1/account', body, {
+    //     headers: { 'X-AUTH-TOKEN': `${jwt}` },
+    //   })
+    //   .then(() => {ㄴ
+    //     console.log('success');
+    //     navigate('/');
+    //   })
+    //   .catch(e => {
+    //     console.log('ERROR');
+    //     console.log(e);
+    //   });
   };
 
   return (
