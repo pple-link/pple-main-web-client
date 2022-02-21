@@ -183,18 +183,18 @@ const RegisterForm = () => {
       return;
     }
 
-    // customAxios
-    //   .patch('/api/v1/account', body, {
-    //     headers: { 'X-AUTH-TOKEN': `${jwt}` },
-    //   })
-    //   .then(() => {ㄴ
-    //     console.log('success');
-    //     navigate('/');
-    //   })
-    //   .catch(e => {
-    //     console.log('ERROR');
-    //     console.log(e);
-    //   });
+    customAxios
+      .patch('/api/v1/account', body, {
+        headers: { 'X-AUTH-TOKEN': `${jwt}` },
+      })
+      .then(() => {
+        console.log('success');
+        navigate('/');
+      })
+      .catch(e => {
+        console.log('ERROR');
+        console.log(e);
+      });
   };
 
   return (
