@@ -8,7 +8,7 @@ import { updateDonation } from '../../api/donation';
 
 export type OwnDonationType = {
   bloodProduct: string;
-  donationContent: string;
+  content: string;
   writer: {
     blood: {
       abo: string;
@@ -41,7 +41,7 @@ const ModifyStoryForm: React.FC = () => {
   const [tempPhone, setTempPhone] = useState<string>('');
   const [ownDonation, setOwnDonation] = useState<OwnDonationType>({
     bloodProduct: '',
-    donationContent: '',
+    content: '',
     writer: {
       blood: {
         abo: '',
@@ -77,6 +77,7 @@ const ModifyStoryForm: React.FC = () => {
           const own = await res.data.content.filter(
             (content, idx) => content.uuid == donationUuid,
           );
+          console.log(own[0]);
           setOwnDonation(own[0]);
         });
     }
@@ -155,9 +156,17 @@ const ModifyStoryForm: React.FC = () => {
 
   const onSubmit = (e: any) => {
     e.preventDefault();
+    const body = {
+      bloodProduct: ownDonation.bloodProduct,
+      content: ownDonation.content,
+      phoneNumber: ownDonation.phoneNumber,
+      title: ownDonation.title,
+      uuid: ownDonation.uuid,
+    };
+    console.log(body);
     updateDonation(donationUuid, {
       bloodProduct: ownDonation.bloodProduct,
-      donationContent: ownDonation.donationContent,
+      content: ownDonation.content,
       phoneNumber: ownDonation.phoneNumber,
       title: ownDonation.title,
       uuid: ownDonation.uuid,
