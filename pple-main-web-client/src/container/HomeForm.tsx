@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { styled } from '@mui/material';
 import HomePageHeader from '../components/home/HomePageHeader';
 import { getCookie, setCookie } from '../lib/hooks/CookieUtil';
 import { checkUser } from '../lib/hooks/CookieUtil';
-import { customAxios } from '../lib/customAxios';
 import HomeCardTemplateForm from './feed/HomeCardTemplateForm';
 import { getAccountProfile } from '../api/account';
 
@@ -18,7 +16,7 @@ const HomeForm = () => {
         setDisplayName(res.data.displayName);
       })
       .catch(err => {
-        console.log('JWT is undefined');
+        console.log('Token is undefined');
         console.log(err);
       });
   }, []);
