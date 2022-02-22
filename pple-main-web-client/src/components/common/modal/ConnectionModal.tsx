@@ -19,6 +19,7 @@ const StyledModal = styled(Modal)({
 });
 const StyledPaper = styled(Paper)({
   borderRadius: '20px',
+  paddingBottom: '10px',
 });
 const CloseBox = styled('div')({
   width: '100%',
@@ -29,27 +30,14 @@ const ImageBox = styled('div')({
   marginBottom: '15px',
 });
 const TitleBox = styled('div')({
-  fontStyle: 'normal',
-  fontWeight: 'bold',
-  fontSize: '22px',
-  lineHeight: '28px',
-  textAlign: 'center',
-  color: '#222222',
-  marginBottom: '10px',
-  padding: '0px 70px',
-  '& .capture': {
-    fontSize: '20px',
-    padding: '0px',
-  },
-});
-const TitleBox2 = styled('div')({
+  width: 'max-content',
   fontStyle: 'normal',
   fontWeight: 'bold',
   fontSize: '20px',
   lineHeight: '28px',
   textAlign: 'center',
   color: '#222222',
-  marginBottom: '10px',
+  margin: '0px 33px 10px 33px',
 });
 const ContentBox = styled('div')({
   fontStyle: 'normal',
@@ -65,6 +53,8 @@ const PhoneBox = styled('div')({
   textAlign: 'center',
   marginTop: '25px',
   marginBottom: '50px',
+  textDecoration: 'underline',
+  textDecorationColor: '#C7C7C7',
 });
 
 interface Props {
@@ -77,7 +67,7 @@ const createPhoneNumber = (phoneNumber: string): string => {
   const first = phoneNumber.slice(0, 3);
   const second = phoneNumber.slice(3, 7);
   const third = phoneNumber.slice(7, 11);
-  return `${first}-${second}-${third}`;
+  return `${first} - ${second} - ${third}`;
 };
 
 const ConnectionModal: React.FC<Props> = ({
@@ -98,50 +88,20 @@ const ConnectionModal: React.FC<Props> = ({
               <CloseIcon style={{ color: '#C7C7C7' }} />
             </IconButton>
           </CloseBox>
-
-          <Swiper
-            style={{ width: '340px' }}
-            slidesPerView={1}
-            centeredSlides
-            pagination={true}
-          >
-            <SwiperSlide>
-              <ImageBox>
-                <img src={Phone} alt="수혈자와 연락" width={90} height={90} />
-              </ImageBox>
-
-              <TitleBox>
-                수혈자와 연락을 통해
-                <br />
-                헌혈을 진행해보세요
-              </TitleBox>
-              <ContentBox>
-                지정헌혈도움 이외의 대화는
-                <br />
-                삼가해주세요
-              </ContentBox>
-              <PhoneBox>{createPhoneNumber(phoneNumber)}</PhoneBox>
-            </SwiperSlide>
-            <SwiperSlide>
-              <ImageBox>
-                <img
-                  src={Capture}
-                  alt="수혈자에게 안내 문자 캡쳐본을 받으세요"
-                  width={90}
-                  height={90}
-                />
-              </ImageBox>
-
-              <TitleBox2>
-                수혈자에게 수혈자등록번호가 적힌
-                <br /> 안내 문자 캡쳐본을 전달받아주세요
-              </TitleBox2>
-              <ContentBox>
-                근처 헌혈의 집 혹은 헌혈카페에 방문해
-                <br /> 지정헌혈을 완료해주세요
-              </ContentBox>
-            </SwiperSlide>
-          </Swiper>
+          <ImageBox>
+            <img src={Capture} alt="수혈자와 연락" width={90} height={90} />
+          </ImageBox>
+          <TitleBox>
+            수혈자에게 수혈자 등록번호가 적힌
+            <br />
+            안내 문자 캡쳐본을 전달 받아주세요
+          </TitleBox>
+          <ContentBox>
+            지정헌혈도움 이외의 대화는
+            <br />
+            삼가해주세요
+          </ContentBox>
+          <PhoneBox>{createPhoneNumber(phoneNumber)}</PhoneBox>
         </StyledPaper>
       </StyledModal>
     </>
