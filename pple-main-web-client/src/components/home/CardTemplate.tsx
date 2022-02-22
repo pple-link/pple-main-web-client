@@ -47,7 +47,7 @@ const RenderPost = (contentArray: any) => {
     <CardComponent
       key={content.uuid}
       title={content.title}
-      content={content.donationContent}
+      content={content.content}
       sort={content.bloodProduct}
       bloodType={
         content.patient.blood.rh == 'POSITIVE'
@@ -66,7 +66,7 @@ const FilterBloodType = (bloodType: string, contentArray: any) => {
       <CardComponent
         key={content.uuid}
         title={content.title}
-        content={content.donationContent}
+        content={content.content}
         sort={content.bloodProduct}
         bloodType={
           content.patient.blood.rh == 'POSITIVE'
@@ -105,7 +105,7 @@ const FilterBloodProduct = (bloodProduct: string, contentArray: any) => {
       <CardComponent
         key={content.uuid}
         title={content.title}
-        content={content.donationContent}
+        content={content.content}
         sort={content.bloodProduct}
         bloodType={
           content.patient.blood.rh == 'POSITIVE'
@@ -128,11 +128,11 @@ const FilterBloodTypeAndBloodProduct = (
 ) => {
   return contentArray.map((content, idx) =>
     content.patient.blood.abo == bloodType.replace('형', '') &&
-    content.bloodProduct[0] == ChangeBloodProductValue(bloodProduct) ? (
+    content.bloodProduct == ChangeBloodProductValue(bloodProduct) ? (
       <CardComponent
         key={idx}
         title={content.title}
-        content={content.donationContent}
+        content={content.content}
         sort={content.bloodProduct}
         bloodType={
           content.patient.blood.rh == 'POSITIVE'
