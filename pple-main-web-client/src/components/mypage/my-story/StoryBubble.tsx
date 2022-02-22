@@ -86,10 +86,10 @@ const StoryBubble: React.FC<StoryBubbleType> = ({ content, index }) => {
             <FeedUserInfo
               time={content.createdAt}
               nickname={content.displayName}
-              imgUrl={content.createdAccount.profileImageUrl}
+              imgUrl={content.writer.profileImageUrl}
             />
             <Title>{title}</Title>
-            <Content>{content.content}</Content>
+            <Content>{content.donationContent}</Content>
             <ReduceButton>
               <IconButton
                 sx={{ color: '#B7B7B7', textAlign: 'center' }}

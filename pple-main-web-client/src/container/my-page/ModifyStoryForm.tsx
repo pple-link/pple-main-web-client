@@ -4,11 +4,12 @@ import { customAxios } from '../../lib/customAxios';
 import { getCookie } from '../../lib/hooks/CookieUtil';
 import React, { useEffect, useMemo, useState } from 'react';
 import produce from 'immer';
+import { updateDonation } from '../../api/donation';
 
 export type OwnDonationType = {
-  bloodProduct: Array<string>;
+  bloodProduct: string;
   content: string;
-  createdAccount: {
+  writer: {
     blood: {
       abo: string;
       rh: string;
@@ -38,11 +39,10 @@ const ModifyStoryForm: React.FC = () => {
   const donationUuid = useParams().donationUuid;
   const jwt = getCookie();
   const [tempPhone, setTempPhone] = useState<string>('');
-  const [bloodProduction, setBloodProduction] = useState<Array<string>>([]);
   const [ownDonation, setOwnDonation] = useState<OwnDonationType>({
-    bloodProduct: [],
+    bloodProduct: '',
     content: '',
-    createdAccount: {
+    writer: {
       blood: {
         abo: '',
         rh: '',
@@ -77,6 +77,7 @@ const ModifyStoryForm: React.FC = () => {
           const own = await res.data.content.filter(
             (content, idx) => content.uuid == donationUuid,
           );
+          console.log(own[0]);
           setOwnDonation(own[0]);
         });
     }
@@ -110,26 +111,11 @@ const ModifyStoryForm: React.FC = () => {
   };
 
   const handleBloodProduction = (e: React.ChangeEvent<HTMLButtonElement>) => {
-    const { ariaPressed, value } = e.target;
-    // 헌혈 종류를 선택했을 때
-    if (ariaPressed == 'false') {
-      const newArr = [...ownDonation.bloodProduct];
-      newArr.push(value);
-      console.log(newArr);
-      const newArray = produce(ownDonation, draft => {
-        draft.bloodProduct = newArr;
-      });
-      setOwnDonation(newArray);
-      return;
-    }
-    // 헌혈 종류 선택 해제 했을 때
-    const newArr = [...ownDonation.bloodProduct].filter(product => {
-      return product !== value;
+    const { value } = e.target;
+    const newState = produce(ownDonation, draft => {
+      draft.bloodProduct = value;
     });
-    const newArray = produce(ownDonation, draft => {
-      draft.bloodProduct = newArr;
-    });
-    setOwnDonation(newArray);
+    setOwnDonation(newState);
   };
 
   const handlePhoneNumber = (e: any) => {
@@ -170,7 +156,21 @@ const ModifyStoryForm: React.FC = () => {
 
   const onSubmit = (e: any) => {
     e.preventDefault();
-    console.log(ownDonation);
+    const body = {
+      bloodProduct: ownDonation.bloodProduct,
+      content: ownDonation.content,
+      phoneNumber: ownDonation.phoneNumber,
+      title: ownDonation.title,
+      uuid: ownDonation.uuid,
+    };
+    console.log(body);
+    updateDonation(donationUuid, {
+      bloodProduct: ownDonation.bloodProduct,
+      content: ownDonation.content,
+      phoneNumber: ownDonation.phoneNumber,
+      title: ownDonation.title,
+      uuid: ownDonation.uuid,
+    });
   };
 
   return (

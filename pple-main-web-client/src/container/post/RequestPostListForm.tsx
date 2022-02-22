@@ -9,7 +9,7 @@ const ShowTemplate = (content: any) => {
     <FeedTemplate
       key={content.uuid}
       title={content.title}
-      content={content.content}
+      content={content.donationContent}
       sort={content.bloodProduct}
       bloodType={
         content.patient.blood.rh == 'POSITIVE'
@@ -18,8 +18,8 @@ const ShowTemplate = (content: any) => {
       }
       time={content.createdAt}
       phoneNumber={content.phoneNumber}
-      displayName={content.createdAccount.displayName}
-      profileImageUrl={content.createdAccount.profileImageUrl}
+      displayName={content.writer.displayName}
+      profileImageUrl={content.writer.profileImageUrl}
     />
   );
 };
@@ -98,7 +98,7 @@ const RequestPostListForm: React.FC = () => {
       .then(res => {
         if (search != undefined) {
           const newArray = res.data.content.filter(content =>
-            content.content.includes(search),
+            content.donationContent.includes(search),
           );
           setContentArray(newArray);
           return;

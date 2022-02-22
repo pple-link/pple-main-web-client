@@ -1,25 +1,11 @@
 import React, { MouseEventHandler, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  styled,
-  Box,
-  Button,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  IconButton,
-  Drawer,
-} from '@mui/material';
+import { styled, Box, Button, IconButton } from '@mui/material';
 import PaperPlus from '../../static/images/PaperPlus.png';
 import Calendar from '../../static/images/Calendar.png';
 import MenuIcon from '@mui/icons-material/Menu';
-import Home from '../../static/images/menu/Home.svg';
-import Mypage from '../../static/images/menu/Mypage.svg';
-import MenuLogo from '../../static/images/menu/MenuLogo.svg';
-import { borderRadius } from '@mui/system';
-import { useCookies } from 'react-cookie';
-import { checkUser, getCookie } from '../../lib/hooks/CookieUtil';
+
+import { getCookie } from '../../lib/hooks/CookieUtil';
 import LoginRequestModal from '../common/modal/LoginRequestModal';
 
 const HomePageHeaderBlock = styled('div')({
@@ -34,6 +20,7 @@ const Title = styled('div')({
   fontSize: '24px',
   display: 'flex',
   justifyContent: 'space-between',
+  lineHeight: '120%',
 });
 
 const ButtonGroup = styled('div')({
@@ -65,7 +52,7 @@ const ButtonContent = styled('div')({
 });
 
 const HomeButton = styled(Button)({
-  width: '45%',
+  width: '48%',
   padding: '8px 0px 12px 0px',
   display: 'flex',
   alignItems: 'center',

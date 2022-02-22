@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { getOwnDonations } from '../../api/donation';
 import MyStory from '../../components/mypage/my-story/MyStory';
 import StoryBubble from '../../components/mypage/my-story/StoryBubble';
 import { customAxios } from '../../lib/customAxios';
@@ -18,7 +19,7 @@ export type ContentType = {
       rh: string;
     };
   };
-  createdAccount: {
+  writer: {
     blood: {
       abo: string;
       rh: string;
@@ -38,20 +39,11 @@ const MyStoryForm = () => {
   const [content, setContent] = useState<Array<ContentType>>([]);
 
   useEffect(() => {
-    const params = {
-      page: 0,
-      size: 10,
-    };
-    customAxios
-      .get('/api/v1/donation/own', {
-        params: params,
-        headers: { 'X-AUTH-TOKEN': `${jwt}` },
-      })
+    getOwnDonations(jwt)
       .then(async res => {
         const newContent = [];
         await res.data.content.map(story => newContent.push(story));
         setContent(newContent);
-        console.log(newContent);
       })
       .catch(e => {
         console.log(e);
@@ -60,9 +52,13 @@ const MyStoryForm = () => {
 
   return (
     <MyStory>
-      {content.map((con: ContentType, index) => (
-        <StoryBubble key={index} index={index} content={con} />
-      ))}
+      {content.length != 0 ? (
+        content.map((con: ContentType, index) => (
+          <StoryBubble key={index} index={index} content={con} />
+        ))
+      ) : (
+        <div>등록된 게시글이 없습니다</div>
+      )}
     </MyStory>
   );
 };

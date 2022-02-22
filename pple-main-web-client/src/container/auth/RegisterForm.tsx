@@ -154,7 +154,7 @@ const RegisterForm = () => {
     return true;
   };
   const setRegisterBody = () => {
-    if (isFilledUserInfo) {
+    if (isFilledUserInfo()) {
       const body = {
         uuid: uuid,
         displayName: user.nickname,
@@ -177,6 +177,7 @@ const RegisterForm = () => {
       return;
     }
     const body = setRegisterBody();
+    console.log(body);
     if (body == false) {
       alert('모든 정보를 입력해주세요');
       return;
