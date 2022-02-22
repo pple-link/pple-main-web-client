@@ -18,7 +18,7 @@ export type ContentType = {
       rh: string;
     };
   };
-  createdAccount: {
+  writer: {
     blood: {
       abo: string;
       rh: string;

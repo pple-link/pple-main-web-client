@@ -86,7 +86,7 @@ const StoryBubble: React.FC<StoryBubbleType> = ({ content, index }) => {
             <FeedUserInfo
               time={content.createdAt}
               nickname={content.displayName}
-              imgUrl={content.createdAccount.profileImageUrl}
+              imgUrl={content.writer.profileImageUrl}
             />
             <Title>{title}</Title>
             <Content>{content.donationContent}</Content>

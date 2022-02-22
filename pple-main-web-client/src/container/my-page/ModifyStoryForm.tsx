@@ -9,7 +9,7 @@ import { updateDonation } from '../../api/donation';
 export type OwnDonationType = {
   bloodProduct: string;
   donationContent: string;
-  createdAccount: {
+  writer: {
     blood: {
       abo: string;
       rh: string;
@@ -42,7 +42,7 @@ const ModifyStoryForm: React.FC = () => {
   const [ownDonation, setOwnDonation] = useState<OwnDonationType>({
     bloodProduct: '',
     donationContent: '',
-    createdAccount: {
+    writer: {
       blood: {
         abo: '',
         rh: '',

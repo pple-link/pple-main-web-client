@@ -18,8 +18,8 @@ const ShowTemplate = (content: any) => {
       }
       time={content.createdAt}
       phoneNumber={content.phoneNumber}
-      displayName={content.createdAccount.displayName}
-      profileImageUrl={content.createdAccount.profileImageUrl}
+      displayName={content.writer.displayName}
+      profileImageUrl={content.writer.profileImageUrl}
     />
   );
 };
