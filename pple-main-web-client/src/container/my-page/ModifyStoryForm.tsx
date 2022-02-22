@@ -77,7 +77,6 @@ const ModifyStoryForm: React.FC = () => {
           const own = await res.data.content.filter(
             (content, idx) => content.uuid == donationUuid,
           );
-          console.log(own[0]);
           setOwnDonation(own[0]);
         });
     }
@@ -161,16 +160,23 @@ const ModifyStoryForm: React.FC = () => {
       content: ownDonation.content,
       phoneNumber: ownDonation.phoneNumber,
       title: ownDonation.title,
-      uuid: ownDonation.uuid,
+      uuid: ownDonation.writer.uuid,
     };
     console.log(body);
+    console.log(donationUuid);
     updateDonation(donationUuid, {
       bloodProduct: ownDonation.bloodProduct,
       content: ownDonation.content,
       phoneNumber: ownDonation.phoneNumber,
       title: ownDonation.title,
       uuid: ownDonation.uuid,
-    });
+    })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   return (
