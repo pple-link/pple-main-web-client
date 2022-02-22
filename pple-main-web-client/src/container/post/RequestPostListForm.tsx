@@ -9,7 +9,7 @@ const ShowTemplate = (content: any) => {
     <FeedTemplate
       key={content.uuid}
       title={content.title}
-      content={content.donationContent}
+      content={content.content}
       sort={content.bloodProduct}
       bloodType={
         content.patient.blood.rh == 'POSITIVE'
