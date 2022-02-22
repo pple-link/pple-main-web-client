@@ -5,6 +5,7 @@ import { getCookie, setCookie } from '../lib/hooks/CookieUtil';
 import { checkUser } from '../lib/hooks/CookieUtil';
 import { customAxios } from '../lib/customAxios';
 import HomeCardTemplateForm from './feed/HomeCardTemplateForm';
+import { getAccountProfile } from '../api/account';
 
 const HomeForm = () => {
   setCookie();
@@ -12,19 +13,15 @@ const HomeForm = () => {
   const [displayName, setDisplayName] = useState<string>('피플');
   const jwt = getCookie();
   useEffect(() => {
-    if (jwt != undefined) {
-      customAxios
-        .get('/api/v1/account/profile', {
-          headers: { 'X-AUTH-TOKEN': `${jwt}` },
-        })
-        .then(res => {
-          setDisplayName(res.data.displayName);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }
-  }, [jwt]);
+    getAccountProfile(jwt)
+      .then(res => {
+        setDisplayName(res.data.displayName);
+      })
+      .catch(err => {
+        console.log('JWT is undefined');
+        console.log(err);
+      });
+  }, []);
   return (
     <>
       <HomePageHeader name={displayName} />
