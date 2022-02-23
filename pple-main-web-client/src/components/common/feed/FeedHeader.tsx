@@ -3,7 +3,7 @@ import { styled } from '@mui/material';
 import bar from '../../../static/images/bar.png';
 import RadiusButton from '../buttons/RadiusButton';
 import A from '../../../static/images/bloodType/A+.svg';
-import An from '../../../static/images/bloodType/A+.svg';
+import An from '../../../static/images/bloodType/A-.svg';
 import B from '../../../static/images/bloodType/B+.svg';
 import Bn from '../../../static/images/bloodType/B-.svg';
 import O from '../../../static/images/bloodType/O+.svg';
