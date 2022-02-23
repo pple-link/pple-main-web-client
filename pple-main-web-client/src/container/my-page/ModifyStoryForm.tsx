@@ -10,7 +10,7 @@ export type OwnDonationType = {
   bloodProduct: string;
   content: string;
   writer: {
-    blood: {
+    bloodType: {
       abo: string;
       rh: string;
     };
@@ -23,7 +23,7 @@ export type OwnDonationType = {
   modifiedAt: string;
   modifiedBy: number;
   patient: {
-    blood: {
+    bloodType: {
       abo: string;
       rh: string;
     };
@@ -43,7 +43,7 @@ const ModifyStoryForm: React.FC = () => {
     bloodProduct: '',
     content: '',
     writer: {
-      blood: {
+      bloodType: {
         abo: '',
         rh: '',
       },
@@ -56,7 +56,7 @@ const ModifyStoryForm: React.FC = () => {
     modifiedAt: '',
     modifiedBy: 0,
     patient: {
-      blood: {
+      bloodType: {
         abo: '',
         rh: '',
       },
@@ -93,17 +93,17 @@ const ModifyStoryForm: React.FC = () => {
   const handleBloodType = (e: any) => {
     const { value } = e.target;
     const nextState = produce(ownDonation, draft => {
-      draft.patient.blood.abo = value;
+      draft.patient.bloodType.abo = value;
     });
     setOwnDonation(nextState);
   };
 
   const handleRh = (e: any) => {
     const nextState = produce(ownDonation, draft => {
-      if (ownDonation.patient.blood.rh == 'POSITIVE') {
-        draft.patient.blood.rh = 'NEGATIVE';
+      if (ownDonation.patient.bloodType.rh == 'POSITIVE') {
+        draft.patient.bloodType.rh = 'NEGATIVE';
       } else {
-        draft.patient.blood.rh = 'POSITIVE';
+        draft.patient.bloodType.rh = 'POSITIVE';
       }
     });
     setOwnDonation(nextState);

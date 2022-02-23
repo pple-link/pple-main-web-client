@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { styled, Paper, IconButton, MobileStepper } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import Phone from '../../../static/images/modal/Phone.svg';
 import Capture from '../../../static/images/modal/capture.svg';
 import SwiperCore, { Navigation, Pagination, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';

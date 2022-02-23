@@ -131,7 +131,7 @@ const RequestRegisterForm: React.FC = () => {
         bloodProduct: post.bloodProduct,
         content: post.content,
         patient: {
-          blood: {
+          bloodType: {
             abo: post.abo,
             rh: post.rh,
           },
