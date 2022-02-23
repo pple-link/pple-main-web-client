@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { styled, Paper, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import Coin from '../../../lib/images/modal/Coin.svg';
+import Coin from '../../../static/images/modal/Coin.svg';
 import '../../../static/fonts/fonts.css';
 
 const StyledModal = styled(Modal)({
@@ -49,15 +49,18 @@ const ContentBox = styled('div')({
   minWidth: '280px',
 });
 
-const ExtensionModal: React.FC = () => {
-  const [open, setOpen] = useState(false);
+interface Props {
+  open: boolean;
+  setOpen: any;
+}
+
+const ExtensionModal: React.FC<Props> = ({ open, setOpen }) => {
   const onClick = () => {
     setOpen(!open);
   };
 
   return (
     <>
-      <button onClick={onClick}></button>
       <StyledModal isOpen={open}>
         <StyledPaper elevation={1}>
           <CloseBox>

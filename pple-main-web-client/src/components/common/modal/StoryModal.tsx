@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { styled, Paper, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import Clock from '../../../lib/images/modal/Clock.svg';
+import Clock from '../../../static/images/modal/Clock.svg';
 import ModalButton from './ModalButton';
 import '../../../static/fonts/fonts.css';
+import { updateExpiredDonation } from '../../../api/donation';
 const StyledModal = styled(Modal)({
   position: 'fixed',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
   fontFamily: 'Pretendard',
+  outline: 'none',
 });
 
 const StylePaper = styled(Paper)({
@@ -54,14 +56,24 @@ const ButtonBox = styled('div')({
   padding: '0px 25px 25px 25px',
 });
 
-const StoryModal = () => {
-  const [open, setOpen] = useState(false);
+interface Props {
+  open: boolean;
+  setOpen: any;
+  donationUuid: string;
+}
+
+const StoryModal: React.FC<Props> = ({ open, setOpen, donationUuid }) => {
   const onClick = () => {
     setOpen(!open);
   };
+
+  const handleUpdate = () => {
+    updateExpiredDonation(donationUuid);
+    setOpen(!open);
+  };
+
   return (
     <>
-      <button onClick={onClick}>모달 테스트</button>
       <StyledModal isOpen={open}>
         <StylePaper elevation={2}>
           {/* 닫기 버튼 */}
@@ -89,7 +101,7 @@ const StoryModal = () => {
               background="#F4F4F4"
               color="#B7B7B7"
             />
-            <ModalButton onClick={onClick} text="연장하기" />
+            <ModalButton onClick={handleUpdate} text="연장하기" />
           </ButtonBox>
         </StylePaper>
       </StyledModal>
