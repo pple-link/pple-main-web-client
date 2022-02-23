@@ -90,8 +90,8 @@ const ModifyStory: React.FC<Props> = ({
           />
           <BloodTypeGroup
             onChange={handleBloodType}
-            abo={patient.blood.abo}
-            rh={patient.blood.rh}
+            abo={patient.bloodType.abo}
+            rh={patient.bloodType.rh}
             handleRh={handleRh}
           />
           <BloodDonationType

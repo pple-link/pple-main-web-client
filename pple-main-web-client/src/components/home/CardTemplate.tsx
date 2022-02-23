@@ -50,9 +50,9 @@ const RenderPost = (contentArray: any) => {
       content={content.content}
       sort={content.bloodProduct}
       bloodType={
-        content.patient.blood.rh == 'POSITIVE'
-          ? `${content.patient.blood.abo}+`
-          : `${content.patient.blood.abo}-`
+        content.patient.bloodType.rh == 'POSITIVE'
+          ? `${content.patient.bloodType.abo}+`
+          : `${content.patient.bloodType.abo}-`
       }
       time={content.createdAt}
       phoneNumber={content.phoneNumber}
@@ -62,16 +62,16 @@ const RenderPost = (contentArray: any) => {
 
 const FilterBloodType = (bloodType: string, contentArray: any) => {
   return contentArray.map((content, idx) =>
-    content.patient.blood.abo == bloodType.replace('형', '') ? (
+    content.patient.bloodType.abo == bloodType.replace('형', '') ? (
       <CardComponent
         key={content.uuid}
         title={content.title}
         content={content.content}
         sort={content.bloodProduct}
         bloodType={
-          content.patient.blood.rh == 'POSITIVE'
-            ? `${content.patient.blood.abo}+`
-            : `${content.patient.blood.abo}-`
+          content.patient.bloodType.rh == 'POSITIVE'
+            ? `${content.patient.bloodType.abo}+`
+            : `${content.patient.bloodType.abo}-`
         }
         time={content.createdAt}
         phoneNumber={content.phoneNumber}
@@ -108,9 +108,9 @@ const FilterBloodProduct = (bloodProduct: string, contentArray: any) => {
         content={content.content}
         sort={content.bloodProduct}
         bloodType={
-          content.patient.blood.rh == 'POSITIVE'
-            ? `${content.patient.blood.abo}+`
-            : `${content.patient.blood.abo}-`
+          content.patient.bloodType.rh == 'POSITIVE'
+            ? `${content.patient.bloodType.abo}+`
+            : `${content.patient.bloodType.abo}-`
         }
         time={content.createdAt}
         phoneNumber={content.phoneNumber}
@@ -127,7 +127,7 @@ const FilterBloodTypeAndBloodProduct = (
   contentArray,
 ) => {
   return contentArray.map((content, idx) =>
-    content.patient.blood.abo == bloodType.replace('형', '') &&
+    content.patient.bloodType.abo == bloodType.replace('형', '') &&
     content.bloodProduct == ChangeBloodProductValue(bloodProduct) ? (
       <CardComponent
         key={idx}
@@ -135,9 +135,9 @@ const FilterBloodTypeAndBloodProduct = (
         content={content.content}
         sort={content.bloodProduct}
         bloodType={
-          content.patient.blood.rh == 'POSITIVE'
-            ? `${content.patient.blood.abo}+`
-            : `${content.patient.blood.abo}-`
+          content.patient.bloodType.rh == 'POSITIVE'
+            ? `${content.patient.bloodType.abo}+`
+            : `${content.patient.bloodType.abo}-`
         }
         time={content.createdAt}
         phoneNumber={content.phoneNumber}

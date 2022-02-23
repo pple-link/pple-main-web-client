@@ -16,10 +16,10 @@ const ProfileForm = () => {
       .then(res => {
         setProfileImageUrl(res.data.profileImageUrl);
         setDisplayName(res.data.displayName);
-        if (res.data.blood.rh == 'POSITIVE') {
-          setBloodType(`${res.data.blood.abo}+`);
-        } else if (res.data.blood.rh == 'NEGATIVE') {
-          setBloodType(`${res.data.blood.abo}-`);
+        if (res.data.bloodType.rh == 'POSITIVE') {
+          setBloodType(`${res.data.bloodType.abo}+`);
+        } else if (res.data.bloodType.rh == 'NEGATIVE') {
+          setBloodType(`${res.data.bloodType.abo}-`);
         }
       });
   }, []);

@@ -72,9 +72,9 @@ const StoryBubble: React.FC<StoryBubbleType> = ({ content, index }) => {
       <Paper elevation={2} sx={{ borderRadius: '15px' }}>
         <FeedHeader
           bloodType={
-            content.patient.blood.rh == 'POSITIVE'
-              ? `${content.patient.blood.abo}+`
-              : `${content.patient.blood.abo}-`
+            content.patient.bloodType.rh == 'POSITIVE'
+              ? `${content.patient.bloodType.abo}+`
+              : `${content.patient.bloodType.abo}-`
           }
           sort={content.bloodProduct}
           buttonText="정보수정"

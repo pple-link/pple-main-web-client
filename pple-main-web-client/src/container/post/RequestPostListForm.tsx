@@ -12,9 +12,9 @@ const ShowTemplate = (content: any) => {
       content={content.content}
       sort={content.bloodProduct}
       bloodType={
-        content.patient.blood.rh == 'POSITIVE'
-          ? `${content.patient.blood.abo}+`
-          : `${content.patient.blood.abo}-`
+        content.patient.bloodType.rh == 'POSITIVE'
+          ? `${content.patient.bloodType.abo}+`
+          : `${content.patient.bloodType.abo}-`
       }
       time={content.createdAt}
       phoneNumber={content.phoneNumber}
@@ -30,7 +30,7 @@ const RenderPost = (contentArray: any) => {
 
 const FilterBloodType = (bloodType: string, contentArray: any) => {
   return contentArray.map((content, idx) =>
-    content.patient.blood.abo == bloodType.replace('형', '') ? (
+    content.patient.bloodType.abo == bloodType.replace('형', '') ? (
       ShowTemplate(content)
     ) : (
       <div key={idx}></div>
@@ -71,7 +71,7 @@ const FilterBloodTypeAndBloodProduct = (
   contentArray,
 ) => {
   return contentArray.map((content, idx) =>
-    content.patient.blood.abo == bloodType.replace('형', '') &&
+    content.patient.bloodType.abo == bloodType.replace('형', '') &&
     content.bloodProduct == ChangeBloodProductValue(bloodProduct) ? (
       ShowTemplate(content)
     ) : (

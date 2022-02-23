@@ -161,7 +161,7 @@ const RegisterForm = () => {
         birthDay: `${user.year}-${user.month}-${user.day}`,
         gender: user.gender,
         phoneNumber: user.phone.first + user.phone.second + user.phone.third,
-        blood: {
+        bloodType: {
           rh: user.rh,
           abo: user.abo,
         },
