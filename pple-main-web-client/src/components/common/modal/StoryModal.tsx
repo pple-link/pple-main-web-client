@@ -5,7 +5,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import Clock from '../../../static/images/modal/Clock.svg';
 import ModalButton from './ModalButton';
 import '../../../static/fonts/fonts.css';
-import { updateExpiredDonation } from '../../../api/donation';
+import {
+  deleteExpiredDonation,
+  updateExpiredDonation,
+} from '../../../api/donation';
 const StyledModal = styled(Modal)({
   position: 'fixed',
   top: '50%',
@@ -72,6 +75,11 @@ const StoryModal: React.FC<Props> = ({ open, setOpen, donationUuid }) => {
     setOpen(!open);
   };
 
+  const handleDelete = () => {
+    deleteExpiredDonation(donationUuid);
+    setOpen(!open);
+  };
+
   return (
     <>
       <StyledModal isOpen={open}>
@@ -96,7 +104,7 @@ const StoryModal: React.FC<Props> = ({ open, setOpen, donationUuid }) => {
           </ContentBox>
           <ButtonBox>
             <ModalButton
-              onClick={onClick}
+              onClick={handleDelete}
               text="내리기"
               background="#F4F4F4"
               color="#B7B7B7"

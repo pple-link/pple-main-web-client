@@ -30,3 +30,15 @@ export const updateExpiredDonation = (donationUuid: string) => {
       console.log('Updating Donation is failed');
     });
 };
+
+export const deleteExpiredDonation = (donationUuid: string) => {
+  return customAxios
+    .patch(`/api/v1/donation/delete/${donationUuid}`)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+      console.log('Deleting Donation is failed');
+    });
+};
