@@ -18,7 +18,9 @@ const HomeForm = () => {
   useEffect(() => {
     getAccountProfile(jwt)
       .then(res => {
-        setDisplayName(res.data.displayName);
+        if (res.data) {
+          setDisplayName(res.data.displayName);
+        }
       })
       .catch(err => {
         console.log('Token is undefined');
