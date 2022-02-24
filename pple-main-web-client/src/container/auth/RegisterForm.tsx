@@ -6,6 +6,7 @@ import { RootState } from '../../models';
 import { customAxios } from '../../lib/customAxios';
 import { getCookie } from '../../lib/hooks/CookieUtil';
 import { useNavigate } from 'react-router-dom';
+import { postSignUpBody } from '../../api/account';
 
 // 회원 정보 관련 인터페이스
 interface IUser {
@@ -165,6 +166,9 @@ const RegisterForm = () => {
           rh: user.rh,
           abo: user.abo,
         },
+        privacyPolicy: privacy,
+        termOfService: term,
+        marketingUserAgreement: marketing,
       };
       return body;
     }
@@ -183,18 +187,7 @@ const RegisterForm = () => {
       return;
     }
 
-    customAxios
-      .patch('/api/v1/account', body, {
-        headers: { 'X-AUTH-TOKEN': `${jwt}` },
-      })
-      .then(() => {
-        console.log('success');
-        navigate('/');
-      })
-      .catch(e => {
-        console.log('ERROR');
-        console.log(e);
-      });
+    postSignUpBody(body, jwt);
   };
 
   return (
