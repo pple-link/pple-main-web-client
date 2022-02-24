@@ -187,7 +187,14 @@ const RegisterForm = () => {
       return;
     }
 
-    postSignUpBody(body, jwt);
+    postSignUpBody(body, jwt)
+      .then(() => {
+        navigate('/');
+      })
+      .catch(err => {
+        console.log(err);
+        console.log('patch Sign Up Error');
+      });
   };
 
   return (
