@@ -1,11 +1,17 @@
 import { customAxios } from '../lib/customAxios';
 
 export const updateDonation = (donationUuid: string, parameter: any) => {
-  return customAxios.patch(`/api/v1/donation/${donationUuid}`, {
+  return customAxios.post(`/api/v1/donation/${donationUuid}`, {
     parameter,
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
     },
+  });
+};
+
+export const getDonationsOfActiveStatus = () => {
+  return customAxios.get('/api/v1/donation', {
+    params: { status: 'ACTIVE' },
   });
 };
 
