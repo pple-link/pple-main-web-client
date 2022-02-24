@@ -26,13 +26,16 @@ const HomeForm = () => {
         console.log('Token is undefined');
         console.log(err);
       });
-    getExpiredDonations().then(res => {
-      console.log(res);
-      if (res.data.length) {
-        setExtensionOpen(!extensionOpen);
-        setExpiredDonationUuid(res.data[0].uuid);
-      }
-    });
+
+    if (jwt) {
+      getExpiredDonations().then(res => {
+        console.log(res);
+        if (res.data.length && res.data[0].status == 'ACTIVE') {
+          setExtensionOpen(!extensionOpen);
+          setExpiredDonationUuid(res.data[0].uuid);
+        }
+      });
+    }
   }, []);
   return (
     <>

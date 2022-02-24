@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getDonationsOfActiveStatus } from '../../api/donation';
 import LoginRequestModal from '../../components/common/modal/LoginRequestModal';
 import CardTemplate from '../../components/home/CardTemplate';
 import { customAxios } from '../../lib/customAxios';
@@ -23,11 +24,10 @@ const HomeCardTemplateForm: React.FC = () => {
   };
 
   useEffect(() => {
-    customAxios
-      .get('/api/v1/donation/all')
+    getDonationsOfActiveStatus()
       .then(res => {
         console.log(res);
-        const newArray = res.data;
+        const newArray = res.data.content;
         setContentArray(newArray);
       })
       .catch(err => {

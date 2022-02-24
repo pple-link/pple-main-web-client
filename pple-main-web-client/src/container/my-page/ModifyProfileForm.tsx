@@ -42,9 +42,7 @@ const ModifyProfileForm = () => {
       displayName: displayName,
     };
     // 닉네임 변경
-    console.log(uuid);
     console.log(`/api/v1/account/${uuid}`);
-    console.log(body);
     customAxios
       .patch(`/api/v1/account/${uuid}`, body, {
         headers: { 'X-AUTH-TOKEN': `${jwt}` },

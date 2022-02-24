@@ -73,11 +73,13 @@ const StoryModal: React.FC<Props> = ({ open, setOpen, donationUuid }) => {
   const handleUpdate = () => {
     updateExpiredDonation(donationUuid);
     setOpen(!open);
+    location.reload();
   };
 
   const handleDelete = () => {
     deleteExpiredDonation(donationUuid);
     setOpen(!open);
+    location.reload();
   };
 
   return (
