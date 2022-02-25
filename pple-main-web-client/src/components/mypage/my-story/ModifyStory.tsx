@@ -65,7 +65,6 @@ const ModifyStory: React.FC<Props> = ({
   const { title, content, patient, phoneNumber, bloodProduct } = ownDonation;
   return (
     <Block>
-      {console.log(bloodProduct)}
       <div>
         <MyPageElementHeader title="정보수정" />
         <Divider />

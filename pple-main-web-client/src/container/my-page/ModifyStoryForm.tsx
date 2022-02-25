@@ -175,7 +175,7 @@ const ModifyStoryForm: React.FC = () => {
         content: ownDonation.content,
         phoneNumber: ownDonation.phoneNumber,
         title: ownDonation.title,
-        uuid: ownDonation.writer.uuid,
+        uuid: donationUuid,
       })
       .then(res => {
         console.log(res);
