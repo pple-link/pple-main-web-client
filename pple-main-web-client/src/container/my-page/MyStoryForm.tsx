@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getOwnDonations } from '../../api/donation';
+import { getOwnDonations } from '../../lib/api/donation';
 import MyStory from '../../components/mypage/my-story/MyStory';
 import StoryBubble from '../../components/mypage/my-story/StoryBubble';
 import { customAxios } from '../../lib/customAxios';
@@ -42,7 +42,11 @@ const MyStoryForm = () => {
     getOwnDonations(jwt)
       .then(async res => {
         const newContent = [];
-        await res.data.content.map(story => newContent.push(story));
+        await res.data.content.map(story => {
+          if (story.status == 'ACTIVE') {
+            newContent.push(story);
+          }
+        });
         setContent(newContent);
       })
       .catch(e => {

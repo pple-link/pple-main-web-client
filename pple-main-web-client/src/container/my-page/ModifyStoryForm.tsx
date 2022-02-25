@@ -1,45 +1,18 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ModifyStory from '../../components/mypage/my-story/ModifyStory';
 import { customAxios } from '../../lib/customAxios';
 import { getCookie } from '../../lib/hooks/CookieUtil';
 import React, { useEffect, useMemo, useState } from 'react';
 import produce from 'immer';
-import { updateDonation } from '../../api/donation';
-
-export type OwnDonationType = {
-  bloodProduct: string;
-  content: string;
-  writer: {
-    bloodType: {
-      abo: string;
-      rh: string;
-    };
-    displayName: string;
-    profileImageUrl: string;
-    uuid: string;
-  };
-  createdAt: string;
-  lastRenewedAt: string;
-  modifiedAt: string;
-  modifiedBy: number;
-  patient: {
-    bloodType: {
-      abo: string;
-      rh: string;
-    };
-  };
-  phoneNumber: string;
-  renewedCount: number;
-  status: string;
-  title: string;
-  uuid: string;
-};
+import { updateDonation } from '../../lib/api/donation';
+import OwnDonation from '../../lib/interface/OwnDonation';
 
 const ModifyStoryForm: React.FC = () => {
+  const navigator = useNavigate();
   const donationUuid = useParams().donationUuid;
   const jwt = getCookie();
   const [tempPhone, setTempPhone] = useState<string>('');
-  const [ownDonation, setOwnDonation] = useState<OwnDonationType>({
+  const [ownDonation, setOwnDonation] = useState<OwnDonation>({
     bloodProduct: '',
     content: '',
     writer: {
@@ -74,6 +47,7 @@ const ModifyStoryForm: React.FC = () => {
           headers: { 'X-AUTH-TOKEN': `${jwt}` },
         })
         .then(async res => {
+          console.log(res);
           const own = await res.data.content.filter(
             (content, idx) => content.uuid == donationUuid,
           );
@@ -160,19 +134,19 @@ const ModifyStoryForm: React.FC = () => {
       content: ownDonation.content,
       phoneNumber: ownDonation.phoneNumber,
       title: ownDonation.title,
-      uuid: ownDonation.writer.uuid,
+      uuid: donationUuid,
+      patient: {
+        bloodType: {
+          abo: ownDonation.patient.bloodType.abo,
+          rh: ownDonation.patient.bloodType.rh,
+        },
+      },
     };
-    console.log(body);
-    console.log(donationUuid);
-    updateDonation(donationUuid, {
-      bloodProduct: ownDonation.bloodProduct,
-      content: ownDonation.content,
-      phoneNumber: ownDonation.phoneNumber,
-      title: ownDonation.title,
-      uuid: ownDonation.uuid,
-    })
+
+    updateDonation(donationUuid, body, jwt)
       .then(res => {
         console.log(res);
+        navigator(-1);
       })
       .catch(err => {
         console.log(err);

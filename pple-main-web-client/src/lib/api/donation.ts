@@ -1,10 +1,14 @@
-import { customAxios } from '../lib/customAxios';
+import { customAxios } from '../customAxios';
 
-export const updateDonation = (donationUuid: string, parameter: any) => {
-  return customAxios.post(`/api/v1/donation/${donationUuid}`, {
-    parameter,
+export const updateDonation = (
+  donationUuid: string,
+  parameter: any,
+  jwt: string,
+) => {
+  return customAxios.post(`/api/v1/donation/${donationUuid}`, parameter, {
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
+      'X-AUTH-TOKEN': `${jwt}`,
     },
   });
 };

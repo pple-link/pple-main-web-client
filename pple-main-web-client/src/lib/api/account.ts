@@ -1,6 +1,5 @@
-import { useNavigate } from 'react-router-dom';
 import SignUp from '../interface/SignUp';
-import { customAxios } from '../lib/customAxios';
+import { customAxios } from '../customAxios';
 
 export const getAccountProfile = (jwt: string) => {
   return customAxios.get('/api/v1/account/profile', {

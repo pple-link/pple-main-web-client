@@ -3,8 +3,8 @@ import HomePageHeader from '../components/home/HomePageHeader';
 import { getCookie, setCookie } from '../lib/hooks/CookieUtil';
 import { checkUser } from '../lib/hooks/CookieUtil';
 import HomeCardTemplateForm from './feed/HomeCardTemplateForm';
-import { getAccountProfile } from '../api/account';
-import { getExpiredDonations } from '../api/donation';
+import { getAccountProfile } from '../lib/api/account';
+import { getExpiredDonations } from '../lib/api/donation';
 import StoryModal from '../components/common/modal/StoryModal';
 
 const HomeForm = () => {

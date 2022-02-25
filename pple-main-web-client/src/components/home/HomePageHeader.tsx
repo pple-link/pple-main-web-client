@@ -94,13 +94,11 @@ const HomePageHeader: React.FC<HomeHeaderProps> = ({ name }) => {
   const handleModalOpen = () => {
     setModalOpen(!modalOpen);
   };
+
   const goPage = () => {
-    if (jwt !== undefined) {
-      navigate('/page');
-      return;
-    }
-    setModalOpen(!modalOpen);
+    navigate('/page');
   };
+
   const goRequestRegister: MouseEventHandler = () => {
     if (isAuth()) {
       navigate('/post/register');

@@ -89,7 +89,7 @@ const StoryBubble: React.FC<StoryBubbleType> = ({ content, index }) => {
               imgUrl={content.writer.profileImageUrl}
             />
             <Title>{title}</Title>
-            <Content>{content.donationContent}</Content>
+            <Content>{content.content}</Content>
             <ReduceButton>
               <IconButton
                 sx={{ color: '#B7B7B7', textAlign: 'center' }}
