@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { getDonationsOfActiveStatus } from '../../lib/api/donation';
 import LoginRequestModal from '../../components/common/modal/LoginRequestModal';
 import CardTemplate from '../../components/home/CardTemplate';
-import { customAxios } from '../../lib/customAxios';
 import { getCookie } from '../../lib/hooks/CookieUtil';
 
 const HomeCardTemplateForm: React.FC = () => {
@@ -26,7 +25,6 @@ const HomeCardTemplateForm: React.FC = () => {
   useEffect(() => {
     getDonationsOfActiveStatus()
       .then(res => {
-        console.log(res);
         const newArray = res.data.content;
         setContentArray(newArray);
       })
