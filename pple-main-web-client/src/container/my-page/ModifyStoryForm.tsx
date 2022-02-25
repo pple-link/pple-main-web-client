@@ -5,42 +5,14 @@ import { getCookie } from '../../lib/hooks/CookieUtil';
 import React, { useEffect, useMemo, useState } from 'react';
 import produce from 'immer';
 import { updateDonation } from '../../lib/api/donation';
-
-export type OwnDonationType = {
-  bloodProduct: string;
-  content: string;
-  writer: {
-    bloodType: {
-      abo: string;
-      rh: string;
-    };
-    displayName: string;
-    profileImageUrl: string;
-    uuid: string;
-  };
-  createdAt: string;
-  lastRenewedAt: string;
-  modifiedAt: string;
-  modifiedBy: number;
-  patient: {
-    bloodType: {
-      abo: string;
-      rh: string;
-    };
-  };
-  phoneNumber: string;
-  renewedCount: number;
-  status: string;
-  title: string;
-  uuid: string;
-};
+import OwnDonation from '../../lib/interface/OwnDonation';
 
 const ModifyStoryForm: React.FC = () => {
   const navigator = useNavigate();
   const donationUuid = useParams().donationUuid;
   const jwt = getCookie();
   const [tempPhone, setTempPhone] = useState<string>('');
-  const [ownDonation, setOwnDonation] = useState<OwnDonationType>({
+  const [ownDonation, setOwnDonation] = useState<OwnDonation>({
     bloodProduct: '',
     content: '',
     writer: {
@@ -157,26 +129,14 @@ const ModifyStoryForm: React.FC = () => {
 
   const onSubmit = (e: any) => {
     e.preventDefault();
-    const body = {
+
+    updateDonation(donationUuid, {
       bloodProduct: ownDonation.bloodProduct,
       content: ownDonation.content,
       phoneNumber: ownDonation.phoneNumber,
       title: ownDonation.title,
       uuid: donationUuid,
-    };
-    console.log(body);
-
-    customAxios
-      .post(`/api/v1/donation/${donationUuid}`, {
-        headers: {
-          'Content-Type': 'application/json;charset=UTF-8',
-        },
-        bloodProduct: ownDonation.bloodProduct,
-        content: ownDonation.content,
-        phoneNumber: ownDonation.phoneNumber,
-        title: ownDonation.title,
-        uuid: donationUuid,
-      })
+    })
       .then(res => {
         console.log(res);
         navigator(-1);

@@ -36,7 +36,7 @@ const HomeForm = () => {
         }
       });
     }
-  }, [displayName]);
+  }, []);
   return (
     <>
       <StoryModal
