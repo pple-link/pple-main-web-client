@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getDonationsOfActiveStatus } from '../../api/donation';
+import { getDonationsOfActiveStatus } from '../../lib/api/donation';
 import LoginRequestModal from '../../components/common/modal/LoginRequestModal';
 import CardTemplate from '../../components/home/CardTemplate';
 import { customAxios } from '../../lib/customAxios';

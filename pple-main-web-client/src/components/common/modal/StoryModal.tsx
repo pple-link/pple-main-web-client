@@ -8,7 +8,7 @@ import '../../../static/fonts/fonts.css';
 import {
   deleteExpiredDonation,
   updateExpiredDonation,
-} from '../../../api/donation';
+} from '../../../lib/api/donation';
 const StyledModal = styled(Modal)({
   position: 'fixed',
   top: '50%',

@@ -1,4 +1,4 @@
-import { customAxios } from '../lib/customAxios';
+import { customAxios } from '../customAxios';
 
 export const updateDonation = (donationUuid: string, parameter: any) => {
   return customAxios.post(`/api/v1/donation/${donationUuid}`, {

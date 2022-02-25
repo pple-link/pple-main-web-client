@@ -1,10 +1,10 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ModifyStory from '../../components/mypage/my-story/ModifyStory';
 import { customAxios } from '../../lib/customAxios';
 import { getCookie } from '../../lib/hooks/CookieUtil';
 import React, { useEffect, useMemo, useState } from 'react';
 import produce from 'immer';
-import { updateDonation } from '../../api/donation';
+import { updateDonation } from '../../lib/api/donation';
 
 export type OwnDonationType = {
   bloodProduct: string;
@@ -36,6 +36,7 @@ export type OwnDonationType = {
 };
 
 const ModifyStoryForm: React.FC = () => {
+  const navigator = useNavigate();
   const donationUuid = useParams().donationUuid;
   const jwt = getCookie();
   const [tempPhone, setTempPhone] = useState<string>('');
@@ -74,6 +75,7 @@ const ModifyStoryForm: React.FC = () => {
           headers: { 'X-AUTH-TOKEN': `${jwt}` },
         })
         .then(async res => {
+          console.log(res);
           const own = await res.data.content.filter(
             (content, idx) => content.uuid == donationUuid,
           );
@@ -160,19 +162,24 @@ const ModifyStoryForm: React.FC = () => {
       content: ownDonation.content,
       phoneNumber: ownDonation.phoneNumber,
       title: ownDonation.title,
-      uuid: ownDonation.writer.uuid,
+      uuid: donationUuid,
     };
     console.log(body);
-    console.log(donationUuid);
-    updateDonation(donationUuid, {
-      bloodProduct: ownDonation.bloodProduct,
-      content: ownDonation.content,
-      phoneNumber: ownDonation.phoneNumber,
-      title: ownDonation.title,
-      uuid: ownDonation.uuid,
-    })
+
+    customAxios
+      .post(`/api/v1/donation/${donationUuid}`, {
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+        },
+        bloodProduct: ownDonation.bloodProduct,
+        content: ownDonation.content,
+        phoneNumber: ownDonation.phoneNumber,
+        title: ownDonation.title,
+        uuid: ownDonation.writer.uuid,
+      })
       .then(res => {
         console.log(res);
+        navigator(-1);
       })
       .catch(err => {
         console.log(err);

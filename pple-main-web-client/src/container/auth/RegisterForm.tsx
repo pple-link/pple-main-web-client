@@ -6,7 +6,7 @@ import { RootState } from '../../models';
 import { customAxios } from '../../lib/customAxios';
 import { getCookie } from '../../lib/hooks/CookieUtil';
 import { useNavigate } from 'react-router-dom';
-import { postSignUpBody } from '../../api/account';
+import { postSignUpBody } from '../../lib/api/account';
 
 // 회원 정보 관련 인터페이스
 interface IUser {

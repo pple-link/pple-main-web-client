@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getDonationsOfActiveStatus } from '../../api/donation';
+import { getDonationsOfActiveStatus } from '../../lib/api/donation';
 import { FilterType } from '../../components/home/CardTemplate';
 import FeedTemplate from '../../components/request/post/feed/FeedTemplate';
 import RequestPostList from '../../components/request/post/RequestPostList';
