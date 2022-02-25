@@ -42,7 +42,11 @@ const MyStoryForm = () => {
     getOwnDonations(jwt)
       .then(async res => {
         const newContent = [];
-        await res.data.content.map(story => newContent.push(story));
+        await res.data.content.map(story => {
+          if (story.status == 'ACTIVE') {
+            newContent.push(story);
+          }
+        });
         setContent(newContent);
       })
       .catch(e => {

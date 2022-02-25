@@ -1,8 +1,7 @@
 import { customAxios } from '../customAxios';
 
 export const updateDonation = (donationUuid: string, parameter: any) => {
-  return customAxios.post(`/api/v1/donation/${donationUuid}`, {
-    parameter,
+  return customAxios.post(`/api/v1/donation/${donationUuid}`, parameter, {
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
     },

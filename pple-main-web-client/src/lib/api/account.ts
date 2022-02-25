@@ -1,5 +1,4 @@
-import { useNavigate } from 'react-router-dom';
-import SignUp from '../../interface/SignUp';
+import SignUp from '../interface/SignUp';
 import { customAxios } from '../customAxios';
 
 export const getAccountProfile = (jwt: string) => {
