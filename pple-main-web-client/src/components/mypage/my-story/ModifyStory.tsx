@@ -5,7 +5,7 @@ import BloodDonationType from '../../common/input/BloodDonationType';
 import BloodTypeGroup from '../../common/input/BloodTypeGroup';
 import PhoneInput from '../../common/input/PhoneInput';
 import { useNavigate } from 'react-router-dom';
-import { OwnDonationType } from '../../../container/my-page/ModifyStoryForm';
+import OwnDonation from '../../../lib/interface/OwnDonation';
 
 const Block = styled('div')({
   height: '100%',
@@ -46,7 +46,7 @@ const ModifyButton = styled(ButtonBase)({
 });
 
 interface Props {
-  ownDonation: OwnDonationType;
+  ownDonation: OwnDonation;
   handleText: any;
   handleBloodType: any;
   handleRh: any;
