@@ -129,14 +129,21 @@ const ModifyStoryForm: React.FC = () => {
 
   const onSubmit = (e: any) => {
     e.preventDefault();
-
-    updateDonation(donationUuid, {
+    const body = {
       bloodProduct: ownDonation.bloodProduct,
       content: ownDonation.content,
       phoneNumber: ownDonation.phoneNumber,
       title: ownDonation.title,
       uuid: donationUuid,
-    })
+      patient: {
+        bloodType: {
+          abo: ownDonation.patient.bloodType.abo,
+          rh: ownDonation.patient.bloodType.rh,
+        },
+      },
+    };
+
+    updateDonation(donationUuid, body, jwt)
       .then(res => {
         console.log(res);
         navigator(-1);
