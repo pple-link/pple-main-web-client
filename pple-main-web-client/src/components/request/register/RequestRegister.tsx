@@ -25,15 +25,16 @@ const Header = styled('div')({
   display: 'flex',
   alignItems: 'center',
   backgroundColor: 'white',
-  padding: '14px 17px 14px 10px',
+  padding: '14px 17px 8px 10px',
   '& .column': {
     display: 'flex',
     alignItems: 'center',
     width: '33%',
   },
   '& .title': {
-    fontSize: 'larger',
+    color: '#767676',
     transform: 'translateX(50%)',
+    fontWeight: 'bold',
   },
   '& .button': {
     display: 'flex',

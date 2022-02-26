@@ -18,6 +18,7 @@ const BloodDonationTypeBlock = styled('div')({
   },
 });
 const StyleToggleButton = styled(ToggleButton)({
+  fontWeight: 'bold',
   '&.Mui-selected': {
     background: `${palette.red[1]} !important`,
     color: 'white !important',
