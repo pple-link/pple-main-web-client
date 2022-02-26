@@ -92,11 +92,17 @@ const StoryModal: React.FC<Props> = ({ open, setOpen, donationUuid }) => {
         open={extensionConfirmOpen}
         setOpen={setExtensionConfirmOpen}
       />
-      <StyledModal isOpen={open}>
+      <StyledModal
+        isOpen={open}
+        style={{ overlay: { background: 'rgba(0, 0, 0, 0.4)' } }}
+      >
         <StylePaper elevation={2}>
           {/* 닫기 버튼 */}
           <CloseBox>
-            <IconButton onClick={onClick}>
+            <IconButton
+              sx={{ marginTop: '10px', marginRight: '10px' }}
+              onClick={onClick}
+            >
               <CloseIcon style={{ color: '#C7C7C7' }} />
             </IconButton>
           </CloseBox>

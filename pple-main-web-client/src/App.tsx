@@ -20,6 +20,7 @@ import TermsOfService from './components/mypage/etc/TermsOfService';
 import ModifyStoryForm from './container/my-page/ModifyStoryForm';
 import HandleOAuthRedirectUrl from './container/auth/HandleOAuthRedirectUrl';
 import './static/fonts/fonts.css';
+import Introduce from './pages/Introduce';
 
 const GlobalStyles = createGlobalStyle`
   ${reset};
@@ -56,6 +57,7 @@ const App: React.FC = () => {
           <Route path="/etc/1" element={<DesignatedBloodDonation />} />
           <Route path="/etc/2" element={<PrivacyPolicy />} />
           <Route path="/etc/3" element={<TermsOfService />} />
+          <Route path="/intro" element={<Introduce />} />
           <Route
             path="/page/story/modify/:donationUuid"
             element={<ModifyStoryForm />}

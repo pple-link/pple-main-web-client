@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getDonationsOfActiveStatus } from '../../lib/api/donation';
 import LoginRequestModal from '../../components/common/modal/LoginRequestModal';
 import CardTemplate from '../../components/home/CardTemplate';
 import { getCookie } from '../../lib/hooks/CookieUtil';
 
-const HomeCardTemplateForm: React.FC = () => {
+interface ContentArray {
+  contentArray: any;
+}
+
+const HomeCardTemplateForm: React.FC<ContentArray> = ({ contentArray }) => {
   const jwt = getCookie();
   const navigate = useNavigate();
-  const [contentArray, setContentArray] = useState([]);
   const [open, setOpen] = useState(false);
   const onClick = () => {
     setOpen(!open);
@@ -21,18 +23,6 @@ const HomeCardTemplateForm: React.FC = () => {
     }
     navigate('/post');
   };
-
-  useEffect(() => {
-    getDonationsOfActiveStatus()
-      .then(res => {
-        const newArray = res.data.content;
-        setContentArray(newArray);
-      })
-      .catch(err => {
-        console.log(err);
-        console.log('ERROR_DONATION');
-      });
-  }, []);
 
   return (
     <div>

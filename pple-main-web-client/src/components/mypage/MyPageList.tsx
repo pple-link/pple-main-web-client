@@ -17,12 +17,27 @@ import { useNavigate } from 'react-router-dom';
 const DIVIDER = styled('div')({
   backgroundColor: '#F4F4F4',
   width: '100%',
-  height: '9px',
+  height: '1px',
 });
 
-const List1 = styled(List)({});
+const List1 = styled(List)({
+  '& .MuiListItemIcon-root': {
+    minWidth: 0,
+    marginRight: 17,
+  },
+});
 
-const List2 = styled(List)({});
+const List2 = styled(List)({
+  '& .MuiListItemIcon-root': {
+    minWidth: 0,
+    marginRight: 17,
+  },
+});
+const SubTitle = styled('div')({
+  color: '#B7B7B7',
+  fontWeight: 'bold',
+  padding: '17px 17px 20px 17px',
+});
 
 const MyPageList: React.FC = () => {
   const navigate = useNavigate();
@@ -48,6 +63,7 @@ const MyPageList: React.FC = () => {
     <div>
       <DIVIDER />
       <List1>
+        <SubTitle>내정보</SubTitle>
         {/* <ListItemButton onClick={handleHelper}>
           <ListItemIcon>
             <img src={heart} alt="도움을 주신 분들" />
@@ -55,7 +71,7 @@ const MyPageList: React.FC = () => {
           <ListItemText primary="도움을 주신 분들" />
         </ListItemButton> */}
         <ListItemButton onClick={handleStory}>
-          <ListItemIcon>
+          <ListItemIcon sx={{ marginRight: '0px' }}>
             <img src={edit} alt="나의 사연" />
           </ListItemIcon>
           <ListItemText primary="나의 사연" />
@@ -69,6 +85,7 @@ const MyPageList: React.FC = () => {
       </List1>
       <DIVIDER />
       <List2>
+        <SubTitle>서비스 정보</SubTitle>
         <ListItemButton onClick={handleDonation}>
           <ListItemIcon>
             <img src={heartSearch} alt="지정헌혈이란" />

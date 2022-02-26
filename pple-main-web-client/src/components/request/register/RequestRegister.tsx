@@ -25,15 +25,16 @@ const Header = styled('div')({
   display: 'flex',
   alignItems: 'center',
   backgroundColor: 'white',
-  padding: '14px 17px 14px 10px',
+  padding: '14px 17px 8px 10px',
   '& .column': {
     display: 'flex',
     alignItems: 'center',
     width: '33%',
   },
   '& .title': {
-    fontSize: 'larger',
+    color: '#767676',
     transform: 'translateX(50%)',
+    fontWeight: 'bold',
   },
   '& .button': {
     display: 'flex',
@@ -50,12 +51,25 @@ const BodyTextBox = styled('div')({
   display: 'flex',
   flexDirection: 'column',
   backgroundColor: 'white',
-  marginTop: '1rem',
-  padding: '10px',
+  padding: '0px 17px',
+  '& .MuiTextField-root': {
+    borderBottom: '1px solid #E6E6E6',
+    '& .MuiInput-root::before': {
+      borderBottom: '1px solid #E6E6E6',
+    },
+    '& .MuiInput-root::after': {
+      borderBottom: '1px solid red',
+    },
+  },
   '& #title': {
     fontSize: 'large',
-    color: '#222222',
-    fontWeight: 'bold',
+    color: '#AEAEAE',
+    padding: '20px 0px 10px 0px',
+    border: 'red',
+  },
+  '& #content': {
+    color: '#AEAEAE',
+    paddingTop: '20px',
   },
 });
 
@@ -63,7 +77,6 @@ const BodyPatientInfoBox = styled('div')({
   display: 'flex',
   flexDirection: 'column',
   backgroundColor: 'white',
-  marginTop: '1rem',
   padding: '0px 17px',
 });
 
@@ -74,10 +87,10 @@ const Footer = styled('div')({
   display: 'flex',
   justifyContent: 'space-between',
   alignContent: 'center',
-  padding: '2rem 2rem',
+  padding: '2rem 17px',
   '& .MuiButton-root': {
     padding: '10px 0px',
-    width: '45%',
+    width: '48%',
   },
 });
 
@@ -102,7 +115,10 @@ const RequestRegister: React.FC<RequestRegisterType> = ({
   const onClickExit: MouseEventHandler = () => {
     navigate(-1);
   };
-  const { bloodProduct, content, abo, rh, first, second, third, title } = post;
+  const { content, abo, rh, first, second, third, title } = post;
+  const textFieldStyle = {
+    padding: '10px 0px',
+  };
 
   return (
     <RequestRegisterBlock>
@@ -130,12 +146,17 @@ const RequestRegister: React.FC<RequestRegisterType> = ({
             placeholder="제목"
             value={title}
             onChange={onChange}
+            InputProps={{
+              style: {
+                borderColor: 'red !important',
+              },
+            }}
           />
           <TextField
-            id="standard-multiline-static"
+            id="content"
             multiline
             rows={6}
-            placeholder="내용"
+            placeholder="내용을 입력하세요"
             variant="standard"
             name="content"
             value={content}

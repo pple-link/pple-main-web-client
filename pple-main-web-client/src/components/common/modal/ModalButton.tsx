@@ -9,7 +9,7 @@ const StyledButton = styled(ButtonBase)({
   textAlign: 'center',
   borderRadius: '15px',
   padding: '18px 38px',
-  minWidth: '138.28px',
+  minWidth: '145.28px',
   fontFamily: 'Pretendard',
 });
 

@@ -17,6 +17,13 @@ const CardContentBox = styled('div')({
   padding: '8px 27px',
 });
 
+const CardPaper = styled('div')({
+  borderRadius: '14px',
+  border: '1px solid rgba(0,0,0,0.03)',
+  filter: ' drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.1))',
+  boxShadow: '5px 5px 6px 0px rgba(0,0,0,0.05)',
+});
+
 const ContentWithMore = styled('div')({
   fontStyle: 'normal',
   fontWeight: 'bold',
@@ -25,7 +32,7 @@ const ContentWithMore = styled('div')({
   letterSpacing: '-0.03em',
   color: '#222222',
   margin: '17px 0px',
-  padding: '0px 27px 17px 27px',
+  padding: '0px 17px 0px 17px',
   '& button': {
     background: 'none',
     border: 'none',
@@ -75,7 +82,7 @@ const CardComponent: React.FC<Props> = ({
   return (
     <CardComponentBlock>
       <LoginRequestModal open={loginOpen} onClick={handleLoginOpen} />
-      <Paper sx={{ borderRadius: '14px', border: 'none' }} elevation={2}>
+      <CardPaper>
         <FeedHeader
           bloodType={bloodType}
           sort={sort}
@@ -90,10 +97,12 @@ const CardComponent: React.FC<Props> = ({
         ) : (
           <ContentWithMore>
             {title.slice(0, 22)}
-            <button onClick={handleDetail}>...더보기</button>
+            <button style={{ color: '#B7B7B7' }} onClick={handleDetail}>
+              ...더보기
+            </button>
           </ContentWithMore>
         )}
-      </Paper>
+      </CardPaper>
       <ConnectionModal
         handleOpen={handleOpen}
         open={open}

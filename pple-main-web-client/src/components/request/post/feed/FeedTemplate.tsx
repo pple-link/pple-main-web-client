@@ -65,6 +65,7 @@ const FeedTemplate: React.FC<Props> = ({
             bloodType={bloodType}
             sort={sort}
             buttonText="도움주기"
+            time={time}
           />
           <FeedContentBox>
             <FeedUserInfo

@@ -9,6 +9,7 @@ const StyledButton = styled(Button)({
   borderRadius: '15px',
   fontWeight: 'bold',
   textAlign: 'center',
+  boxShadow: 'none',
 });
 
 interface Style {

@@ -32,7 +32,7 @@ const SearchInput: React.FC<ISearch> = ({ placeholder, handleSearch }) => {
         <SearchComponentsBox>
           <InputBase
             placeholder={placeholder}
-            sx={{ ml: 1, flex: 1, fontWeight: 'bold' }}
+            sx={{ ml: 1, flex: 1, fontWeight: 'bold', color: '#B7B7B7' }}
             inputProps={{ 'aria-label': 'search request feed' }}
             onChange={handleSearch}
           ></InputBase>

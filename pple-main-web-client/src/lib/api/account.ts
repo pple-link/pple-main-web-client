@@ -12,3 +12,13 @@ export const postSignUpBody = (body: SignUp, jwt: string) => {
     headers: { 'X-AUTH-TOKEN': `${jwt}` },
   });
 };
+
+export const patchUserDisplayName = (
+  uuid: string,
+  jwt: string,
+  displayName: string,
+) => {
+  return customAxios.patch(`/api/v1/account/${uuid}`, displayName, {
+    headers: { 'X-AUTH-TOKEN': `${jwt}` },
+  });
+};

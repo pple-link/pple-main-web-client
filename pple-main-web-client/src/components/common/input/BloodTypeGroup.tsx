@@ -34,11 +34,11 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)({
   display: 'flex',
   justifyContent: 'space-between',
   '& .MuiButtonBase-root': {
-    backgroundColor: 'white',
     minWidth: '64px',
     color: `${palette.gray[1]}`,
-    padding: '1rem',
+    // padding: '1rem',
     transition: 'all ease 0.5s 0s',
+    fontSize: '18px',
   },
   '& .MuiToggleButton-root.Mui-selected': {
     background: `${palette.red[1]} !important`,
@@ -46,7 +46,8 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)({
   },
   '& #circle-toggle': {
     borderRadius: '100%',
-    border: `1px solid ${palette.gray[1]}`,
+    border: `1px solid #EDEDED`,
+    background: '#F9F9F9',
   },
 });
 

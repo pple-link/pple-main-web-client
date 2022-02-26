@@ -51,8 +51,8 @@ const StyledInput = styled(TextField)({
 });
 
 const StyledButton = styled(Button)({
+  width: '100%',
   boxSizing: 'border-box',
-  width: '28rem',
   position: 'fixed',
   bottom: '0px',
   left: '0px',
