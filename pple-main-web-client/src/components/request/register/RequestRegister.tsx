@@ -87,10 +87,10 @@ const Footer = styled('div')({
   display: 'flex',
   justifyContent: 'space-between',
   alignContent: 'center',
-  padding: '2rem 2rem',
+  padding: '2rem 17px',
   '& .MuiButton-root': {
     padding: '10px 0px',
-    width: '45%',
+    width: '48%',
   },
 });
 
