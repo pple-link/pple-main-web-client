@@ -13,6 +13,7 @@ const PhoneInputBlock = styled('div')({
     fontSize: 'smaller',
     minWidth: '50px',
     display: 'flex',
+    marginRight: '10px',
   },
 });
 const InputBlock = styled('div')({
@@ -20,10 +21,7 @@ const InputBlock = styled('div')({
   alignContent: 'center',
   justifyContent: 'space-between',
   '& .divider': {
-    borderBottom: '1px solid #EDEDED',
-    height: '28px',
-    width: '50px',
-    margin: '15px 10px',
+    width: '30px',
   },
   '& .input-form': {
     marginTop: '16px',
