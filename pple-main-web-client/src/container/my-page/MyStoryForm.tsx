@@ -56,12 +56,16 @@ const MyStoryForm = () => {
 
   return (
     <MyStory>
-      {content.length != 0 ? (
-        content.map((con: ContentType, index) => (
-          <StoryBubble key={index} index={index} content={con} />
-        ))
+      {jwt ? (
+        content.length != 0 ? (
+          content.map((con: ContentType, index) => (
+            <StoryBubble key={index} index={index} content={con} />
+          ))
+        ) : (
+          <div>등록된 게시글이 없습니다</div>
+        )
       ) : (
-        <div>등록된 게시글이 없습니다</div>
+        <div>로그인 후 이용해주세요</div>
       )}
     </MyStory>
   );

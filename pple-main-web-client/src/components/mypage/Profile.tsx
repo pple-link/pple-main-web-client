@@ -2,6 +2,7 @@ import { Avatar, ButtonBase } from '@mui/material';
 import { styled } from '@mui/system';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import ProfileInMyPage from '../../lib/interface/ProfileInMyPage';
 
 const ProfileBlock = styled('div')({
   padding: '20px',
@@ -57,16 +58,11 @@ const EditProfileButton = styled(ButtonBase)({
   borderRadius: '15px',
 });
 
-type ProfileType = {
-  profileImageUrl: string;
-  displayName: string;
-  bloodType: string;
-};
-
-const Profile: React.FC<ProfileType> = ({
+const Profile: React.FC<ProfileInMyPage> = ({
   profileImageUrl,
   displayName,
   bloodType,
+  jwt,
 }) => {
   const navigate = useNavigate();
   const onClick = () => {
@@ -74,18 +70,21 @@ const Profile: React.FC<ProfileType> = ({
   };
   return (
     <ProfileBlock>
-      <ProfileBox>
-        <Avatar src={profileImageUrl} alt="프로필 이미지" />
-        <div>
-          <NameBox>
-            <div className="nick-name">{displayName}</div>
-            <div className="blood-type">{bloodType}</div>
-          </NameBox>
-          <CountBox>오늘도 건강하고 행복하세요!</CountBox>
-        </div>
-      </ProfileBox>
-
-      <EditProfileButton onClick={onClick}>프로필 수정</EditProfileButton>
+      {jwt ? (
+        <ProfileBox>
+          <Avatar src={profileImageUrl} alt="프로필 이미지" />
+          <div>
+            <NameBox>
+              <div className="nick-name">{displayName}</div>
+              <div className="blood-type">{bloodType}</div>
+            </NameBox>
+            <CountBox>오늘도 건강하고 행복하세요!</CountBox>
+          </div>
+          <EditProfileButton onClick={onClick}>프로필 수정</EditProfileButton>
+        </ProfileBox>
+      ) : (
+        <div>로그인 후 이용해주세요</div>
+      )}
     </ProfileBlock>
   );
 };

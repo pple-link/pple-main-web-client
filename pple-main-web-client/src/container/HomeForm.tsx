@@ -16,20 +16,19 @@ const HomeForm = () => {
   const jwt = getCookie();
 
   useEffect(() => {
-    getAccountProfile(jwt)
-      .then(res => {
-        if (res.data) {
-          setDisplayName(res.data.displayName);
-        }
-      })
-      .catch(err => {
-        console.log('Token is undefined');
-        console.log(err);
-      });
-
     if (jwt) {
+      getAccountProfile(jwt)
+        .then(res => {
+          if (res.data) {
+            setDisplayName(res.data.displayName);
+          }
+        })
+        .catch(err => {
+          console.log('Token is undefined');
+          console.log(err);
+        });
+
       getExpiredDonations().then(res => {
-        console.log(res);
         if (res.data.length && res.data[0].status == 'ACTIVE') {
           setExtensionOpen(!extensionOpen);
           setExpiredDonationUuid(res.data[0].uuid);
