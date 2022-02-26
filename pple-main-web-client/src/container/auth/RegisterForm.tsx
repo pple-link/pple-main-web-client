@@ -148,8 +148,11 @@ const RegisterForm = () => {
       user.abo == '' ||
       user.gender == '' ||
       user.phone.first == '' ||
+      user.phone.first.length < 3 ||
       user.phone.second == '' ||
-      user.phone.third == ''
+      user.phone.second.length < 4 ||
+      user.phone.third == '' ||
+      user.phone.third.length < 4
     )
       return false;
     return true;
