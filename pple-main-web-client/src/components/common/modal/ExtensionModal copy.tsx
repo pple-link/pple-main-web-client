@@ -68,7 +68,10 @@ const ExtensionModal: React.FC<Props> = ({ open, setOpen }) => {
       >
         <StyledPaper elevation={1}>
           <CloseBox>
-            <IconButton onClick={onClick}>
+            <IconButton
+              sx={{ marginTop: '10px', marginRight: '10px' }}
+              onClick={onClick}
+            >
               <CloseIcon style={{ color: '#C7C7C7' }} />
             </IconButton>
           </CloseBox>
