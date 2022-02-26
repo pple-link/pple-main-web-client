@@ -13,7 +13,6 @@ const StyledButton = styled(ButtonBase)({
   backgroundColor: `${palette.gray[5]}`,
   borderRadius: '15px',
   padding: '17px 0px',
-  transition: '0.2s ease-in-out 0.2s',
   '&:active': {
     backgroundColor: `${palette.red[1]}`,
   },
