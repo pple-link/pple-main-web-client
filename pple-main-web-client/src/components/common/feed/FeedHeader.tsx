@@ -15,23 +15,25 @@ interface FeedHeaderBlockProp {
   noBorderRadius?: boolean;
 }
 
-const FeedHeaderBlock = styled('div')<FeedHeaderBlockProp>(
-  ({ noBorderRadius }) => ({
-    width: '100%',
-    borderRadius: '14px',
-    '& .header': {
-      backgroundColor: 'whitesmoke',
-      padding: '9px 22px',
-      borderRadius: !noBorderRadius ? '14px 14px 0px 0px' : '0px 0px 0px 0px',
-    },
-  }),
-);
+const FeedHeaderBlock = styled('div')({
+  width: '100%',
+  '& .header': {
+    backgroundColor: '#EEEEEE',
+    padding: '9px 22px',
+    borderRadius: '14px 14px 0px 0px',
+  },
+  borderBottom: '1px solid rgba(0,0,0,0.02)',
+});
 
 const TimeBox = styled('div')({
+  fontFamily:
+    "'Pretendard', source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace",
+
   fontSize: 'x-small',
   width: '100%',
   textAlign: 'right',
   boxSizing: 'border-box',
+  color: '#B7B7B7',
 });
 
 const CardComponentHeader = styled('div')({

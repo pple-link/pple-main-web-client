@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styles from 'styled-components';
 import { Button, styled } from '@mui/material';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import palette from '../../lib/styles/palette';
 import SortingButtonGroup from '../common/buttons/SortingButtonGroup';
 import CardComponent from './CardComponent';
+import ChevronRightIcon from '../../static/images/ChevronRightIcon.svg';
 
 const CardContainerBlock = styles.div`
   width: 100%;
@@ -37,6 +37,10 @@ const StyledButton = styled(Button)({
   display: 'flex',
   justifyContent: 'flex-end',
   alignItems: 'center',
+  '& span': {
+    display: 'inline-block',
+    marginRight: '5px',
+  },
   '&:hover': {
     color: `${palette.gray[2]}`,
   },
@@ -175,8 +179,8 @@ const CardTemplate: React.FC<CardTemplateType> = ({
         </div>
         <div>
           <StyledButton sx={{ padding: '0px' }} onClick={handleAuth}>
-            <span>전체보기</span>
-            <ChevronRightIcon />
+            <span style={{ marginRight: '6ox' }}>전체보기</span>
+            <img src={ChevronRightIcon} alt="" />
           </StyledButton>
         </div>
       </ButtonGroup>
