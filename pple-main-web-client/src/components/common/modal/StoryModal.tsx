@@ -9,6 +9,8 @@ import {
   deleteExpiredDonation,
   updateExpiredDonation,
 } from '../../../lib/api/donation';
+import ExtensionModal from './ExtensionModal copy';
+
 const StyledModal = styled(Modal)({
   position: 'fixed',
   top: '50%',
@@ -66,6 +68,8 @@ interface Props {
 }
 
 const StoryModal: React.FC<Props> = ({ open, setOpen, donationUuid }) => {
+  const [extensionConfirmOpen, setExtensionConfirmOpen] =
+    useState<boolean>(false);
   const onClick = () => {
     setOpen(!open);
   };
@@ -73,7 +77,7 @@ const StoryModal: React.FC<Props> = ({ open, setOpen, donationUuid }) => {
   const handleUpdate = () => {
     updateExpiredDonation(donationUuid);
     setOpen(!open);
-    location.reload();
+    setExtensionConfirmOpen(!extensionConfirmOpen);
   };
 
   const handleDelete = () => {
@@ -84,6 +88,10 @@ const StoryModal: React.FC<Props> = ({ open, setOpen, donationUuid }) => {
 
   return (
     <>
+      <ExtensionModal
+        open={extensionConfirmOpen}
+        setOpen={setExtensionConfirmOpen}
+      />
       <StyledModal isOpen={open}>
         <StylePaper elevation={2}>
           {/* 닫기 버튼 */}
@@ -98,7 +106,7 @@ const StoryModal: React.FC<Props> = ({ open, setOpen, donationUuid }) => {
           </ImageBox>
           {/* 제목 */}
           <TitleBox>
-            사연을 올린 기간이 <br /> 5일을 경과했어요
+            사연을 올린 기간이 <br /> 7일을 경과했어요
           </TitleBox>
           <ContentBox>
             사연을 연장하거나

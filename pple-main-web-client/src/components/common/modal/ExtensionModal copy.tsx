@@ -57,6 +57,7 @@ interface Props {
 const ExtensionModal: React.FC<Props> = ({ open, setOpen }) => {
   const onClick = () => {
     setOpen(!open);
+    location.reload();
   };
 
   return (
