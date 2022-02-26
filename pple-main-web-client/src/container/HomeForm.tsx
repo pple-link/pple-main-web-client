@@ -4,7 +4,10 @@ import { getCookie, setCookie } from '../lib/hooks/CookieUtil';
 import { checkUser } from '../lib/hooks/CookieUtil';
 import HomeCardTemplateForm from './feed/HomeCardTemplateForm';
 import { getAccountProfile } from '../lib/api/account';
-import { getExpiredDonations } from '../lib/api/donation';
+import {
+  getDonationsOfActiveStatus,
+  getExpiredDonations,
+} from '../lib/api/donation';
 import StoryModal from '../components/common/modal/StoryModal';
 
 const HomeForm = () => {
@@ -13,6 +16,8 @@ const HomeForm = () => {
   const [displayName, setDisplayName] = useState<string>('피플');
   const [extensionOpen, setExtensionOpen] = useState(false);
   const [expiredDonationUuid, setExpiredDonationUuid] = useState<string>('');
+  const [contentArray, setContentArray] = useState([]);
+
   const jwt = getCookie();
 
   useEffect(() => {
@@ -35,7 +40,16 @@ const HomeForm = () => {
         }
       });
     }
-  }, []);
+    getDonationsOfActiveStatus()
+      .then(res => {
+        const newArray = res.data.content;
+        setContentArray(newArray);
+      })
+      .catch(err => {
+        console.log(err);
+        console.log('ERROR_DONATION');
+      });
+  }, [displayName]);
   return (
     <>
       <StoryModal
@@ -44,7 +58,7 @@ const HomeForm = () => {
         donationUuid={expiredDonationUuid}
       />
       <HomePageHeader name={displayName} />
-      <HomeCardTemplateForm />
+      <HomeCardTemplateForm contentArray={contentArray} />
     </>
   );
 };
