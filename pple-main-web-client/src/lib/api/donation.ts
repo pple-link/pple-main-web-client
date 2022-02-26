@@ -1,4 +1,21 @@
+import { useNavigate } from 'react-router-dom';
 import { customAxios } from '../customAxios';
+import PostDonation from '../interface/PostDontaion';
+
+const navigate = useNavigate();
+
+export const postDonation = (body: PostDonation, jwt: string) => {
+  return customAxios
+    .post('/api/v1/donation', body, {
+      headers: { 'X-AUTH-TOKEN': `${jwt}` },
+    })
+    .then(() => {
+      navigate('/');
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
 
 export const updateDonation = (
   donationUuid: string,

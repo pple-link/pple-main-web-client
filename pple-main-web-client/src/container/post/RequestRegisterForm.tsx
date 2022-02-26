@@ -3,6 +3,8 @@ import RequestRegister from '../../components/request/register/RequestRegister';
 import { customAxios } from '../../lib/customAxios';
 import { getCookie } from '../../lib/hooks/CookieUtil';
 import { useNavigate } from 'react-router-dom';
+import DoneRegisterModal from '../../components/common/modal/DoneRegisterModal';
+import { postDonation } from '../../lib/api/donation';
 
 export type RequestState = {
   bloodProduct: string;
@@ -16,7 +18,7 @@ export type RequestState = {
 };
 
 const RequestRegisterForm: React.FC = () => {
-  // Submit 에서 사용
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
   const jwt = getCookie();
   const navigate = useNavigate();
 
@@ -113,8 +115,11 @@ const RequestRegisterForm: React.FC = () => {
   const isFiledPatientInfo = () => {
     if (
       post.first == '' ||
+      post.first.length < 3 ||
       post.second == '' ||
+      post.second.length < 4 ||
       post.third == '' ||
+      post.third.length < 4 ||
       post.title == '' ||
       post.abo == '' ||
       post.content == '' ||
@@ -140,7 +145,7 @@ const RequestRegisterForm: React.FC = () => {
         title: post.title,
       };
     }
-    return undefined;
+    return false;
   };
 
   const onSubmit = (e: any) => {
@@ -150,19 +155,12 @@ const RequestRegisterForm: React.FC = () => {
       alert('모든 정보를 입력해주세요');
       return;
     }
-    customAxios
-      .post('/api/v1/donation', body, {
-        headers: { 'X-AUTH-TOKEN': `${jwt}` },
-      })
-      .then(() => {
-        navigate('/');
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    setModalOpen(!modalOpen);
+    postDonation(body, jwt);
   };
   return (
     <>
+      <DoneRegisterModal open={modalOpen} setOpen={setModalOpen} />
       <form onSubmit={onSubmit}>
         <RequestRegister
           post={post}
