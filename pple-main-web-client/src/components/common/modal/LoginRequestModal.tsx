@@ -67,7 +67,11 @@ const LoginRequestModal: React.FC<IModal> = ({ open, onClick }) => {
   };
   return (
     <div>
-      <StyledModal isOpen={open} ariaHideApp={false}>
+      <StyledModal
+        isOpen={open}
+        ariaHideApp={false}
+        style={{ overlay: { background: 'rgba(0, 0, 0, 0.4)' } }}
+      >
         <StyledPaper elevation={1}>
           <CloseBox>
             <IconButton onClick={onClick}>

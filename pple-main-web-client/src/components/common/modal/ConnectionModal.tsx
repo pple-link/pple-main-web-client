@@ -15,6 +15,9 @@ const StyledModal = styled(Modal)({
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
+  overlay: {
+    background: '#FFFF00',
+  },
 });
 const StyledPaper = styled(Paper)({
   borderRadius: '20px',
@@ -80,7 +83,10 @@ const ConnectionModal: React.FC<Props> = ({
   };
   return (
     <>
-      <StyledModal isOpen={open}>
+      <StyledModal
+        isOpen={open}
+        style={{ overlay: { background: 'rgba(0, 0, 0, 0.4)' } }}
+      >
         <StyledPaper elevation={1}>
           <CloseBox>
             <IconButton onClick={onClick}>

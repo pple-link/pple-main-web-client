@@ -62,7 +62,10 @@ const ExtensionModal: React.FC<Props> = ({ open, setOpen }) => {
 
   return (
     <>
-      <StyledModal isOpen={open}>
+      <StyledModal
+        style={{ overlay: { background: 'rgba(0, 0, 0, 0.4)' } }}
+        isOpen={open}
+      >
         <StyledPaper elevation={1}>
           <CloseBox>
             <IconButton onClick={onClick}>
