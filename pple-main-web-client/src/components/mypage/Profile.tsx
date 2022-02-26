@@ -71,17 +71,19 @@ const Profile: React.FC<ProfileInMyPage> = ({
   return (
     <ProfileBlock>
       {jwt ? (
-        <ProfileBox>
-          <Avatar src={profileImageUrl} alt="프로필 이미지" />
-          <div>
-            <NameBox>
-              <div className="nick-name">{displayName}</div>
-              <div className="blood-type">{bloodType}</div>
-            </NameBox>
-            <CountBox>오늘도 건강하고 행복하세요!</CountBox>
-          </div>
+        <>
+          <ProfileBox>
+            <Avatar src={profileImageUrl} alt="프로필 이미지" />
+            <div>
+              <NameBox>
+                <div className="nick-name">{displayName}</div>
+                <div className="blood-type">{bloodType}</div>
+              </NameBox>
+              <CountBox>오늘도 건강하고 행복하세요!</CountBox>
+            </div>
+          </ProfileBox>
           <EditProfileButton onClick={onClick}>프로필 수정</EditProfileButton>
-        </ProfileBox>
+        </>
       ) : (
         <div>로그인 후 이용해주세요</div>
       )}
