@@ -27,6 +27,12 @@ const InputBlock = styled('div')({
     marginTop: '16px',
   },
 });
+const HelpText = styled('div')({
+  marginBottom: '30px',
+  color: 'gray',
+  fontSize: 'small',
+  lineHeight: '15px',
+});
 
 // modify story 시 ? 삭제
 interface IPhone {
@@ -43,49 +49,55 @@ const PhoneInput: React.FC<IPhone> = ({
   handlePhoneNumber,
 }) => {
   return (
-    <PhoneInputBlock>
-      <div className="title">연락처 *</div>
-      <InputBlock>
-        <FormControl
-          sx={{ width: '100%' }}
-          variant="standard"
-          className="input-form"
-        >
-          <StyleInput
-            name="first"
-            id="first"
-            value={first}
-            onChange={handlePhoneNumber}
-          ></StyleInput>
-        </FormControl>
-        <div className="divider"></div>
-        <FormControl
-          sx={{ width: '100%' }}
-          variant="standard"
-          className="input-form"
-        >
-          <StyleInput
-            name="second"
-            id="second"
-            value={second}
-            onChange={handlePhoneNumber}
-          ></StyleInput>
-        </FormControl>
-        <div className="divider"></div>
-        <FormControl
-          sx={{ width: '100%' }}
-          variant="standard"
-          className="input-form"
-        >
-          <StyleInput
-            name="third"
-            id="third"
-            value={third}
-            onChange={handlePhoneNumber}
-          ></StyleInput>
-        </FormControl>
-      </InputBlock>
-    </PhoneInputBlock>
+    <>
+      <PhoneInputBlock>
+        <div className="title">연락처 *</div>
+        <InputBlock>
+          <FormControl
+            sx={{ width: '100%' }}
+            variant="standard"
+            className="input-form"
+          >
+            <StyleInput
+              name="first"
+              id="first"
+              value={first}
+              onChange={handlePhoneNumber}
+            ></StyleInput>
+          </FormControl>
+          <div className="divider"></div>
+          <FormControl
+            sx={{ width: '100%' }}
+            variant="standard"
+            className="input-form"
+          >
+            <StyleInput
+              name="second"
+              id="second"
+              value={second}
+              onChange={handlePhoneNumber}
+            ></StyleInput>
+          </FormControl>
+          <div className="divider"></div>
+          <FormControl
+            sx={{ width: '100%' }}
+            variant="standard"
+            className="input-form"
+          >
+            <StyleInput
+              name="third"
+              id="third"
+              value={third}
+              onChange={handlePhoneNumber}
+            ></StyleInput>
+          </FormControl>
+        </InputBlock>
+      </PhoneInputBlock>
+      <HelpText>
+        연락처는 수정 불가합니다. 수정이 필요하시다면 <br />
+        contact.pple2022@gmail.com 로 연락바랍니다
+      </HelpText>
+    </>
   );
 };
 

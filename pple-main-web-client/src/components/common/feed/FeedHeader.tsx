@@ -2,13 +2,13 @@ import React from 'react';
 import { styled } from '@mui/material';
 import bar from '../../../static/images/bar.png';
 import RadiusButton from '../buttons/RadiusButton';
-import A from '../../../static/images/bloodType/A+.svg';
+import A from '../../../static/images/bloodType/A.svg';
 import An from '../../../static/images/bloodType/A-.svg';
-import B from '../../../static/images/bloodType/B+.svg';
+import B from '../../../static/images/bloodType/B.svg';
 import Bn from '../../../static/images/bloodType/B-.svg';
-import O from '../../../static/images/bloodType/O+.svg';
+import O from '../../../static/images/bloodType/O.svg';
 import On from '../../../static/images/bloodType/O-.svg';
-import AB from '../../../static/images/bloodType/AB+.svg';
+import AB from '../../../static/images/bloodType/AB.svg';
 import ABn from '../../../static/images/bloodType/AB-.svg';
 
 interface FeedHeaderBlockProp {

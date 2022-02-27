@@ -2,11 +2,15 @@ import React from 'react';
 import { IconButton, styled } from '@mui/material';
 import ChannelTalkImg from '../../../static/images/Talk.svg';
 
-const ChannelTalkBlock = styled('div')({});
+const ChannelTalkBlock = styled('div')({
+  position: 'fixed',
+  bottom: 0,
+  right: 0,
+});
 
 const ChannelTalk = () => {
   const onClick = () => {
-    window.location.href = 'https://0ej6q.channel.io/lounge';
+    window.location.href = 'https://open.kakao.com/o/gOg74umb';
   };
 
   return (

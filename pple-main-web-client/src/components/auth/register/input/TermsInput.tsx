@@ -39,11 +39,18 @@ const TermsInput: React.FC<ITerms> = ({
 }) => {
   const navigate = useNavigate();
   const navigatePrivacy = () => {
-    navigate('/etc/2');
+    window.location.href =
+      'https://pple.notion.site/a19608ee13a8436d900262685443c452';
   };
 
   const navigateTerm = () => {
-    navigate('/etc/3');
+    window.location.href =
+      'https://pple.notion.site/52ab3b73d5f64d5891c9f6723dae7848';
+  };
+
+  const navigateMarketing = () => {
+    window.location.href =
+      'https://pple.notion.site/aa6a393366354c6aa884b14a5d07dbc4';
   };
   return (
     <>
@@ -105,6 +112,11 @@ const TermsInput: React.FC<ITerms> = ({
             )}
           </IconButton>
           <span>마케팅 활용동의(선택)</span>
+        </div>
+        <div>
+          <IconButton sx={{ color: '#767676' }} onClick={navigateMarketing}>
+            <ChevronRightIcon />
+          </IconButton>
         </div>
       </ButtonBlock>
     </>

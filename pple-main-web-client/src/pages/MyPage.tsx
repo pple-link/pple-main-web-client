@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ChannelTalk from '../components/common/buttons/ChannelTalk';
 import MyPageHeader from '../components/mypage/MyPageHeader';
 import MyPageList from '../components/mypage/MyPageList';
 import MyPageTemplate from '../components/mypage/MyPageTemplate';
@@ -11,6 +12,7 @@ const MyPage: React.FC = () => {
 
   return (
     <MyPageTemplate>
+      <ChannelTalk />
       <MyPageHeader />
       <ProfileForm />
       <MyPageList />

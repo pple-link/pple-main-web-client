@@ -14,6 +14,12 @@ const InputBlock = styled('div')({
     margin: '0px 10px',
   },
 });
+const HelpText = styled('div')({
+  marginBottom: '30px',
+  color: 'gray',
+  fontSize: 'small',
+  lineHeight: '15px',
+});
 
 interface IPhone {
   phone: {
@@ -51,6 +57,10 @@ const PhoneInput: React.FC<IPhone> = ({ phone, handlePhoneNumber }) => {
           onChange={handlePhoneNumber}
         ></StyleInput>
       </InputBlock>
+      <HelpText>
+        연락처는 수정 불가합니다. 수정이 필요하시다면 <br />
+        contact.pple2022@gmail.com 로 연락바랍니다
+      </HelpText>
     </div>
   );
 };

@@ -11,6 +11,7 @@ const ProfileForm = () => {
   useEffect(() => {
     if (jwt) {
       getAccountProfile(jwt).then(res => {
+        console.log(res);
         setProfileImageUrl(res.data.profileImageUrl);
         setDisplayName(res.data.displayName);
         if (res.data.bloodType.rh == 'POSITIVE') {
