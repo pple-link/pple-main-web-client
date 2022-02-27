@@ -12,6 +12,7 @@ import heartSearch from '../../static/images/mypage-button/heart-search.png';
 import heart from '../../static/images/mypage-button/Heart.png';
 import messageQuestion from '../../static/images/mypage-button/message-question.png';
 import shieldTick from '../../static/images/mypage-button/shield-tick.png';
+import marketing from '../../static/images/mypage-button/marketing.png';
 import { useNavigate } from 'react-router-dom';
 
 const DIVIDER = styled('div')({
@@ -53,11 +54,17 @@ const MyPageList: React.FC = () => {
   const handleDonation = () => {
     navigate('/etc/1');
   };
-  const handlePolicy = () => {
-    navigate('/etc/2');
-  };
   const handleService = () => {
-    navigate('/etc/3');
+    window.location.href =
+      'https://pple.notion.site/52ab3b73d5f64d5891c9f6723dae7848';
+  };
+  const handlePolicy = () => {
+    window.location.href =
+      'https://pple.notion.site/a19608ee13a8436d900262685443c452';
+  };
+  const handleMarketing = () => {
+    window.location.href =
+      'https://pple.notion.site/aa6a393366354c6aa884b14a5d07dbc4';
   };
   return (
     <div>
@@ -103,6 +110,16 @@ const MyPageList: React.FC = () => {
             <img src={task} alt="서비스 이용약관" />
           </ListItemIcon>
           <ListItemText primary="서비스 이용약관" />
+        </ListItemButton>
+        <ListItemButton onClick={handleService}>
+          <ListItemIcon>
+            <img
+              src={marketing}
+              alt="마케팅 활용 동의"
+              style={{ color: 'gray' }}
+            />
+          </ListItemIcon>
+          <ListItemText primary="마케팅 활용 동의" />
         </ListItemButton>
       </List2>
     </div>
