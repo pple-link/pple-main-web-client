@@ -38,8 +38,11 @@ const ModifyProfileForm = () => {
 
   const onSubmit = (e: any) => {
     e.preventDefault();
+    const body = {
+      displayName: displayName,
+    };
 
-    patchUserDisplayName(uuid, jwt, displayName)
+    patchUserDisplayName(uuid, jwt, body)
       .then(res => {
         navigate('/page');
       })
