@@ -33,7 +33,8 @@ const HomeForm = () => {
           console.log(err);
         });
 
-      getExpiredDonations().then(res => {
+      getExpiredDonations(jwt).then(res => {
+        console.log(res.data);
         if (res.data.length && res.data[0].status == 'ACTIVE') {
           setExtensionOpen(!extensionOpen);
           setExpiredDonationUuid(res.data[0].uuid);
@@ -49,7 +50,7 @@ const HomeForm = () => {
         console.log(err);
         console.log('ERROR_DONATION');
       });
-  }, [jwt]);
+  }, []);
   return (
     <>
       <StoryModal
