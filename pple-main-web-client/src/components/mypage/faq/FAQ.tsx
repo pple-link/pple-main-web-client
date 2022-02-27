@@ -83,13 +83,15 @@ const FAQ = () => {
           ))}
         </TabPanel>
         <TabPanel value="1" sx={{ padding: '0px' }}>
-          {document.donation.map((doc, idx) => (
+          {document.app.map((doc, idx) => (
             <Accordion key={idx}>
               <StyledAccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography>{doc.title}</Typography>
               </StyledAccordionSummary>
               <StyledAccordionDetails>
-                <Typography>{doc.content}</Typography>
+                <Typography>
+                  <pre>{doc.content}</pre>
+                </Typography>
               </StyledAccordionDetails>
             </Accordion>
           ))}
