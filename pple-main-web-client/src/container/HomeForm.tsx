@@ -36,7 +36,7 @@ const HomeForm = () => {
       getExpiredDonations(jwt).then(res => {
         console.log(res.data);
         if (res.data.length && res.data[0].status == 'ACTIVE') {
-          setExtensionOpen(!extensionOpen);
+          setExtensionOpen(true);
           setExpiredDonationUuid(res.data[0].uuid);
         }
       });
