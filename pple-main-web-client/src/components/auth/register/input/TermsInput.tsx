@@ -39,18 +39,15 @@ const TermsInput: React.FC<ITerms> = ({
 }) => {
   const navigate = useNavigate();
   const navigatePrivacy = () => {
-    window.location.href =
-      'https://pple.notion.site/a19608ee13a8436d900262685443c452';
-  };
+      window.open('https://pple.notion.site/a19608ee13a8436d900262685443c452');
+};
 
   const navigateTerm = () => {
-    window.location.href =
-      'https://pple.notion.site/52ab3b73d5f64d5891c9f6723dae7848';
+      window.open('https://pple.notion.site/52ab3b73d5f64d5891c9f6723dae7848');  
   };
 
   const navigateMarketing = () => {
-    window.location.href =
-      'https://pple.notion.site/aa6a393366354c6aa884b14a5d07dbc4';
+      window.open('https://pple.notion.site/aa6a393366354c6aa884b14a5d07dbc4');
   };
   return (
     <>
