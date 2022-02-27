@@ -156,13 +156,7 @@ const RequestRegisterForm: React.FC = () => {
       return;
     }
     setModalOpen(!modalOpen);
-    postDonation(body, jwt)
-      .then(() => {
-        navigate('/');
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    postDonation(body, jwt);
   };
   return (
     <>

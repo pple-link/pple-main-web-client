@@ -4,6 +4,7 @@ import { styled, Paper, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import Coin from '../../../static/images/modal/Coin.svg';
 import '../../../static/fonts/fonts.css';
+import { useNavigate } from 'react-router-dom';
 
 const StyledModal = styled(Modal)({
   position: 'fixed',
@@ -55,8 +56,10 @@ interface Props {
 }
 
 const DoneRegisterModal: React.FC<Props> = ({ open, setOpen }) => {
+  const navigate = useNavigate();
   const onClick = () => {
     setOpen(!open);
+    navigate('/');
   };
 
   return (
