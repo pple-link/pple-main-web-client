@@ -55,17 +55,15 @@ const MyPageList: React.FC = () => {
     navigate('/etc/1');
   };
   const handleService = () => {
-    window.location.href =
-      'https://pple.notion.site/52ab3b73d5f64d5891c9f6723dae7848';
+     window.open('https://pple.notion.site/52ab3b73d5f64d5891c9f6723dae7848');
   };
   const handlePolicy = () => {
-    window.location.href =
-      'https://pple.notion.site/a19608ee13a8436d900262685443c452';
-  };
-  const handleMarketing = () => {
-    window.location.href =
-      'https://pple.notion.site/aa6a393366354c6aa884b14a5d07dbc4';
-  };
+    windo.open('https://pple.notion.site/a19608ee13a8436d900262685443c452');
+      };
+  const handleMarketing=()=>{
+    window.open('https://pple.notion.site/aa6a393366354c6aa884b14a5d07dbc4');
+};
+};
   return (
     <div>
       <DIVIDER />
@@ -111,7 +109,7 @@ const MyPageList: React.FC = () => {
           </ListItemIcon>
           <ListItemText primary="서비스 이용약관" />
         </ListItemButton>
-        <ListItemButton onClick={handleService}>
+        <ListItemButton onClick={handleMarketing}>
           <ListItemIcon>
             <img
               src={marketing}
