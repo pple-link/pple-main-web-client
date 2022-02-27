@@ -21,6 +21,7 @@ const HomePage: React.FC = () => {
   return (
     <HomepageBlock>
       <HomeForm />
+      <ChannelTalk />
     </HomepageBlock>
   );
 };
