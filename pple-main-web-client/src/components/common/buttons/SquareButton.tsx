@@ -10,6 +10,16 @@ const StyledButton = styled(Button)({
   fontWeight: 'bold',
   textAlign: 'center',
   boxShadow: 'none',
+  background: '#FF6969',
+  '&:hover': {
+    background: '#FF6969',
+  },
+  '&:focus': {
+    background: '#FF6969',
+  },
+  '&:active': {
+    background: '#FF6969',
+  },
 });
 
 interface Style {

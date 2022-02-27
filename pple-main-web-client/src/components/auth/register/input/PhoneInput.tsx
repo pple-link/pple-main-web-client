@@ -30,20 +30,21 @@ const PhoneInput: React.FC<IPhone> = ({ phone, handlePhoneNumber }) => {
       <Label>휴대폰 번호</Label>
       <InputBlock>
         <StyleInput
+          widthValue="30%"
           name="first"
           id="first"
           value={phone.first}
           onChange={handlePhoneNumber}
         ></StyleInput>
-        <div className="divider"></div>
         <StyleInput
+          widthValue="30%"
           name="second"
           id="second"
           value={phone.second}
           onChange={handlePhoneNumber}
         ></StyleInput>
-        <div className="divider"></div>
         <StyleInput
+          widthValue="30%"
           name="third"
           id="third"
           value={phone.third}
