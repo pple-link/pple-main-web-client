@@ -50,7 +50,7 @@ const HomeForm = () => {
         console.log(err);
         console.log('ERROR_DONATION');
       });
-  }, []);
+  }, [displayName]);
   return (
     <>
       <StoryModal
