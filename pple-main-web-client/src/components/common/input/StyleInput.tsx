@@ -1,5 +1,6 @@
 import React from 'react';
 import { styled, TextField } from '@mui/material';
+import { width } from '@mui/system';
 
 interface StyleInputProps {
   text: string;
@@ -30,6 +31,7 @@ type InputProps = {
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   inputProps?: any;
+  widthValue?: string;
 };
 
 const StyleInput: React.FC<InputProps> = ({
@@ -39,6 +41,7 @@ const StyleInput: React.FC<InputProps> = ({
   onChange,
   inputProps,
   name,
+  widthValue,
 }) => {
   return (
     <>
@@ -53,6 +56,9 @@ const StyleInput: React.FC<InputProps> = ({
         placeholder={placeholder}
         onChange={onChange}
         inputProps={inputProps}
+        sx={{
+          width: widthValue,
+        }}
       />
     </>
   );

@@ -52,6 +52,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)<IType>(
     '& #circle-toggle': {
       borderRadius: '100%',
       border: `1px solid ${palette.gray[1]}`,
+      background: '#F9F9F9',
     },
   }),
 );

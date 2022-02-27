@@ -63,13 +63,20 @@ const BodyTextBox = styled('div')({
   },
   '& #title': {
     fontSize: 'large',
-    color: '#AEAEAE',
+    color: 'black',
     padding: '20px 0px 10px 0px',
     border: 'red',
   },
-  '& #content': {
+
+  '& #title::placeholder': {
     color: '#AEAEAE',
+  },
+  '& #content': {
+    color: 'black',
     paddingTop: '20px',
+  },
+  '& #content::placeholder': {
+    color: '#AEAEAE',
   },
 });
 
@@ -116,9 +123,6 @@ const RequestRegister: React.FC<RequestRegisterType> = ({
     navigate(-1);
   };
   const { content, abo, rh, first, second, third, title } = post;
-  const textFieldStyle = {
-    padding: '10px 0px',
-  };
 
   return (
     <RequestRegisterBlock>
