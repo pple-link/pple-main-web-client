@@ -39,9 +39,11 @@ export const getExpiredDonations = (jwt: string) => {
   });
 };
 
-export const updateExpiredDonation = (donationUuid: string) => {
+export const updateExpiredDonation = (donationUuid: string, jwt: string) => {
   return customAxios
-    .post(`/api/v1/account/donation/renew/${donationUuid}`)
+    .post(`/api/v1/account/donation/renew/${donationUuid}`, {
+      headers: { 'X-AUTH-TOKEN': `${jwt}` },
+    })
     .then(res => {
       console.log(res);
     })
@@ -51,9 +53,11 @@ export const updateExpiredDonation = (donationUuid: string) => {
     });
 };
 
-export const deleteExpiredDonation = (donationUuid: string) => {
+export const deleteExpiredDonation = (donationUuid: string, jwt: string) => {
   return customAxios
-    .patch(`/api/v1/donation/delete/${donationUuid}`)
+    .patch(`/api/v1/donation/delete/${donationUuid}`, {
+      headers: { 'X-AUTH-TOKEN': `${jwt}` },
+    })
     .then(res => {
       console.log(res);
     })

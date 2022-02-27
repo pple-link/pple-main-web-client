@@ -10,6 +10,7 @@ import {
   updateExpiredDonation,
 } from '../../../lib/api/donation';
 import ExtensionModal from './ExtensionModal copy';
+import { getCookie } from '../../../lib/hooks/CookieUtil';
 
 const StyledModal = styled(Modal)({
   position: 'fixed',
@@ -68,6 +69,7 @@ interface Props {
 }
 
 const StoryModal: React.FC<Props> = ({ open, setOpen, donationUuid }) => {
+  const jwt = getCookie();
   const [extensionConfirmOpen, setExtensionConfirmOpen] =
     useState<boolean>(false);
   const onClick = () => {
@@ -75,13 +77,13 @@ const StoryModal: React.FC<Props> = ({ open, setOpen, donationUuid }) => {
   };
 
   const handleUpdate = () => {
-    updateExpiredDonation(donationUuid);
+    updateExpiredDonation(donationUuid, jwt);
     setOpen(!open);
     setExtensionConfirmOpen(!extensionConfirmOpen);
   };
 
   const handleDelete = () => {
-    deleteExpiredDonation(donationUuid);
+    deleteExpiredDonation(donationUuid, jwt);
     setOpen(!open);
     location.reload();
   };
