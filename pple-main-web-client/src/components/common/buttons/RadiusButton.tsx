@@ -2,19 +2,21 @@ import React from 'react';
 import { styled, ButtonBase } from '@mui/material';
 
 const StyledButton = styled(ButtonBase)({
-  padding: '7px 16px',
+  padding: '9px 20px',
   borderRadius: '20px',
   display: 'flex',
   justifyContent: 'center',
   alignContent: 'center',
   backgroundColor: '#FF6969',
   color: 'white',
+  fontSize: 'middle',
   '&:hover': {
     backgroundColor: '#FF6980',
     borderColor: '#FF6980',
     boxShadow: 'none',
   },
-  fontWeight: 'bold',
+  fontWeight: 'bolder',
+  fontFamily: 'Pretendard',
 });
 
 interface Props {

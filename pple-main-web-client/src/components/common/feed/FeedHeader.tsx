@@ -19,7 +19,7 @@ const FeedHeaderBlock = styled('div')({
   width: '100%',
   '& .header': {
     backgroundColor: '#EEEEEE',
-    padding: '9px 22px',
+    padding: '7px 22px 10px 22px',
     borderRadius: '14px 14px 0px 0px',
   },
   borderBottom: '1px solid rgba(0,0,0,0.02)',
@@ -34,6 +34,7 @@ const TimeBox = styled('div')({
   textAlign: 'right',
   boxSizing: 'border-box',
   color: '#B7B7B7',
+  transform: 'translate(0, 2px)',
 });
 
 const CardComponentHeader = styled('div')({

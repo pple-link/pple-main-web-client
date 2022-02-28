@@ -98,7 +98,10 @@ const CardComponent: React.FC<Props> = ({
         ) : (
           <ContentWithMore>
             {title.slice(0, 22)}
-            <button style={{ color: '#B7B7B7' }} onClick={handleDetail}>
+            <button
+              style={{ color: '#B7B7B7', fontSize: '14px' }}
+              onClick={handleDetail}
+            >
               ...더보기
             </button>
           </ContentWithMore>
