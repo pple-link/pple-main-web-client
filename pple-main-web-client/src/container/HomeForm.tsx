@@ -57,6 +57,7 @@ const HomeForm = () => {
         open={extensionOpen}
         setOpen={setExtensionOpen}
         donationUuid={expiredDonationUuid}
+        jwt={jwt}
       />
       <HomePageHeader name={displayName} />
       <HomeCardTemplateForm contentArray={contentArray} />
