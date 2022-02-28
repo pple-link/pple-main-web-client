@@ -45,7 +45,7 @@ const Pre = styled('div')({
   boxSizing: "border-box", 
   width: "inherit",
   wordBreak:"break-all",
-
+whiteSpace:"pre-wrap",
 });
 
 const FAQ = () => {
