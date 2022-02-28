@@ -15,6 +15,7 @@ const CardComponentBlock = styled('div')({
 
 const CardContentBox = styled('div')({
   padding: '8px 27px',
+  boxSizing: 'border-box',
 });
 
 const CardPaper = styled('div')({
