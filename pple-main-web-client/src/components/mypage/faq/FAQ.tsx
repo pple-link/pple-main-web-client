@@ -41,7 +41,7 @@ const StyledAccordionDetails = styled(AccordionDetails)({
   color: '#767676',
 });
 
-const Pre = styled('pre')({
+const Pre = styled('div')({
   boxSizing: "border-box"; 
 });
 
@@ -94,7 +94,7 @@ const FAQ = () => {
               </StyledAccordionSummary>
               <StyledAccordionDetails>
                 <Typography>
-                  <Pre>{doc.content}</Pre>
+                  <Pre><pre>{doc.content}</pre>/Pre>
                 </Typography>
               </StyledAccordionDetails>
             </Accordion>
