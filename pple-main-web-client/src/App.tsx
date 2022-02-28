@@ -21,15 +21,32 @@ import ModifyStoryForm from './container/my-page/ModifyStoryForm';
 import HandleOAuthRedirectUrl from './container/auth/HandleOAuthRedirectUrl';
 import './static/fonts/fonts.css';
 import Introduce from './pages/Introduce';
-
+import { isMobile } from 'react-device-detect';
 const GlobalStyles = createGlobalStyle`
   ${reset};
   font-family: "Pretendard";
+
+`;
+
+const PCBlock = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  height: 100vh;
+  overflow: auto;
+  font-family: 'Pretendard';
 `;
 
 const AppBlock = styled.div`
   width: 100%;
   height: auto;
+  font-family: 'Pretendard';
+`;
+
+const PCBox = styled.div`
+  width: 32rem;
+  margin: 0 auto;
+  height: 100vh;
+  overflow: auto;
   font-family: 'Pretendard';
 `;
 
@@ -42,32 +59,63 @@ const App: React.FC = () => {
   return (
     <>
       <GlobalStyles />
-      <AppBlock>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/post" element={<RequestPostPage />} />
-          <Route path="/post/register" element={<RequestRegisterPage />} />
-          <Route path="/page" element={<MyPage />} />
-          <Route path="/page/modify" element={<ModifyProfileForm />} />
-          <Route path="/page/faq" element={<FAQ />} />
-          <Route path="/page/helper" element={<Helped />} />
-          <Route path="/page/story" element={<MyStoryForm />} />
-          <Route path="/etc/1" element={<DesignatedBloodDonation />} />
-          <Route path="/etc/2" element={<PrivacyPolicy />} />
-          <Route path="/etc/3" element={<TermsOfService />} />
-          <Route path="/intro" element={<Introduce />} />
-          <Route
-            path="/page/story/modify/:donationUuid"
-            element={<ModifyStoryForm />}
-          />
-          <Route
-            path="/login/oauth2/kakao/callback"
-            element={<HandleOAuthRedirectUrl />}
-          />
-        </Routes>
-      </AppBlock>
+      {isMobile ? (
+        <AppBlock style={{ background: 'white' }}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/post" element={<RequestPostPage />} />
+            <Route path="/post/register" element={<RequestRegisterPage />} />
+            <Route path="/page" element={<MyPage />} />
+            <Route path="/page/modify" element={<ModifyProfileForm />} />
+            <Route path="/page/faq" element={<FAQ />} />
+            <Route path="/page/helper" element={<Helped />} />
+            <Route path="/page/story" element={<MyStoryForm />} />
+            <Route path="/etc/1" element={<DesignatedBloodDonation />} />
+            <Route path="/etc/2" element={<PrivacyPolicy />} />
+            <Route path="/etc/3" element={<TermsOfService />} />
+            <Route path="/intro" element={<Introduce />} />
+            <Route
+              path="/page/story/modify/:donationUuid"
+              element={<ModifyStoryForm />}
+            />
+            <Route
+              path="/login/oauth2/kakao/callback"
+              element={<HandleOAuthRedirectUrl />}
+            />
+          </Routes>
+        </AppBlock>
+      ) : (
+        <PCBlock>
+          <PCBox style={{ background: 'white' }}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/post" element={<RequestPostPage />} />
+              <Route path="/post/register" element={<RequestRegisterPage />} />
+              <Route path="/page" element={<MyPage />} />
+              <Route path="/page/modify" element={<ModifyProfileForm />} />
+              <Route path="/page/faq" element={<FAQ />} />
+              <Route path="/page/helper" element={<Helped />} />
+              <Route path="/page/story" element={<MyStoryForm />} />
+              <Route path="/etc/1" element={<DesignatedBloodDonation />} />
+              <Route path="/etc/2" element={<PrivacyPolicy />} />
+              <Route path="/etc/3" element={<TermsOfService />} />
+              <Route path="/intro" element={<Introduce />} />
+              <Route
+                path="/page/story/modify/:donationUuid"
+                element={<ModifyStoryForm />}
+              />
+              <Route
+                path="/login/oauth2/kakao/callback"
+                element={<HandleOAuthRedirectUrl />}
+              />
+            </Routes>
+          </PCBox>
+        </PCBlock>
+      )}
     </>
   );
 };

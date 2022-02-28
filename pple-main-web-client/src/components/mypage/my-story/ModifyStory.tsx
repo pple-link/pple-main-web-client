@@ -6,13 +6,16 @@ import BloodTypeGroup from '../../common/input/BloodTypeGroup';
 import PhoneInput from '../../common/input/PhoneInput';
 import { useNavigate } from 'react-router-dom';
 import OwnDonation from '../../../lib/interface/OwnDonation';
+import { isMobile } from 'react-device-detect';
 
 const Block = styled('div')({
-  height: '100%',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
   paddingBottom: '40px',
+  position: 'relative',
+  boxSizing: 'border-box',
+  width: 'inherit',
 });
 
 const Divider = styled('div')({
@@ -32,18 +35,21 @@ const InputBlock = styled('div')({
   },
 });
 
-const ModifyButton = styled(ButtonBase)({
-  width: '100%',
+type Detect = {
+  isMobile: boolean;
+};
+
+const ModifyButton = styled(ButtonBase)<Detect>(({ isMobile }) => ({
+  width: isMobile ? '100%' : '32rem',
+  // maxWidth: '32rem',
   background: '#FF6969',
   color: 'white',
   fontWeight: 'bold',
   fontSize: '18px',
   padding: '20px 0px',
   position: 'fixed',
-  bottom: '0',
-  boxSizing: 'border-box',
-  marginTop: '20px',
-});
+  bottom: 0,
+}));
 
 interface Props {
   ownDonation: OwnDonation;
@@ -105,7 +111,9 @@ const ModifyStory: React.FC<Props> = ({
           />
         </InputBlock>
       </div>
-      <ModifyButton type="submit">수정 완료</ModifyButton>
+      <ModifyButton isMobile={isMobile} type="submit">
+        수정 완료
+      </ModifyButton>
     </Block>
   );
 };

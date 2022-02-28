@@ -5,7 +5,8 @@ import { Avatar, Badge, Button, styled, TextField } from '@mui/material';
 import palette from '../../lib/styles/palette';
 
 const ModifyProfileBlock = styled('div')({
-  height: '100%',
+  position: 'relative',
+  height: '100vh',
   '& .avatar': {
     width: '100%',
     display: 'flex',
@@ -53,9 +54,9 @@ const StyledInput = styled(TextField)({
 const StyledButton = styled(Button)({
   width: '100%',
   boxSizing: 'border-box',
-  position: 'fixed',
-  bottom: '0px',
-  left: '0px',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
   background: `${palette.red[1]}`,
   color: 'white',
   padding: '20px 0px',
