@@ -45,6 +45,9 @@ const Content = styled('div')({
   lineHeight: '20px',
   letterSpacing: '-0.03em',
   color: '#222222',
+  boxSizing:'border-box', 
+  whiteSpace:"pre-wrap",
+  wordBreak:"break-all",
 });
 const ReduceButton = styled('div')({
   width: '100%',
