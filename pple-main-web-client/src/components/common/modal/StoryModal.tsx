@@ -69,7 +69,7 @@ interface Props {
   jwt: string;
 }
 
-const StoryModal: React.FC<Props> = ({ open, setOpen, donationUuid,jwt }) => {
+const StoryModal: React.FC<Props> = ({ open, setOpen, donationUuid, jwt }) => {
   const [extensionConfirmOpen, setExtensionConfirmOpen] =
     useState<boolean>(false);
   const onClick = () => {
@@ -84,8 +84,10 @@ const StoryModal: React.FC<Props> = ({ open, setOpen, donationUuid,jwt }) => {
 
   const handleDelete = () => {
     deleteExpiredDonation(donationUuid, jwt);
-    setOpen(!open);
-    location.reload();
+    setTimeout(function () {
+      setOpen(!open);
+      location.reload();
+    }, 2000);
   };
 
   return (
