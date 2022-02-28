@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconButton, styled } from '@mui/material';
-import ChannelTalkImg from '../../../static/images/Talk.svg';
+import ChannelTalkImg from '../../../static/images/channelTalk.png';
 
 const ChannelTalkBlock = styled('div')({
   position: 'fixed',
@@ -16,7 +16,7 @@ const ChannelTalk = () => {
   return (
     <ChannelTalkBlock>
       <IconButton onClick={onClick}>
-        <img src={ChannelTalkImg} alt="채널톡" />
+        <img src={ChannelTalkImg} alt="채널톡" width={70} height={70} />
       </IconButton>
     </ChannelTalkBlock>
   );
