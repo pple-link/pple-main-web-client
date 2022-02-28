@@ -17,8 +17,9 @@ interface Filter {
 }
 
 const SortingButtonGroup: React.FC<Filter> = ({ filter, setFilter }) => {
-  const bloodTypeList = ['A형', 'B형', 'O형', 'AB형'];
+  const bloodTypeList = ['전체보기', 'A형', 'B형', 'O형', 'AB형'];
   const bloodDonationList = [
+    '전체보기',
     '전혈',
     '성분채혈 혈소판',
     '성분채혈 백혈구',

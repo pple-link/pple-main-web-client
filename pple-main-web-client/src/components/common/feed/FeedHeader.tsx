@@ -83,7 +83,7 @@ const createBloodProduct = (bloodProduct: string) => {
   } else if (bloodProduct == 'PACKED_RED_BLOOD_CELL') {
     return '농축 적혈구';
   } else if (bloodProduct == 'LEUKOCYTE_REDUCED_RED_BLOOD_CELL') {
-    return '백혈구제거 적혈구';
+    return '백혈구여과제거적혈구';
   } else {
     return '오타있습니다';
   }

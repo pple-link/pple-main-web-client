@@ -10,7 +10,7 @@ const ChannelTalkBlock = styled('div')({
 
 const ChannelTalk = () => {
   const onClick = () => {
-    window.location.href = 'https://open.kakao.com/o/gOg74umb';
+    window.open('https://open.kakao.com/o/gOg74umb');
   };
 
   return (

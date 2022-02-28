@@ -46,8 +46,25 @@ const StyledButton = styled(Button)({
   },
 });
 
-const RenderPost = (contentArray: any) => {
-  return contentArray.map((content, idx) => (
+const ChangeBloodProductValue = (bloodProduct: string) => {
+  switch (bloodProduct) {
+    case '전혈':
+      return 'WHOLE';
+    case '성분채혈 혈소판':
+      return 'PLATELET';
+    case '성분채혈 백혈구':
+      return 'LEUKOCYTE';
+    case '농축적혈구':
+      return 'PACKED_RED_BLOOD_CELL';
+    case '백혈구여과제거적혈구':
+      return 'LEUKOCYTE_REDUCED_RED_BLOOD_CELL';
+    default:
+      break;
+  }
+};
+
+const returnCardComponent = (content: any) => {
+  return (
     <CardComponent
       key={content.uuid}
       title={content.title}
@@ -61,7 +78,11 @@ const RenderPost = (contentArray: any) => {
       time={content.createdAt}
       phoneNumber={content.phoneNumber}
     />
-  ));
+  );
+};
+
+const RenderPost = (contentArray: any) => {
+  return contentArray.map((content, idx) => returnCardComponent(content));
 };
 
 const FilterBloodType = (bloodType: string, contentArray: any) => {
@@ -84,23 +105,6 @@ const FilterBloodType = (bloodType: string, contentArray: any) => {
       <div key={idx}></div>
     ),
   );
-};
-
-const ChangeBloodProductValue = (bloodProduct: string) => {
-  switch (bloodProduct) {
-    case '전혈':
-      return 'WHOLE';
-    case '성분채혈 혈소판':
-      return 'PLATELET';
-    case '성분채혈 백혈구':
-      return 'LEUKOCYTE';
-    case '농축적혈구':
-      return 'PACKED_RED_BLOOD_CELL';
-    case '백혈구여과제거적혈구':
-      return 'LEUKOCYTE_REDUCED_RED_BLOOD_CELL';
-    default:
-      break;
-  }
 };
 
 const FilterBloodProduct = (bloodProduct: string, contentArray: any) => {
@@ -186,15 +190,18 @@ const CardTemplate: React.FC<CardTemplateType> = ({
           </StyledButton>
         </div>
       </ButtonGroup>
-      {filter.bloodProduct && filter.bloodType
+      {filter.bloodProduct &&
+      filter.bloodType &&
+      filter.bloodType !== '전체보기' &&
+      filter.bloodProduct !== '전체보기'
         ? FilterBloodTypeAndBloodProduct(
             filter.bloodType,
             filter.bloodProduct,
             contentArray,
           )
-        : filter.bloodProduct
+        : filter.bloodProduct && filter.bloodProduct !== '전체보기'
         ? FilterBloodProduct(filter.bloodProduct, contentArray)
-        : filter.bloodType
+        : filter.bloodType && filter.bloodType !== '전체보기'
         ? FilterBloodType(filter.bloodType, contentArray)
         : RenderPost(contentArray)}
     </CardContainerBlock>
