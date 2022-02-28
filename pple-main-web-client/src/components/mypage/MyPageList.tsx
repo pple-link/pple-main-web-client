@@ -58,11 +58,10 @@ const MyPageList: React.FC = () => {
      window.open('https://pple.notion.site/52ab3b73d5f64d5891c9f6723dae7848');
   };
   const handlePolicy = () => {
-    windo.open('https://pple.notion.site/a19608ee13a8436d900262685443c452');
+    window.open('https://pple.notion.site/a19608ee13a8436d900262685443c452');
       };
   const handleMarketing=()=>{
     window.open('https://pple.notion.site/aa6a393366354c6aa884b14a5d07dbc4');
-};
 };
   return (
     <div>
@@ -123,5 +122,6 @@ const MyPageList: React.FC = () => {
     </div>
   );
 };
+  
 
 export default MyPageList;
