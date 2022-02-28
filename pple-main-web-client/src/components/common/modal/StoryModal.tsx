@@ -66,10 +66,10 @@ interface Props {
   open: boolean;
   setOpen: any;
   donationUuid: string;
+  jwt: string;
 }
 
-const StoryModal: React.FC<Props> = ({ open, setOpen, donationUuid }) => {
-  const jwt = getCookie();
+const StoryModal: React.FC<Props> = ({ open, setOpen, donationUuid,jwt }) => {
   const [extensionConfirmOpen, setExtensionConfirmOpen] =
     useState<boolean>(false);
   const onClick = () => {
