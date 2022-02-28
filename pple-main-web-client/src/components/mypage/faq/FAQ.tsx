@@ -45,7 +45,7 @@ const Pre = styled('div')({
   boxSizing: "border-box", 
   width: "inherit",
   wordBreak:"break-all",
-whiteSpace:"pre-wrap",
+  whiteSpace:"pre-wrap",
 });
 
 const FAQ = () => {
@@ -93,11 +93,11 @@ const FAQ = () => {
           {document.app.map((doc, idx) => (
             <Accordion key={idx}>
               <StyledAccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography>{doc.title}</Typography>
+                <Typography><p>{doc.title}</p></Typography>
               </StyledAccordionSummary>
               <StyledAccordionDetails>
                 <Typography>
-                  <Pre><p>{doc.content}</p></Pre>
+                  <Pre>{doc.content}</Pre>
                 </Typography>
               </StyledAccordionDetails>
             </Accordion>
