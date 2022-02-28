@@ -8,6 +8,7 @@ import { customAxios } from '../lib/customAxios';
 import HomeCardTemplateForm from '../container/feed/HomeCardTemplateForm';
 import HomeForm from '../container/HomeForm';
 const HomepageBlock = styled('div')({
+  fontFamily: 'Pretendard',
   '& .channel-talk': {
     width: '28rem',
     position: 'fixed',

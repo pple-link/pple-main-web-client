@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { styled, Box, Button, IconButton } from '@mui/material';
 import PaperPlus from '../../static/images/PaperPlus.png';
 import Calendar from '../../static/images/Calendar.png';
-import MenuIcon from '@mui/icons-material/Menu';
-
+import Hamberger from '../../static/images/Hamberger.svg';
 import { getCookie } from '../../lib/hooks/CookieUtil';
 import LoginRequestModal from '../common/modal/LoginRequestModal';
 
 const HomePageHeaderBlock = styled('div')({
+  fontFamily: 'Pretendard',
   background: 'linear-gradient(109.4deg, #ff6969 -3.19%, #ff3333 109.95%)',
   borderRadius: '0px 0px 30px 30px',
   padding: '60px 16px 25px 16px',
@@ -20,10 +20,12 @@ const Title = styled('div')({
   fontSize: '24px',
   display: 'flex',
   justifyContent: 'space-between',
+  alignContent: 'center',
   lineHeight: '120%',
 });
 
 const ButtonGroup = styled('div')({
+  fontFamily: 'Pretendard',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-around',
@@ -42,12 +44,14 @@ const ButtonContent = styled('div')({
     fontWeight: '500',
     margin: '0px',
     lineHeight: '16px',
+    fontFamily: 'Pretendard',
   },
   '& .button-text-bottom': {
     fontSize: 'large',
     fontWeight: 'bold',
     margin: '0px',
     lineHeight: '16px',
+    fontFamily: 'Pretendard',
   },
 });
 
@@ -68,18 +72,6 @@ const HomeButton = styled(Button)({
     boxShadow:
       'inset 3px 3px 2px rgba(255, 255, 255, 0.12), inset -2px -2px 2px rgba(255, 0, 0, 0.1)',
     backdropFilter: 'blur(4px)',
-  },
-});
-
-const StyledBox = styled(Box)({
-  width: 250,
-  background: '#FF6969',
-  height: '100%',
-  color: 'white',
-  padding: '60px 0px 0px 46px',
-  '& .list .list-item:hover': {
-    background: '#AEAEAE',
-    borderRadius: '14px',
   },
 });
 
@@ -128,7 +120,13 @@ const HomePageHeader: React.FC<HomeHeaderProps> = ({ name }) => {
         </div>
         <div className="menu">
           <IconButton sx={{ color: 'white' }} onClick={goPage}>
-            <MenuIcon />
+            <img
+              style={{ transform: 'translate(0,-5px)' }}
+              src={Hamberger}
+              alt=""
+              width={25}
+              height={25}
+            />
           </IconButton>
         </div>
       </Title>
