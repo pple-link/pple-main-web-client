@@ -116,15 +116,18 @@ const RequestPostListForm: React.FC = () => {
       filter={filter}
       setFilter={setFilter}
     >
-      {filter.bloodProduct && filter.bloodType
+      {filter.bloodProduct &&
+      filter.bloodType &&
+      filter.bloodType !== '전체보기' &&
+      filter.bloodProduct !== '전체보기'
         ? FilterBloodTypeAndBloodProduct(
             filter.bloodType,
             filter.bloodProduct,
             contentArray,
           )
-        : filter.bloodProduct
+        : filter.bloodProduct && filter.bloodProduct !== '전체보기'
         ? FilterBloodProduct(filter.bloodProduct, contentArray)
-        : filter.bloodType
+        : filter.bloodType && filter.bloodType !== '전체보기'
         ? FilterBloodType(filter.bloodType, contentArray)
         : RenderPost(contentArray)}
     </RequestPostList>
