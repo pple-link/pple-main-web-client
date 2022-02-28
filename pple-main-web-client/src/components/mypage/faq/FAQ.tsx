@@ -41,6 +41,10 @@ const StyledAccordionDetails = styled(AccordionDetails)({
   color: '#767676',
 });
 
+const Pre = styled('pre')({
+  boxSizing: "border-box"; 
+});
+
 const FAQ = () => {
   const [value, setValue] = useState('0');
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -90,7 +94,7 @@ const FAQ = () => {
               </StyledAccordionSummary>
               <StyledAccordionDetails>
                 <Typography>
-                  <pre>{doc.content}</pre>
+                  <Pre>{doc.content}</Pre>
                 </Typography>
               </StyledAccordionDetails>
             </Accordion>
