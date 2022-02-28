@@ -102,6 +102,7 @@ interface CardProps {
   buttonText: string;
   time?: string;
   onClick?: any;
+  status?: string;
 }
 
 const FeedHeader: React.FC<CardProps> = ({
@@ -110,6 +111,7 @@ const FeedHeader: React.FC<CardProps> = ({
   buttonText,
   onClick,
   time,
+  status,
 }) => {
   const bloodTypeImg = (bloodType: string) => {
     if (bloodType == 'A+') {
@@ -162,7 +164,7 @@ const FeedHeader: React.FC<CardProps> = ({
             </CardComponentHeaderColumn>
           </div>
           <CardComponentHeaderColumn sx={{ transform: 'translate(0,5px)' }}>
-            <RadiusButton onClick={onClick} text={buttonText} />
+            <RadiusButton status={status} onClick={onClick} text={buttonText} />
           </CardComponentHeaderColumn>
         </CardComponentHeader>
       </div>

@@ -39,6 +39,10 @@ export const getExpiredDonations = (jwt: string) => {
   });
 };
 
+export const getExpiredDonationsTest = () => {
+  return customAxios.get('/api/v1/account/donation/gus5427@naver.com/test');
+};
+
 export const updateExpiredDonation = (donationUuid: string, jwt: string) => {
   return customAxios
     .post(`/api/v1/account/donation/renew/${donationUuid}`, {
