@@ -31,7 +31,6 @@ const GlobalStyles = createGlobalStyle`
 const PCBlock = styled.div`
   width: 100%;
   margin: 0 auto;
-  height: 100vh;
   overflow: auto;
   font-family: 'Pretendard';
 `;
@@ -43,7 +42,7 @@ const AppBlock = styled.div`
 `;
 
 const PCBox = styled.div`
-  width: 32rem;
+  width: 28rem;
   margin: 0 auto;
   height: 100vh;
   overflow: auto;
@@ -100,9 +99,6 @@ const App: React.FC = () => {
               <Route path="/page/faq" element={<FAQ />} />
               <Route path="/page/helper" element={<Helped />} />
               <Route path="/page/story" element={<MyStoryForm />} />
-              <Route path="/etc/1" element={<DesignatedBloodDonation />} />
-              <Route path="/etc/2" element={<PrivacyPolicy />} />
-              <Route path="/etc/3" element={<TermsOfService />} />
               <Route path="/intro" element={<Introduce />} />
               <Route
                 path="/page/story/modify/:donationUuid"
