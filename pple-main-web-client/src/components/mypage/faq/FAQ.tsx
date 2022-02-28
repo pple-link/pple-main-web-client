@@ -41,6 +41,13 @@ const StyledAccordionDetails = styled(AccordionDetails)({
   color: '#767676',
 });
 
+const Pre = styled('div')({
+  boxSizing: "border-box", 
+  width: "inherit",
+  wordBreak:"break-all",
+  whiteSpace:"pre-wrap",
+});
+
 const FAQ = () => {
   const [value, setValue] = useState('0');
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -86,11 +93,11 @@ const FAQ = () => {
           {document.app.map((doc, idx) => (
             <Accordion key={idx}>
               <StyledAccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography>{doc.title}</Typography>
+                <Typography><p>{doc.title}</p></Typography>
               </StyledAccordionSummary>
               <StyledAccordionDetails>
                 <Typography>
-                  <pre>{doc.content}</pre>
+                  <Pre>{doc.content}</Pre>
                 </Typography>
               </StyledAccordionDetails>
             </Accordion>
