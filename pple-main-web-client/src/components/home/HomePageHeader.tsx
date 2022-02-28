@@ -9,7 +9,7 @@ import LoginRequestModal from '../common/modal/LoginRequestModal';
 
 const HomePageHeaderBlock = styled('div')({
   fontFamily: 'Pretendard',
-  background: 'linear-gradient(109.4deg, #ff6969 -3.19%, #ff3333 109.95%)',
+  background: 'linear-gradient(109.4deg, #FF6969 -3.19%, #FF3333 109.95%);',
   borderRadius: '0px 0px 30px 30px',
   padding: '60px 16px 25px 16px',
 });
@@ -38,19 +38,19 @@ const ButtonContent = styled('div')({
   justifyContent: 'flex-start',
   marginLeft: '5px',
   '& .button-text-top': {
-    fontSize: 'x-small',
+    fontSize: 'small',
     textAlign: 'start',
     Letter: '-0.24px',
-    fontWeight: '500',
+    fontWeight: '600',
     margin: '0px',
-    lineHeight: '16px',
+    lineHeight: '18px',
     fontFamily: 'Pretendard',
   },
   '& .button-text-bottom': {
     fontSize: 'large',
     fontWeight: 'bold',
     margin: '0px',
-    lineHeight: '16px',
+    lineHeight: '18px',
     fontFamily: 'Pretendard',
   },
 });

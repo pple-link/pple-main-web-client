@@ -28,7 +28,7 @@ const ButtonGroup = styles.div`
     display: flex;
     align-items: center;
   }
-  padding:20px 0px 10px 0px;
+  padding:20px 0px 5px 0px;
 `;
 
 const StyledButton = styled(Button)({
@@ -179,7 +179,9 @@ const CardTemplate: React.FC<CardTemplateType> = ({
         </div>
         <div>
           <StyledButton sx={{ padding: '0px' }} onClick={handleAuth}>
-            <span style={{ marginRight: '6ox' }}>전체보기</span>
+            <span style={{ marginRight: '6ox', fontFamily: 'Pretendard' }}>
+              전체보기
+            </span>
             <img src={ChevronRightIcon} alt="" />
           </StyledButton>
         </div>

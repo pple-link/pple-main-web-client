@@ -3,6 +3,7 @@ import { styled } from '@mui/material';
 import RadiusButtonWithDownDrop from './RadiusButtonWithDownDrop';
 import { FilterType } from '../../home/CardTemplate';
 const SortingButtonGroupBlock = styled('div')({
+  fontFamily: 'Pretendard',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-start',
