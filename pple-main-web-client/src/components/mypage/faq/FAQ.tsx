@@ -44,6 +44,8 @@ const StyledAccordionDetails = styled(AccordionDetails)({
 const Pre = styled('div')({
   boxSizing: "border-box", 
   width: "inherit",
+  wordBreak:"break-all",
+
 });
 
 const FAQ = () => {
@@ -95,7 +97,7 @@ const FAQ = () => {
               </StyledAccordionSummary>
               <StyledAccordionDetails>
                 <Typography>
-                  <Pre>{doc.content}</Pre>
+                  <Pre><p>{doc.content}</p></Pre>
                 </Typography>
               </StyledAccordionDetails>
             </Accordion>
