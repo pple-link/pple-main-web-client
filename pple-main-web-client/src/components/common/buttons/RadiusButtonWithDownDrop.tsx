@@ -20,7 +20,7 @@ const StyledInputBase = styled(InputBase)({
   fontWeight: 'bold',
   '& .MuiInputBase-input': {
     position: 'relative',
-    border: `1.5px solid #B7B7B7`,
+    border: `1.2px solid #B7B7B7`,
     borderRadius: '18px',
     backgroundColor: 'white',
     color: `${palette.gray[1]}`,

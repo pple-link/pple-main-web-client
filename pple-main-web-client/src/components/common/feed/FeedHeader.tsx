@@ -34,7 +34,7 @@ const TimeBox = styled('div')({
   textAlign: 'right',
   boxSizing: 'border-box',
   color: '#B7B7B7',
-  transform: 'translate(0, 7px)',
+  transform: 'translate(0, 10px)',
 });
 
 const CardComponentHeader = styled('div')({

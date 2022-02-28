@@ -80,7 +80,7 @@ const StoryBubble: React.FC<StoryBubbleType> = ({ content, index }) => {
               : `${content.patient.bloodType.abo}-`
           }
           sort={content.bloodProduct}
-          buttonText="정보수정"
+          buttonText={content.status == 'ACTIVE' ? '사연수정' : '사연종료'}
           onClick={handleModifyButton}
           time={content.createdAt}
         />
