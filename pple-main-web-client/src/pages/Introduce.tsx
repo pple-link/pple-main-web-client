@@ -1,6 +1,6 @@
 import React from 'react';
-import intro1 from '../static/images/intro/introPage1.png';
-import intro2 from '../static/images/intro/introPage2.png';
+import intro1 from '../static/images/intro/introPage1.svg';
+import intro2 from '../static/images/intro/introPage2.svg';
 const Introduce = () => {
   const imageStyle = {
     background: 'white',
