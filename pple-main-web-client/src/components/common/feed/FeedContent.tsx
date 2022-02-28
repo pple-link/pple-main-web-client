@@ -26,6 +26,7 @@ const FeedContentBlock = styled('div')({
 const DIV = styled("div")({
   boxSizing:'border-box', 
   whiteSpace:"pre-wrap",
+  wordBreak:"break-all",
 });
 
 interface Props {
