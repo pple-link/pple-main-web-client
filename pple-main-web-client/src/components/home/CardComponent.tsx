@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { styled } from '@mui/system';
-import { Paper } from '@mui/material';
+import { IconButton, Paper } from '@mui/material';
 import FeedHeader from '../common/feed/FeedHeader';
 import FeedContent from '../common/feed/FeedContent';
 import { StringifyOptions } from 'querystring';
 import ConnectionModal from '../common/modal/ConnectionModal';
 import LoginRequestModal from '../common/modal/LoginRequestModal';
 import { getCookie } from '../../lib/hooks/CookieUtil';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 const CardComponentBlock = styled('div')({
   width: '100%',
@@ -39,6 +40,12 @@ const ContentWithMore = styled('div')({
     border: 'none',
     cursor: 'pointer',
   },
+});
+
+const ReduceButton = styled('div')({
+  width: '100%',
+  textAlign: 'center',
+  marginTop: '10px',
 });
 
 interface Props {
@@ -94,6 +101,14 @@ const CardComponent: React.FC<Props> = ({
         {detail ? (
           <CardContentBox>
             <FeedContent title={title} content={content} />
+            <ReduceButton>
+              <IconButton
+                sx={{ color: '#B7B7B7', textAlign: 'center' }}
+                onClick={handleDetail}
+              >
+                <KeyboardArrowUpIcon />
+              </IconButton>
+            </ReduceButton>
           </CardContentBox>
         ) : (
           <ContentWithMore>
