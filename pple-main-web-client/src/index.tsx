@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { PersistGate } from 'redux-persist/integration/react';
 import persistStore from 'redux-persist/es/persistStore';
+import { isMobile } from 'react-device-detect';
 const store = createStore(rootReducer, composeWithDevTools());
 const persistor = persistStore(store);
 
