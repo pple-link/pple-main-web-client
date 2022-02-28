@@ -45,9 +45,9 @@ const Content = styled('div')({
   lineHeight: '20px',
   letterSpacing: '-0.03em',
   color: '#222222',
-  boxSizing:'border-box', 
-  whiteSpace:"pre-wrap",
-  wordBreak:"break-all",
+  boxSizing: 'border-box',
+  whiteSpace: 'pre-wrap',
+  wordBreak: 'break-all',
 });
 const ReduceButton = styled('div')({
   width: '100%',
@@ -80,9 +80,10 @@ const StoryBubble: React.FC<StoryBubbleType> = ({ content, index }) => {
               : `${content.patient.bloodType.abo}-`
           }
           sort={content.bloodProduct}
-          buttonText="정보수정"
+          buttonText={content.status == 'ACTIVE' ? '사연수정' : '사연종료'}
           onClick={handleModifyButton}
           time={content.createdAt}
+          status={content.status}
         />
         {detail ? (
           <ContentDetail>
@@ -105,7 +106,9 @@ const StoryBubble: React.FC<StoryBubbleType> = ({ content, index }) => {
         ) : (
           <ContentWithMore>
             {title.slice(0, 22)}
-            <button onClick={handleDetail}>...더보기</button>
+            <button style={{ fontSize: '14px' }} onClick={handleDetail}>
+              ...더보기
+            </button>
           </ContentWithMore>
         )}
       </Paper>

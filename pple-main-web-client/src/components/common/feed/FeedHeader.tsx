@@ -19,7 +19,7 @@ const FeedHeaderBlock = styled('div')({
   width: '100%',
   '& .header': {
     backgroundColor: '#EEEEEE',
-    padding: '9px 22px',
+    padding: '0 22px 10px 22px',
     borderRadius: '14px 14px 0px 0px',
   },
   borderBottom: '1px solid rgba(0,0,0,0.02)',
@@ -34,6 +34,7 @@ const TimeBox = styled('div')({
   textAlign: 'right',
   boxSizing: 'border-box',
   color: '#B7B7B7',
+  transform: 'translate(0, 10px)',
 });
 
 const CardComponentHeader = styled('div')({
@@ -101,6 +102,7 @@ interface CardProps {
   buttonText: string;
   time?: string;
   onClick?: any;
+  status?: string;
 }
 
 const FeedHeader: React.FC<CardProps> = ({
@@ -109,6 +111,7 @@ const FeedHeader: React.FC<CardProps> = ({
   buttonText,
   onClick,
   time,
+  status,
 }) => {
   const bloodTypeImg = (bloodType: string) => {
     if (bloodType == 'A+') {
@@ -160,8 +163,8 @@ const FeedHeader: React.FC<CardProps> = ({
               </div>
             </CardComponentHeaderColumn>
           </div>
-          <CardComponentHeaderColumn>
-            <RadiusButton onClick={onClick} text={buttonText} />
+          <CardComponentHeaderColumn sx={{ transform: 'translate(0,5px)' }}>
+            <RadiusButton status={status} onClick={onClick} text={buttonText} />
           </CardComponentHeaderColumn>
         </CardComponentHeader>
       </div>

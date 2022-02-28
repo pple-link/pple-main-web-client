@@ -72,7 +72,7 @@ const ModifyStory: React.FC<Props> = ({
   return (
     <Block>
       <div>
-        <MyPageElementHeader title="정보수정" />
+        <MyPageElementHeader title="사연수정" />
         <Divider />
         <InputBlock>
           <TextField

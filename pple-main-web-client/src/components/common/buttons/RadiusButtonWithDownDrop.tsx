@@ -16,14 +16,16 @@ const TempBLock = styled('div')({
 });
 
 const StyledInputBase = styled(InputBase)({
+  fontFamily: 'Pretendard',
+  fontWeight: 'bold',
   '& .MuiInputBase-input': {
     position: 'relative',
-    border: `0.577148px solid ${palette.gray[1]}`,
+    border: `1.2px solid #B7B7B7`,
     borderRadius: '18px',
     backgroundColor: 'white',
     color: `${palette.gray[1]}`,
     fontSize: 'small',
-    padding: '5px 10px',
+    padding: '5px 5px 5px 15px',
     marginRight: '0.5rem',
   },
   '& .MuiInputBase-input:focus': {

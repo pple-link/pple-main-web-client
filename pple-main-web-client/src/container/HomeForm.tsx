@@ -7,6 +7,7 @@ import { getAccountProfile } from '../lib/api/account';
 import {
   getDonationsOfActiveStatus,
   getExpiredDonations,
+  getExpiredDonationsTest,
 } from '../lib/api/donation';
 import StoryModal from '../components/common/modal/StoryModal';
 
@@ -40,6 +41,16 @@ const HomeForm = () => {
           setExpiredDonationUuid(res.data[0].uuid);
         }
       });
+      // getExpiredDonationsTest()
+      //   .then(res => {
+      //     if (res.data.length && res.data[0].status == 'ACTIVE') {
+      //       setExtensionOpen(true);
+      //       setExpiredDonationUuid(res.data[0].uuid);
+      //     }
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //   });
     }
     getDonationsOfActiveStatus()
       .then(res => {
