@@ -85,9 +85,12 @@ const DoneRegisterModal: React.FC<Props> = ({ open, setOpen }) => {
             <br />
           </TitleBox>
           <ContentBox>
-            사연은 7일후 자동 삭제 되며, 연장 유뮤를 선택하실 수 있습니다.
             <br />
-            사연과 관련된 알림은 문자 또는 카카오톡으로 알림이 제공됩니다
+            사연은 7일후 자동 삭제 되며,
+            <br /> 연장 유뮤를 선택하실 수 있습니다.
+            <br />
+            사연과 관련된 알림은
+            <br /> 문자 또는 카카오톡으로 알림이 제공됩니다
           </ContentBox>
         </StyledPaper>
       </StyledModal>

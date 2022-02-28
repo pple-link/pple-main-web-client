@@ -19,14 +19,14 @@ const FeedContentBlock = styled('div')({
     letterSpacing: '-0.03em',
     color: '#222222',
     marginBottom: '10px',
-    boxSizing:"border-box",
+    boxSizing: 'border-box',
   },
 });
 
-const DIV = styled("div")({
-  boxSizing:'border-box', 
-  whiteSpace:"pre-wrap",
-  wordBreak:"break-all",
+const DIV = styled('div')({
+  boxSizing: 'border-box',
+  whiteSpace: 'pre-wrap',
+  wordBreak: 'break-all',
 });
 
 interface Props {
@@ -39,7 +39,11 @@ const FeedContent: React.FC<Props> = ({ title, content }) => {
     <FeedContentBlock>
       <div className="title">{title ? title : '내용이 없습니다'}</div>
       <div className="content">
-        {content ? <DIV>{content.replace('\r',"<br/>")}</DIV> : `내용이 없습니다.`}
+        {content ? (
+          <DIV>{content.replace('\r', '<br/>')}</DIV>
+        ) : (
+          `내용이 없습니다.`
+        )}
       </div>
     </FeedContentBlock>
   );
