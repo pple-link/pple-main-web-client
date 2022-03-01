@@ -39,15 +39,15 @@ const TermsInput: React.FC<ITerms> = ({
 }) => {
   const navigate = useNavigate();
   const navigatePrivacy = () => {
-      window.open('https://pple.notion.site/a19608ee13a8436d900262685443c452');
-};
+    window.open('https://pple.notion.site/a19608ee13a8436d900262685443c452');
+  };
 
   const navigateTerm = () => {
-      window.open('https://pple.notion.site/52ab3b73d5f64d5891c9f6723dae7848');  
+    window.open('https://pple.notion.site/52ab3b73d5f64d5891c9f6723dae7848');
   };
 
   const navigateMarketing = () => {
-      window.open('https://pple.notion.site/aa6a393366354c6aa884b14a5d07dbc4');
+    window.open('https://pple.notion.site/aa6a393366354c6aa884b14a5d07dbc4');
   };
   return (
     <>
@@ -77,7 +77,10 @@ const TermsInput: React.FC<ITerms> = ({
           <span>개인정보 취급방침 (필수)</span>
         </div>
         <div>
-          <IconButton sx={{ color: '#767676' }} onClick={navigatePrivacy}>
+          <IconButton
+            sx={{ color: '#767676', opacity: 0.6 }}
+            onClick={navigatePrivacy}
+          >
             <ChevronRightIcon />
           </IconButton>
         </div>
@@ -94,7 +97,10 @@ const TermsInput: React.FC<ITerms> = ({
           <span>서비스 이용약관 (필수)</span>
         </div>
         <div>
-          <IconButton sx={{ color: '#767676' }} onClick={navigateTerm}>
+          <IconButton
+            sx={{ color: '#767676', opacity: 0.6 }}
+            onClick={navigateTerm}
+          >
             <ChevronRightIcon />
           </IconButton>
         </div>
@@ -111,7 +117,10 @@ const TermsInput: React.FC<ITerms> = ({
           <span>마케팅 활용동의(선택)</span>
         </div>
         <div>
-          <IconButton sx={{ color: '#767676' }} onClick={navigateMarketing}>
+          <IconButton
+            sx={{ color: '#767676', opacity: 0.6 }}
+            onClick={navigateMarketing}
+          >
             <ChevronRightIcon />
           </IconButton>
         </div>

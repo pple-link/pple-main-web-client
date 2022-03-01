@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const MLoginBodyBlock = styled('div')({
   width: '100%',
   textAlign: 'center',
+  transform: 'translate(0,100px)',
 });
 
 const LoginButton = styled(ButtonBase)({
@@ -36,6 +37,7 @@ const LoginButton = styled(ButtonBase)({
 const StartWithoutLogin = styled(ButtonBase)({
   color: `${palette.gray[1]}`,
   marginTop: '1rem',
+  fontSize: '15px',
 });
 
 const ImageSrc = styled('img')({

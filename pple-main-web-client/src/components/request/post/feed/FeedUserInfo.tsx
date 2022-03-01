@@ -7,6 +7,7 @@ const FeedUserInfoBlock = styled('div')({
   display: 'flex',
   alignContent: 'center',
   marginTop: '17px',
+  marginBottom: '17px',
   '& .first': {
     marginRight: '7.42px',
   },
