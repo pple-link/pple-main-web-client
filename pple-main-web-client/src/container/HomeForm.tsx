@@ -10,6 +10,7 @@ import {
   getExpiredDonationsTest,
 } from '../lib/api/donation';
 import StoryModal from '../components/common/modal/StoryModal';
+import { useNavigate } from 'react-router-dom';
 
 const HomeForm = () => {
   setCookie();
@@ -18,6 +19,7 @@ const HomeForm = () => {
   const [extensionOpen, setExtensionOpen] = useState(false);
   const [expiredDonationUuid, setExpiredDonationUuid] = useState<string>('');
   const [contentArray, setContentArray] = useState([]);
+  const navigate = useNavigate();
 
   const jwt = getCookie();
 
@@ -30,8 +32,8 @@ const HomeForm = () => {
           }
         })
         .catch(err => {
-          console.log('Token is undefined');
           console.log(err);
+          navigate('/login');
         });
 
       getExpiredDonations(jwt).then(res => {
