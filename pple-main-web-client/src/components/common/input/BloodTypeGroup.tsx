@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   IconButton,
   styled,
@@ -69,7 +69,9 @@ const BloodTypeGroup: React.FC<IBlood> = ({ onChange, abo, rh, handleRh }) => {
     setSelect(!select);
     handleRh();
   };
-
+  useEffect(() => {
+    console.log(rh);
+  });
   const children = [
     <ToggleButton
       sx={{ fontWeight: 'bold', maxWidth: '35px' }}
@@ -78,7 +80,7 @@ const BloodTypeGroup: React.FC<IBlood> = ({ onChange, abo, rh, handleRh }) => {
       key="A+"
       aria-label="abo"
     >
-      <span>{select ? 'A-' : 'A+'}</span>
+      <span>{select || rh == 'NEGATIVE' ? 'A-' : 'A+'}</span>
     </ToggleButton>,
     <ToggleButton
       sx={{ fontWeight: 'bold', maxWidth: '35px' }}
@@ -87,7 +89,7 @@ const BloodTypeGroup: React.FC<IBlood> = ({ onChange, abo, rh, handleRh }) => {
       key="B+"
       aria-label="abo"
     >
-      <span>{select ? 'B-' : 'B+'}</span>
+      <span>{select || rh == 'NEGATIVE' ? 'B-' : 'B+'}</span>
     </ToggleButton>,
     <ToggleButton
       sx={{ fontWeight: 'bold', maxWidth: '35px' }}
@@ -96,7 +98,7 @@ const BloodTypeGroup: React.FC<IBlood> = ({ onChange, abo, rh, handleRh }) => {
       key="O+"
       aria-label="abo"
     >
-      <span>{select ? 'O-' : 'O+'}</span>
+      <span>{select || rh == 'NEGATIVE' ? 'O-' : 'O+'}</span>
     </ToggleButton>,
     <ToggleButton
       sx={{ fontWeight: 'bold', maxWidth: '35px' }}
@@ -105,7 +107,7 @@ const BloodTypeGroup: React.FC<IBlood> = ({ onChange, abo, rh, handleRh }) => {
       key="AB+"
       aria-label="abo"
     >
-      <span>{select ? 'AB-' : 'AB+'}</span>
+      <span>{select || rh == 'NEGATIVE' ? 'AB-' : 'AB+'}</span>
     </ToggleButton>,
   ];
   return (
