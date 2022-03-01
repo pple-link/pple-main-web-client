@@ -44,6 +44,10 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)({
     background: `${palette.red[1]} !important`,
     color: 'white',
   },
+  '& .MuiToggleButton-root.Mui-selected:active': {
+    background: `${palette.red[1]} !important`,
+    color: 'white',
+  },
   '& #circle-toggle': {
     borderRadius: '100%',
     border: `1px solid #EDEDED`,
@@ -68,16 +72,16 @@ const BloodTypeGroup: React.FC<IBlood> = ({ onChange, abo, rh, handleRh }) => {
 
   const children = [
     <ToggleButton id="circle-toggle" value="A" key="A+" aria-label="abo">
-      <span>A</span>
+      <span>{select ? 'A-' : 'A+'}</span>
     </ToggleButton>,
     <ToggleButton id="circle-toggle" value="B" key="B+" aria-label="abo">
-      <span>B</span>
+      <span>{select ? 'B-' : 'B+'}</span>
     </ToggleButton>,
     <ToggleButton id="circle-toggle" value="O" key="O+" aria-label="abo">
-      <span>O</span>
+      <span>{select ? 'O-' : 'O+'}</span>
     </ToggleButton>,
     <ToggleButton id="circle-toggle" value="AB" key="AB+" aria-label="abo">
-      <span>AB</span>
+      <span>{select ? 'AB-' : 'AB+'}</span>
     </ToggleButton>,
   ];
   return (
