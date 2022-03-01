@@ -31,27 +31,28 @@ const RegisterHeader = styled.div`
 
 const RegisterContent = styled.div`
   width: 100%;
-  box-sizing : border-box;
+  box-sizing: border-box;
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
   padding: 0px 220px;
 `;
 
 const RegisterContentColumn = styled.div`
-  width:40%;
+  width: 40%;
   min-width: 270px;
-  margin-top:80px;
+  margin-top: 80px;
   & .MuiFormHelperText-root {
     font-size: x-small;
   }
-  & .MuiInput-input::placeholder{
-      font-size: small;
+  & .MuiInput-input::placeholder {
+    font-size: small;
   }
 `;
 
 const RegisterFooter = styled.div`
-  display:flex;
-  justify-content:center;
+  display: flex;
+  justify-content: center;
+  font-size: 100px;
   margin-top: 80px;
 `;
 
@@ -90,7 +91,9 @@ const RegisterForm: React.FC = () => {
         </RegisterContentColumn>
       </RegisterContent>
       <RegisterFooter>
-        <Button variant='contained'>회원가입</Button>
+        <Button variant="contained" sx={{ fontSize: '30px !important' }}>
+          <span>회원가입</span>
+        </Button>
       </RegisterFooter>
     </RegisterFormBlock>
   );

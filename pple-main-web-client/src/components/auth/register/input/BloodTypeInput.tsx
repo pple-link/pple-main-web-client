@@ -40,7 +40,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)<IType>(
     justifyContent: 'space-between',
     '& .MuiButtonBase-root': {
       backgroundColor: 'white',
-      minWidth: '64px',
+      minWidth: '62px',
       color: `${palette.gray[1]}`,
       padding: '1rem',
       transition: 'all ease 0.5s 0s',
@@ -85,17 +85,41 @@ const BloodTypeInput: React.FC<IBloodType> = ({
   };
 
   const children = [
-    <ToggleButton id="circle-toggle" value="A" key="A+" aria-label="abo">
-      <span>A</span>
+    <ToggleButton
+      sx={{ fontWeight: 'bold', maxWidth: '35px' }}
+      id="circle-toggle"
+      value="A"
+      key="A+"
+      aria-label="abo"
+    >
+      <span>{select ? 'A-' : 'A+'}</span>
     </ToggleButton>,
-    <ToggleButton id="circle-toggle" value="B" key="B+" aria-label="abo">
-      <span>B</span>
+    <ToggleButton
+      sx={{ fontWeight: 'bold', maxWidth: '35px' }}
+      id="circle-toggle"
+      value="B"
+      key="B+"
+      aria-label="abo"
+    >
+      <span>{select ? 'B-' : 'B+'}</span>
     </ToggleButton>,
-    <ToggleButton id="circle-toggle" value="O" key="O+" aria-label="abo">
-      <span>O</span>
+    <ToggleButton
+      sx={{ fontWeight: 'bold', maxWidth: '35px' }}
+      id="circle-toggle"
+      value="O"
+      key="O+"
+      aria-label="abo"
+    >
+      <span>{select ? 'O-' : 'O+'}</span>
     </ToggleButton>,
-    <ToggleButton id="circle-toggle" value="AB" key="AB" aria-label="abo">
-      <span>AB</span>
+    <ToggleButton
+      sx={{ fontWeight: 'bold', maxWidth: '35px' }}
+      id="circle-toggle"
+      value="AB"
+      key="AB"
+      aria-label="abo"
+    >
+      <span>{select ? 'AB-' : 'AB+'}</span>
     </ToggleButton>,
   ];
   return (

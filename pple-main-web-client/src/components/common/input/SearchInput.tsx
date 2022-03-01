@@ -4,7 +4,7 @@ import palette from '../../../lib/styles/palette';
 import searchImg from '../../../static/images/Search.png';
 
 const SearchInputBlock = styled('div')({
-  margin: '20px 0px',
+  margin: '20px 0px 10px 0px',
   width: '100%',
   '& .MuiPaper-root': {
     backgroundColor: `${palette.gray[0]}`,

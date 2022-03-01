@@ -71,16 +71,40 @@ const BloodTypeGroup: React.FC<IBlood> = ({ onChange, abo, rh, handleRh }) => {
   };
 
   const children = [
-    <ToggleButton id="circle-toggle" value="A" key="A+" aria-label="abo">
+    <ToggleButton
+      sx={{ fontWeight: 'bold', maxWidth: '35px' }}
+      id="circle-toggle"
+      value="A"
+      key="A+"
+      aria-label="abo"
+    >
       <span>{select ? 'A-' : 'A+'}</span>
     </ToggleButton>,
-    <ToggleButton id="circle-toggle" value="B" key="B+" aria-label="abo">
+    <ToggleButton
+      sx={{ fontWeight: 'bold', maxWidth: '35px' }}
+      id="circle-toggle"
+      value="B"
+      key="B+"
+      aria-label="abo"
+    >
       <span>{select ? 'B-' : 'B+'}</span>
     </ToggleButton>,
-    <ToggleButton id="circle-toggle" value="O" key="O+" aria-label="abo">
+    <ToggleButton
+      sx={{ fontWeight: 'bold', maxWidth: '35px' }}
+      id="circle-toggle"
+      value="O"
+      key="O+"
+      aria-label="abo"
+    >
       <span>{select ? 'O-' : 'O+'}</span>
     </ToggleButton>,
-    <ToggleButton id="circle-toggle" value="AB" key="AB+" aria-label="abo">
+    <ToggleButton
+      sx={{ fontWeight: 'bold', maxWidth: '35px' }}
+      id="circle-toggle"
+      value="AB"
+      key="AB+"
+      aria-label="abo"
+    >
       <span>{select ? 'AB-' : 'AB+'}</span>
     </ToggleButton>,
   ];

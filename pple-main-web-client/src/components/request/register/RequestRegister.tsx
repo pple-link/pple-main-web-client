@@ -96,7 +96,7 @@ const Footer = styled('div')({
   alignContent: 'center',
   padding: '2rem 17px',
   '& .MuiButton-root': {
-    padding: '10px 0px',
+    padding: '15px 0px',
     width: '48%',
   },
 });

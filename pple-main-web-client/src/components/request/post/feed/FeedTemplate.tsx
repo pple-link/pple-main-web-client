@@ -20,7 +20,6 @@ const FeedBox = styled('div')({
 const FeedContentBox = styled('div')({
   padding: '0px 15px 18px 15px',
   background: '#FFFFFF',
-  opacity: '0.7',
   borderRadius: '0px 0px 14px 14px',
 });
 
@@ -56,7 +55,12 @@ const FeedTemplate: React.FC<Props> = ({
     <FeedTemplateBlock>
       <Paper
         className="feed"
-        sx={{ borderRadius: '14px', border: 'none' }}
+        sx={{
+          borderRadius: '14px',
+          border: 'none',
+          filter: ' drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.1))',
+          boxShadow: '5px 5px 6px 0px rgba(0,0,0,0.05)',
+        }}
         elevation={1}
       >
         <FeedBox>

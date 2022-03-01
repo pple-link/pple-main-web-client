@@ -13,6 +13,8 @@ const StyledButton = styled(ButtonBase)({
   backgroundColor: `${palette.gray[5]}`,
   borderRadius: '15px',
   padding: '17px 0px',
+  fontSize: 'large',
+  fontWeight: 'bold',
   '&:active': {
     backgroundColor: `${palette.red[1]}`,
   },

@@ -29,12 +29,12 @@ const CardPaper = styled('div')({
 const ContentWithMore = styled('div')({
   fontStyle: 'normal',
   fontWeight: 'bold',
-  fontSize: '20px',
+  fontSize: '17px',
   lineHeight: '22px',
   letterSpacing: '-0.03em',
   color: '#222222',
   margin: '17px 0px',
-  padding: '0px 50px 0px 17px',
+  padding: '0px 50px 0px 30px',
   '& button': {
     background: 'none',
     border: 'none',
@@ -114,7 +114,7 @@ const CardComponent: React.FC<Props> = ({
           <ContentWithMore>
             <span>{title.slice(0, 22)}</span>
             <button
-              style={{ color: '#D8D8D8', fontSize: '15px' }}
+              style={{ color: '#D8D8D8', fontSize: '13px' }}
               onClick={handleDetail}
             >
               ...더보기

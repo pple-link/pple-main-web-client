@@ -10,8 +10,7 @@ const PhoneInputBlock = styled('div')({
   '& .title': {
     color: 'black',
     fontWeight: 'bold',
-    fontSize: 'smaller',
-    minWidth: '50px',
+    minWidth: '60px',
     display: 'flex',
     marginRight: '10px',
   },
