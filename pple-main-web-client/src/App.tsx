@@ -100,6 +100,7 @@ const App: React.FC = () => {
               <Route path="/page/helper" element={<Helped />} />
               <Route path="/page/story" element={<MyStoryForm />} />
               <Route path="/intro" element={<Introduce />} />
+              <Route path="/etc/1" element={<DesignatedBloodDonation />} />
               <Route
                 path="/page/story/modify/:donationUuid"
                 element={<ModifyStoryForm />}
