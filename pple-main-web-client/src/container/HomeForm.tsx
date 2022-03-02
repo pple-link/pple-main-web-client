@@ -37,7 +37,6 @@ const HomeForm = () => {
         });
 
       getExpiredDonations(jwt).then(res => {
-        console.log(res.data);
         if (res.data.length && res.data[0].status == 'ACTIVE') {
           setExtensionOpen(true);
           setExpiredDonationUuid(res.data[0].uuid);
@@ -56,14 +55,14 @@ const HomeForm = () => {
     }
     getDonationsOfActiveStatus()
       .then(res => {
-        const newArray = res.data.content;
+        const newArray = res.data;
         setContentArray(newArray);
       })
       .catch(err => {
         console.log(err);
         console.log('ERROR_DONATION');
       });
-  }, [displayName]);
+  }, []);
   return (
     <>
       <StoryModal
