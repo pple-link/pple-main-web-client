@@ -22,9 +22,7 @@ export const updateDonation = (
 };
 
 export const getDonationsOfActiveStatus = () => {
-  return customAxios.get('/api/v1/donation', {
-    params: { status: 'ACTIVE' },
-  });
+  return customAxios.get('/api/v1/donation/all');
 };
 
 export const getOwnDonations = (jwt: string) => {

@@ -69,9 +69,7 @@ const BloodTypeGroup: React.FC<IBlood> = ({ onChange, abo, rh, handleRh }) => {
     setSelect(!select);
     handleRh();
   };
-  useEffect(() => {
-    console.log(rh);
-  });
+
   const children = [
     <ToggleButton
       sx={{ fontWeight: 'bold', maxWidth: '35px' }}
