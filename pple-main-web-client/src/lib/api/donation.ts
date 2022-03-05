@@ -46,9 +46,6 @@ export const updateExpiredDonation = (donationUuid: string, jwt: string) => {
     .post(`/api/v1/account/donation/renew/${donationUuid}`, {
       headers: { 'X-AUTH-TOKEN': `${jwt}` },
     })
-    .then(res => {
-      console.log(res);
-    })
     .catch(err => {
       console.log(err);
       console.log('Updating Donation is failed');
@@ -59,9 +56,6 @@ export const deleteExpiredDonation = (donationUuid: string, jwt: string) => {
   return customAxios
     .patch(`/api/v1/donation/delete/${donationUuid}`, {
       headers: { 'X-AUTH-TOKEN': `${jwt}` },
-    })
-    .then(res => {
-      console.log(res);
     })
     .catch(err => {
       console.log(err);

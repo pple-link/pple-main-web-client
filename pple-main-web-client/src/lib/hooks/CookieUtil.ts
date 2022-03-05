@@ -10,16 +10,11 @@ const CookieUtil = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
 
   useEffect(() => {
-    console.log(cookies.jwt);
     if (cookies.jwt == undefined) {
       const userToken = searchParams.get('token');
-      console.log(userToken);
       if (userToken == null) {
         navigator;
       }
-    }
-    if (cookies.jwt !== undefined) {
-      console.log('hi cookie');
     }
   }, []);
 };

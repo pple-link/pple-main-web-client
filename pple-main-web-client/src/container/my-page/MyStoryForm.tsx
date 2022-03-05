@@ -41,7 +41,6 @@ const MyStoryForm = () => {
   useEffect(() => {
     getOwnDonations(jwt)
       .then(async res => {
-        console.log(res);
         const newContent = [];
         await res.data.content.map(story => {
           newContent.push(story);
