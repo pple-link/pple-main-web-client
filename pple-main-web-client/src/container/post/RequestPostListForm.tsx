@@ -103,7 +103,7 @@ const RequestPostListForm: React.FC = () => {
           setContentArray(newArray);
           return;
         }
-        const newArray = res.data.content;
+        const newArray = res.data;
         setContentArray(newArray);
       })
       .catch(err => {

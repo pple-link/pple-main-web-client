@@ -116,7 +116,7 @@ const StoryModal: React.FC<Props> = ({ open, setOpen, donationUuid, jwt }) => {
           </ImageBox>
           {/* 제목 */}
           <TitleBox>
-            사연을 올린 기간이 <br /> 7일을 경과했어요
+            사연이 올린 기간이 <br /> 6일을 경과했어요
           </TitleBox>
           <ContentBox>
             사연을 연장하거나

@@ -47,7 +47,6 @@ const ModifyStoryForm: React.FC = () => {
           headers: { 'X-AUTH-TOKEN': `${jwt}` },
         })
         .then(async res => {
-          console.log(res);
           const own = await res.data.content.filter(
             (content, idx) => content.uuid == donationUuid,
           );
@@ -145,7 +144,6 @@ const ModifyStoryForm: React.FC = () => {
 
     updateDonation(donationUuid, body, jwt)
       .then(res => {
-        console.log(res);
         navigator(-1);
       })
       .catch(err => {
