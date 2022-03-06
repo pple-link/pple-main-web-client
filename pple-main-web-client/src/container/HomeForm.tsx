@@ -7,14 +7,11 @@ import { getAccountProfile } from '../lib/api/account';
 import {
   getDonationsOfActiveStatus,
   getExpiredDonations,
-  getExpiredDonationsTest,
 } from '../lib/api/donation';
 import StoryModal from '../components/common/modal/StoryModal';
 import { useNavigate } from 'react-router-dom';
 
 const HomeForm = () => {
-  setCookie();
-  checkUser();
   const [displayName, setDisplayName] = useState<string>('피플');
   const [extensionOpen, setExtensionOpen] = useState(false);
   const [expiredDonationUuid, setExpiredDonationUuid] = useState<string>('');
@@ -23,6 +20,7 @@ const HomeForm = () => {
 
   const jwt = getCookie();
 
+  setCookie();
   useEffect(() => {
     if (jwt) {
       getAccountProfile(jwt)
@@ -42,16 +40,6 @@ const HomeForm = () => {
           setExpiredDonationUuid(res.data[0].uuid);
         }
       });
-      // getExpiredDonationsTest()
-      //   .then(res => {
-      //     if (res.data.length && res.data[0].status == 'ACTIVE') {
-      //       setExtensionOpen(true);
-      //       setExpiredDonationUuid(res.data[0].uuid);
-      //     }
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //   });
     }
     getDonationsOfActiveStatus()
       .then(res => {
@@ -62,7 +50,7 @@ const HomeForm = () => {
         console.log(err);
         console.log('ERROR_DONATION');
       });
-  }, []);
+  }, [jwt]);
   return (
     <>
       <StoryModal

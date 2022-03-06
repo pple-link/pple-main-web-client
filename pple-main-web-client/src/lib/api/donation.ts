@@ -34,11 +34,12 @@ export const getOwnDonations = (jwt: string) => {
 export const getExpiredDonations = (jwt: string) => {
   return customAxios.get('/api/v1/account/donation/days', {
     headers: { 'X-AUTH-TOKEN': `${jwt}` },
+    params: { validDays: '6' },
   });
 };
 
 export const getExpiredDonationsTest = () => {
-  return customAxios.get('/api/v1/account/donation/gus5427@naver.com/test');
+  return customAxios.get('/api/v1/account/donation/gus5427@naver.com/test', {});
 };
 
 export const updateExpiredDonation = (donationUuid: string, jwt: string) => {
