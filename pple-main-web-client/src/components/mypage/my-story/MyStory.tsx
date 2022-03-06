@@ -8,6 +8,7 @@ const MyStoryBlock = styled('div')({
   '& .content': {
     padding: '0px 17px',
     marginTop: '25px',
+    height: '100%',
   },
 });
 
