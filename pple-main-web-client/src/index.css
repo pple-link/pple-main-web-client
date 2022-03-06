@@ -6,7 +6,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-image: url('./static/images/PCBackground.svg');
-  background-size: cover;
   background-repeat: no-repeat;
 }
 
