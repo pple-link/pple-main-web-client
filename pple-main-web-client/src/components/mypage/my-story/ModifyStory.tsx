@@ -58,6 +58,7 @@ interface Props {
   handleRh: any;
   handlePhoneNumber: any;
   handleBloodProduction: any;
+  phone: any;
 }
 
 const ModifyStory: React.FC<Props> = ({
@@ -67,9 +68,17 @@ const ModifyStory: React.FC<Props> = ({
   handleRh,
   handlePhoneNumber,
   handleBloodProduction,
+  phone,
 }) => {
   const { title, content, patient, phoneNumber, bloodProduct } = ownDonation;
-  return (
+  const { first, second, third } = phone;
+  const [delayed, setDelayed] = useState<boolean>(false);
+  useEffect(() => {
+    setTimeout(() => {
+      setDelayed(true);
+    }, 500);
+  }, []);
+  return delayed ? (
     <Block>
       <div>
         <MyPageElementHeader title="사연수정" />
@@ -104,9 +113,9 @@ const ModifyStory: React.FC<Props> = ({
             handleBloodProduction={handleBloodProduction}
           />
           <PhoneInput
-            first={phoneNumber.slice(0, 3)}
-            second={phoneNumber.slice(3, 7)}
-            third={phoneNumber.slice(7, 11)}
+            first={first}
+            second={second}
+            third={third}
             handlePhoneNumber={handlePhoneNumber}
           />
         </InputBlock>
@@ -115,6 +124,8 @@ const ModifyStory: React.FC<Props> = ({
         수정 완료
       </ModifyButton>
     </Block>
+  ) : (
+    <></>
   );
 };
 

@@ -11,6 +11,11 @@ const ModifyStoryForm: React.FC = () => {
   const navigator = useNavigate();
   const donationUuid = useParams().donationUuid;
   const jwt = getCookie();
+  const [phone, setPhone] = useState({
+    first: '',
+    second: '',
+    third: '',
+  });
   const [tempPhone, setTempPhone] = useState<string>('');
   const [ownDonation, setOwnDonation] = useState<OwnDonation>({
     bloodProduct: '',
@@ -51,6 +56,19 @@ const ModifyStoryForm: React.FC = () => {
             (content, idx) => content.uuid == donationUuid,
           );
           setOwnDonation(own[0]);
+          const newPhoneValue = produce(phone, draft => {
+            if (ownDonation.phoneNumber.length == 12) {
+              phone.first = own[0].phoneNumber.slice(0, 4);
+              phone.second = own[0].phoneNumber.slice(4, 8);
+              phone.third = own[0].phoneNumber.slice(8, 12);
+            } else {
+              phone.first = own[0].phoneNumber.slice(0, 3);
+              phone.second = own[0].phoneNumber.slice(3, 7);
+              phone.third = own[0].phoneNumber.slice(7, 11);
+            }
+          });
+          setPhone(newPhoneValue);
+          console.log(own[0]);
         });
     }
   }, []);
@@ -94,67 +112,78 @@ const ModifyStoryForm: React.FC = () => {
     const { name, value } = e.target;
     const onlyNumber: string = value.replace(/[^0-9]/g, '');
     if (name == 'first' && onlyNumber.length <= 3) {
-      setTempPhone(value);
-      const newState = produce(ownDonation, draft => {
-        draft.phoneNumber = `${tempPhone}${ownDonation.phoneNumber.slice(
-          3,
-          11,
-        )}`;
+      const newState = produce(phone, draft => {
+        draft.first = onlyNumber;
       });
+      setPhone(newState);
     }
     // 두 번째 자리
     else if (name === 'second' && onlyNumber.length <= 4) {
-      setTempPhone(value);
-      const newState = produce(ownDonation, draft => {
-        draft.phoneNumber = `${ownDonation.phoneNumber.slice(
-          0,
-          3,
-        )}${tempPhone}${ownDonation.phoneNumber.slice(7, 11)}`;
+      const newState = produce(phone, draft => {
+        draft.second = onlyNumber;
       });
+      setPhone(newState);
     }
     // 세 번쨰 자리
-    else {
-      if (onlyNumber.length <= 4) {
-        setTempPhone(value);
-        const newState = produce(ownDonation, draft => {
-          draft.phoneNumber = `${ownDonation.phoneNumber.slice(
-            0,
-            7,
-          )}${tempPhone}`;
-        });
-      }
+    else if (name == 'third' && onlyNumber.length <= 4) {
+      const newState = produce(phone, draft => {
+        draft.third = onlyNumber;
+      });
+      setPhone(newState);
     }
+  };
+
+  const isFilledUserInfo = () => {
+    if (
+      phone.first == '' ||
+      phone.first.length < 3 ||
+      phone.second == '' ||
+      phone.second.length < 4 ||
+      phone.third == '' ||
+      phone.third.length < 4 ||
+      ownDonation.title == '' ||
+      ownDonation.content == ''
+    ) {
+      return false;
+    }
+
+    return true;
   };
 
   const onSubmit = (e: any) => {
     e.preventDefault();
-    const body = {
-      bloodProduct: ownDonation.bloodProduct,
-      content: ownDonation.content,
-      phoneNumber: ownDonation.phoneNumber,
-      title: ownDonation.title,
-      uuid: donationUuid,
-      patient: {
-        bloodType: {
-          abo: ownDonation.patient.bloodType.abo,
-          rh: ownDonation.patient.bloodType.rh,
+    if (isFilledUserInfo()) {
+      const body = {
+        bloodProduct: ownDonation.bloodProduct,
+        content: ownDonation.content,
+        phoneNumber: `${phone.first}${phone.second}${phone.third}`,
+        title: ownDonation.title,
+        uuid: donationUuid,
+        patient: {
+          bloodType: {
+            abo: ownDonation.patient.bloodType.abo,
+            rh: ownDonation.patient.bloodType.rh,
+          },
         },
-      },
-    };
+      };
 
-    updateDonation(donationUuid, body, jwt)
-      .then(res => {
-        navigator(-1);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      updateDonation(donationUuid, body, jwt)
+        .then(res => {
+          navigator(-1);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      return;
+    }
+    alert('공란이 있습니다.');
   };
 
   return (
     <>
       <form method="PATCH" onSubmit={onSubmit}>
         <ModifyStory
+          phone={phone}
           handlePhoneNumber={handlePhoneNumber}
           handleBloodType={handleBloodType}
           handleText={handleText}

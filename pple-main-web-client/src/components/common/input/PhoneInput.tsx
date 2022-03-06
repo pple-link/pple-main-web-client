@@ -92,10 +92,6 @@ const PhoneInput: React.FC<IPhone> = ({
           </FormControl>
         </InputBlock>
       </PhoneInputBlock>
-      <HelpText>
-        연락처는 수정 불가합니다. 수정이 필요하시다면 <br />
-        contact.pple2022@gmail.com 로 연락바랍니다
-      </HelpText>
     </>
   );
 };
