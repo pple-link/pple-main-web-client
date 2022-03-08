@@ -25,9 +25,11 @@ const HomeForm = () => {
     if (jwt) {
       getAccountProfile(jwt)
         .then(res => {
-          if (res.data) {
-            setDisplayName(res.data.displayName);
+          if (res.data.status == 'TEMP') {
+            navigate('/register');
+            return;
           }
+          setDisplayName(res.data.displayName);
         })
         .catch(err => {
           console.log(err);

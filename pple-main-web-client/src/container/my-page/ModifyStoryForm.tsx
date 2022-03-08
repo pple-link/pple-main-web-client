@@ -68,7 +68,6 @@ const ModifyStoryForm: React.FC = () => {
             }
           });
           setPhone(newPhoneValue);
-          console.log(own[0]);
         });
     }
   }, []);
