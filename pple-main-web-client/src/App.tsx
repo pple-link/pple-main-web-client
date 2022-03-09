@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 import styled from 'styled-components';
@@ -22,6 +22,8 @@ import HandleOAuthRedirectUrl from './container/auth/HandleOAuthRedirectUrl';
 import './static/fonts/fonts.css';
 import Introduce from './pages/Introduce';
 import { isMobile } from 'react-device-detect';
+import amplitude from 'amplitude-js';
+
 const GlobalStyles = createGlobalStyle`
   ${reset};
   font-family: "Pretendard";
@@ -55,6 +57,9 @@ const ContentBlock = styled.div`
 `;
 
 const App: React.FC = () => {
+  useEffect(() => {
+    amplitude.getInstance().init(`${process.env.REACT_APP_AMPLITUDE_API}`);
+  });
   return (
     <>
       <GlobalStyles />
