@@ -3,6 +3,7 @@ import intro1 from '../static/images/intro/introPage1.svg';
 import intro2 from '../static/images/intro/introPage2.svg';
 import { ButtonBase, styled } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { clickIntroButton } from '../lib/ampli';
 const LinkButton = styled(ButtonBase)({
   display: 'block',
   color: 'white',
@@ -46,6 +47,7 @@ const Introduce: React.FC = () => {
   };
   const navigate = useNavigate();
   const goMain = () => {
+    clickIntroButton();
     navigate('/');
   };
   return (

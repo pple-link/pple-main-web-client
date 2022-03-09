@@ -6,6 +6,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import produce from 'immer';
 import { updateDonation } from '../../lib/api/donation';
 import OwnDonation from '../../lib/interface/OwnDonation';
+import { clickModifyDonationPost } from '../../lib/ampli';
 
 const ModifyStoryForm: React.FC = () => {
   const navigator = useNavigate();
@@ -152,6 +153,7 @@ const ModifyStoryForm: React.FC = () => {
   const onSubmit = (e: any) => {
     e.preventDefault();
     if (isFilledUserInfo()) {
+      clickModifyDonationPost();
       const body = {
         bloodProduct: ownDonation.bloodProduct,
         content: ownDonation.content,
