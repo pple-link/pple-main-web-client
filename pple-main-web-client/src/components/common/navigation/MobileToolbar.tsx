@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import palette from '../../../lib/styles/palette';
 
 const MobileGNBBlock = styled('div')({
-  padding: '0.2rem',
+  padding: '0.5rem',
   display: 'flex',
   alignItems: 'center',
   background: `linear-gradient(109.4deg, #FF6969 -3.19%, #FF3333 109.95%);`,
