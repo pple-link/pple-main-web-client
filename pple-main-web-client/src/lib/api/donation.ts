@@ -63,3 +63,13 @@ export const deleteExpiredDonation = (donationUuid: string, jwt: string) => {
       console.log('Deleting Donation is failed');
     });
 };
+
+export const deleteDonation = (donationUuid: string, jwt: string) => {
+  return customAxios
+    .delete(`/api/v1/donation/delete/${donationUuid}/test`, {
+      headers: { 'X-AUTH-TOKEN': `${jwt}` },
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
