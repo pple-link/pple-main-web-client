@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled, Paper, IconButton } from '@mui/material';
 import Modal from 'react-modal';
 import ModalButton from './ModalButton';
 import trashBasket from '../../../static/images/modal/trashbasket.png';
 import CloseIcon from '@mui/icons-material/Close';
+import { deleteDonation } from '../../../lib/api/donation';
+import DoneDeleteModal from './DoneDeleteModal';
 
 const StyledModal = styled(Modal)({
   position: 'fixed',
@@ -63,12 +65,18 @@ interface Props {
 }
 
 const DeleteModal: React.FC<Props> = ({ open, setOpen, donationUuid, jwt }) => {
+  const [done, setDone] = useState<boolean>(false);
   const onClick = () => {
     setOpen(!open);
   };
-
+  const handleDelete = () => {
+    deleteDonation(donationUuid, jwt);
+    setOpen(!open);
+    setDone(!done);
+  };
   return (
     <>
+      <DoneDeleteModal open={done} setOpen={setDone} />
       <StyledModal
         isOpen={open}
         style={{ overlay: { background: 'rgba(0, 0, 0, 0.4)' } }}
@@ -96,12 +104,12 @@ const DeleteModal: React.FC<Props> = ({ open, setOpen, donationUuid, jwt }) => {
           </ContentBox>
           <ButtonBox>
             <ModalButton
-              onClick={() => console.log('aaa')}
+              onClick={onClick}
               text="취소"
               background="#F4F4F4"
               color="#B7B7B7"
             />
-            <ModalButton onClick={() => console.log('aaa')} text="삭제" />
+            <ModalButton onClick={handleDelete} text="삭제" />
           </ButtonBox>
         </StylePaper>
       </StyledModal>
