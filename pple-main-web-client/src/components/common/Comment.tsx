@@ -1,27 +1,59 @@
+import { Avatar, IconButton } from '@mui/material';
 import React from 'react';
 import styled from 'styled-components';
-import Subract from '../../lib/images/Subtract.png';
 import BloodTypeBlock from './BloodTypeBlock';
-
+import dotmenu from '../../static/images/feed/dotmenu.png';
 const OpponentCommentBlock = styled.div`
   width: 100%;
-  display:flex;
-  align-items:center;
-  justify-content:flex-start;
+  display: flex;
+  justify-content: flex-start;
 `;
 
 const UserCommentBlock = styled.div`
   width: 100%;
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 `;
 
 const CommentBubble = styled.div`
-    background-color:whitesmoke;
-    & .user-info{
-        display:flex;
-    }
+  font-family: 'Pretendard Variable';
+  background: #f4f4f4;
+  border-radius: 14px;
+  padding: 10px 12px 12px 12px;
+  margin-left: 8px;
+  & .user-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  & span {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    color: #767676;
+  }
+  & .comment {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: -0.03em;
+    color: #767676;
+    margin-top: 2px;
+  }
+`;
+
+const TimeLine = styled.div`
+  font-family: 'Pretendard Variable';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: -0.03em;
+  color: #aeaeae;
+  margin-left: 16px;
+  margin-top: 4px;
+  margin-bottom: 15px;
 `;
 
 type Props = {
@@ -30,7 +62,7 @@ type Props = {
   bloodType: string;
   comment: string;
   time: string;
-}
+};
 
 const Comment: React.FC<Props> = ({
   isOpponent,
@@ -43,25 +75,32 @@ const Comment: React.FC<Props> = ({
     <>
       {isOpponent ? (
         <OpponentCommentBlock>
-          <div>
-            <img src={Subract} alt="임시 프로필" />
-          </div>
+          <Avatar sx={{ height: '40px', width: '40px' }}>
+            <img
+              src="http://k.kakaocdn.net/dn/nDWKQ/btrrxYujq3q/DhUNBMn41zpPrNnPJe6EsK/img_640x640.jpg"
+              alt=""
+              width={40}
+              height={40}
+            ></img>
+          </Avatar>
           <div>
             <CommentBubble>
               <div className="user-info">
-                <span>{name}</span>
-                <BloodTypeBlock text={bloodType} />
+                <div style={{ display: 'flex', alignContent: 'center' }}>
+                  <span>{name}</span>
+                  <BloodTypeBlock text={bloodType} />
+                </div>
+                <IconButton sx={{ padding: '0px', cursor: 'pointer' }}>
+                  <img src={dotmenu} width={2} height={10} />
+                </IconButton>
               </div>
               <div className="comment">{comment}</div>
             </CommentBubble>
-            <div className="comment-footer">
-              <span>{time}</span>
-              <button>답글달기</button>
-            </div>
+            <TimeLine>12월 13일</TimeLine>
           </div>
         </OpponentCommentBlock>
       ) : (
-        <UserCommentBlock>       
+        <UserCommentBlock>
           <div>
             <CommentBubble>
               <div className="user-info">
@@ -74,9 +113,6 @@ const Comment: React.FC<Props> = ({
               <span>{time}</span>
               <button>답글달기</button>
             </div>
-          </div>
-          <div>
-            <img src={Subract} alt="임시 프로필" />
           </div>
         </UserCommentBlock>
       )}
