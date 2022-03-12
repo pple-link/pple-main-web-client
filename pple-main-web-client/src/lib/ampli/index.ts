@@ -22,3 +22,6 @@ export const clickModifyDonationPost = () => {
 export const clickIntroButton = () => {
   amplitude.getInstance().logEvent('소개 페이지 버튼 클릭');
 };
+
+//TODO : 리텐션.......
+// UTM, GTM
