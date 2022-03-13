@@ -57,7 +57,7 @@ const FeedTemplate: React.FC<Props> = ({
   };
 
   return (
-    <FeedTemplateBlock onClick={onClick}>
+    <FeedTemplateBlock>
       <Paper
         className="feed"
         sx={{
@@ -76,7 +76,7 @@ const FeedTemplate: React.FC<Props> = ({
             buttonText="도움주기"
             time={time}
           />
-          <FeedContentBox>
+          <FeedContentBox onClick={onClick}>
             <FeedUserInfo
               imgUrl={profileImageUrl}
               time={time}
