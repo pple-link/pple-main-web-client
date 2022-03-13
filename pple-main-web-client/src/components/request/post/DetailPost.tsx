@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import styled2 from 'styled-components';
 import Comment from '../../common/Comment';
 import { Avatar, InputBase, Paper, styled } from '@mui/material';
@@ -17,6 +17,8 @@ import {
   createBloodProductString,
   createBloodTypeString,
 } from '../../../lib/util';
+import { useDispatch } from 'react-redux';
+import { setComment } from '../../../models/comment';
 const RequestPostBlock = styled2.div`
   font-family: Pretandard;
   height:100vh;
@@ -102,7 +104,7 @@ const CommentBlock = styled2.div`
   padding: 0px 17px;
   margin-top: 15px;
   width:100%;
-  height: calc(50% - 54px) ;
+  height: calc(50% - 65px) ;
   box-sizing:border-box;
 `;
 
@@ -137,23 +139,36 @@ const DetailPost: React.FC<IDetailPost> = ({
   uuid,
   viewsCount,
   currentUserImageUrl,
+  onSubmitComment,
 }) => {
+  const dispatch = useDispatch();
+  const [commentValue, setCommentValue] = useState('');
+  const onChangeCommentValue = (event: any) => {
+    setCommentValue(event.target.value);
+  };
+  const onClickCommentSubmit = () => {
+    dispatch(setComment(commentValue));
+    setCommentValue('');
+  };
   const { bloodType } = patient;
   const { displayName, profileImageUrl } = writer;
-  const rowRenderer = ({ index, key }) => {
-    const comment = reply[index];
-    return (
-      <Comment
-        key={key}
-        isOpponent={true}
-        name={comment.writer.displayName}
-        bloodType={comment.writer.bloodType}
-        comment={comment.content}
-        time={comment.createdAt}
-        profileImageUrl={comment.writer.profileImageUrl}
-      />
-    );
-  };
+  const rowRenderer = useCallback(
+    ({ index, key }) => {
+      const comment = reply[index];
+      return (
+        <Comment
+          key={key}
+          isOpponent={true}
+          name={comment.writer.displayName}
+          bloodType={comment.writer.bloodType}
+          comment={comment.content}
+          time={comment.createdAt}
+          profileImageUrl={comment.writer.profileImageUrl}
+        />
+      );
+    },
+    [reply],
+  );
 
   return (
     <RequestPostBlock>
@@ -208,9 +223,8 @@ const DetailPost: React.FC<IDetailPost> = ({
               width={width}
               height={height}
               rowCount={reply.length}
-              rowHeight={91}
+              rowHeight={130}
               rowRenderer={rowRenderer}
-              overscan={3}
             />
           )}
         </AutoSizer>
@@ -234,8 +248,10 @@ const DetailPost: React.FC<IDetailPost> = ({
           <StyledInput
             sx={{ ml: 1, flex: 1, width: '100%' }}
             placeholder="댓글을 남겨주세요"
+            value={commentValue}
+            onChange={onChangeCommentValue}
           />
-          <IconButton>
+          <IconButton type="submit" onClick={onClickCommentSubmit}>
             <img src={arrowUp} width={30} height={30} />
           </IconButton>
         </Paper>

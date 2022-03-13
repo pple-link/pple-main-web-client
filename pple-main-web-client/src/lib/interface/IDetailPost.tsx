@@ -25,6 +25,7 @@ export default interface IDetailPost {
     providerType: string;
   };
   currentUserImageUrl: string;
+  onSubmitComment: any;
 }
 
 interface IReply {

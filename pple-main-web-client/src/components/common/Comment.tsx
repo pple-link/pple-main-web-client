@@ -19,6 +19,7 @@ const UserCommentBlock = styled.div`
 
 const CommentBubble = styled.div`
   font-family: 'Pretendard Variable';
+  /* width: 100%; */
   background: #f4f4f4;
   border-radius: 14px;
   padding: 10px 12px 12px 12px;
@@ -86,7 +87,7 @@ const Comment: React.FC<Props> = ({
           <Avatar sx={{ height: '40px', width: '40px' }}>
             <img src={profileImageUrl} alt="" width={40} height={40}></img>
           </Avatar>
-          <div>
+          <div style={{ width: '100%' }}>
             <CommentBubble>
               <div className="user-info">
                 <div style={{ display: 'flex', alignContent: 'center' }}>
