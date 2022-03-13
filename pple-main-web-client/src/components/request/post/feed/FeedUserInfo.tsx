@@ -1,6 +1,7 @@
 import React from 'react';
 import { styled, Avatar } from '@mui/material';
 import NickNameWithBloodType from '../../../common/NickNameWithBloodType';
+import { createTimeFormatForDetailFeedHeader } from '../../../../lib/util';
 
 const FeedUserInfoBlock = styled('div')({
   height: '100%',
@@ -35,10 +36,6 @@ interface UserInfo {
   imgUrl: string;
 }
 
-const createTimeFormat = (time: string) => {
-  return `${time.slice(0, 4)}년 ${time.slice(5, 7)}월 ${time.slice(8, 10)}일`;
-};
-
 const FeedUserInfo: React.FC<UserInfo> = ({ nickname, time, imgUrl }) => {
   return (
     <FeedUserInfoBlock>
@@ -48,7 +45,9 @@ const FeedUserInfo: React.FC<UserInfo> = ({ nickname, time, imgUrl }) => {
       <div className="seconde">
         <UserInfoBox>
           <NickNameWithBloodType nickname={nickname} />
-          <div className="time">{time ? createTimeFormat(time) : ''}</div>
+          <div className="time">
+            {time ? createTimeFormatForDetailFeedHeader(time) : ''}
+          </div>
         </UserInfoBox>
       </div>
     </FeedUserInfoBlock>
