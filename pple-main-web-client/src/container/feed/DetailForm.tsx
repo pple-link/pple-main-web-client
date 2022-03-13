@@ -1,15 +1,15 @@
 import { CircularProgress, styled } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import DetailPost from '../../components/request/post/DetailPost';
 import { getAccountProfile } from '../../lib/api/account';
 import { saveComment } from '../../lib/api/comment';
-import { getOneDonation } from '../../lib/api/donation';
+import { getOneDonation, postDonationLike } from '../../lib/api/donation';
 import { getCookie } from '../../lib/hooks/CookieUtil';
 import IDetailPost from '../../lib/interface/IDetailPost';
 import { RootState } from '../../models';
-import { setComment } from '../../models/comment';
+import LoginRequestModal from '../../components/common/modal/LoginRequestModal';
 
 const ProgressBlock = styled('div')({
   width: '100%',
@@ -31,14 +31,24 @@ const DetailForm: React.FC = () => {
   const [currentUserImageUrl, setCurrentUserImageUrl] = useState<string>('');
   const [submitCheck, setSubmitCheck] = useState<boolean>(false);
   const [firstCall, setFirstCall] = useState<boolean>(true);
+  const [loginModalOpen, setLoginModalOpen] = useState<boolean>(false);
+  const handleLoginModalOpen = () => {
+    setLoginModalOpen(!loginModalOpen);
+  };
   const onSubmitComment = (event: any) => {
     event.preventDefault();
+    if (!jwt) {
+      handleLoginModalOpen();
+    }
     if (commentValue) {
       setSubmitCheck(!submitCheck);
       saveComment(jwt, { content: commentValue, donationUuid }).catch(err => {
         console.log(err);
       });
     }
+  };
+  const onPostDonationLike = () => {
+    postDonationLike(donationUuid, jwt);
   };
 
   useEffect(() => {
@@ -59,6 +69,7 @@ const DetailForm: React.FC = () => {
     <>
       <form onSubmit={onSubmitComment}>
         <DetailPost
+          jwt={jwt}
           bloodProduct={detailPostInfo.bloodProduct}
           patient={detailPostInfo.patient}
           writer={detailPostInfo.writer}
@@ -72,8 +83,10 @@ const DetailForm: React.FC = () => {
           viewsCount={detailPostInfo.viewsCount}
           currentUserImageUrl={currentUserImageUrl}
           onSubmitComment={onSubmitComment}
+          onPostDonationLike={onPostDonationLike}
         />
       </form>
+      <LoginRequestModal open={loginModalOpen} onClick={handleLoginModalOpen} />
     </>
   ) : (
     <ProgressBlock>
