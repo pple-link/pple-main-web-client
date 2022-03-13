@@ -1,13 +1,12 @@
 import React, { useCallback, useState } from 'react';
 import styled2 from 'styled-components';
-import Comment from '../../common/Comment';
 import { Avatar, InputBase, Paper, styled } from '@mui/material';
 import { IconButton } from '@mui/material';
 import MobileToolbar from '../../common/navigation/MobileToolbar';
 import DetailFeedHeader from '../../common/feed/DetailFeedHeader';
 import FeedUserInfo from './feed/FeedUserInfo';
 import ConnectionModal from '../../common/modal/ConnectionModal';
-import { List, AutoSizer } from 'react-virtualized';
+import CoomentList from './feed/CoomentList';
 import clipboard from '../../../static/images/feed/clipboard.png';
 import comments from '../../../static/images/feed/Chat.png';
 import heart from '../../../static/images/feed/heart.png';
@@ -21,6 +20,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { setComment } from '../../../models/comment';
 import LoginRequestModal from '../../common/modal/LoginRequestModal';
+
 const RequestPostBlock = styled2.div`
   font-family: Pretandard;
   height:100vh;
@@ -174,23 +174,6 @@ const DetailPost: React.FC<IDetailPost> = ({
   };
   const { bloodType } = patient;
   const { displayName, profileImageUrl } = writer;
-  const rowRenderer = useCallback(
-    ({ index, key }) => {
-      const comment = reply[index];
-      return (
-        <Comment
-          key={key}
-          isOpponent={true}
-          name={comment.writer.displayName}
-          bloodType={comment.writer.bloodType}
-          comment={comment.content}
-          time={comment.createdAt}
-          profileImageUrl={comment.writer.profileImageUrl}
-        />
-      );
-    },
-    [reply],
-  );
 
   return (
     <RequestPostBlock>
@@ -240,18 +223,7 @@ const DetailPost: React.FC<IDetailPost> = ({
       <DIVIDER />
 
       <CommentBlock>
-        <AutoSizer>
-          {({ height, width }) => (
-            <List
-              list={reply}
-              width={width}
-              height={height}
-              rowCount={reply.length}
-              rowHeight={110}
-              rowRenderer={rowRenderer}
-            />
-          )}
-        </AutoSizer>
+        <CoomentList reply={reply} />
       </CommentBlock>
       <InputCommentBlock>
         <Avatar
