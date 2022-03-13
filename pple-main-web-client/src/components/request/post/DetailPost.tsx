@@ -104,7 +104,7 @@ const CommentBlock = styled2.div`
   padding: 0px 17px;
   margin-top: 15px;
   width:100%;
-  height: calc(50% - 65px) ;
+  height: calc(90% - 65px) ;
   box-sizing:border-box;
 `;
 
@@ -150,6 +150,16 @@ const DetailPost: React.FC<IDetailPost> = ({
     dispatch(setComment(commentValue));
     setCommentValue('');
   };
+  const onClickCopyUrl = () => {
+    const textarea = document.createElement('textarea');
+    textarea.value = window.location.href;
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    alert('클립보드에 복사되었습니다.');
+  };
   const { bloodType } = patient;
   const { displayName, profileImageUrl } = writer;
   const rowRenderer = useCallback(
@@ -184,7 +194,7 @@ const DetailPost: React.FC<IDetailPost> = ({
           time={createdAt}
           imgUrl={profileImageUrl}
         />
-        <ClipBoard>
+        <ClipBoard onClick={onClickCopyUrl}>
           <img src={clipboard} alt="" width={16} height={16} />
           <span>게시물 복사</span>
         </ClipBoard>
