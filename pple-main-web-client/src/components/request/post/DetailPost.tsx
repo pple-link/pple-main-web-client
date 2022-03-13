@@ -12,6 +12,11 @@ import comments from '../../../static/images/feed/Chat.png';
 import sendIcon from '../../../static/images/feed/Send.png';
 import heart from '../../../static/images/feed/heart.png';
 import arrowUp from '../../../static/images/feed/arrow-up.png';
+import IDetailPost from '../../../lib/interface/IDetailPost';
+import {
+  createBloodProductString,
+  createBloodTypeString,
+} from '../../../lib/util';
 const RequestPostBlock = styled2.div`
   font-family: Pretandard;
   height:100vh;
@@ -119,75 +124,50 @@ const StyledInput = styled(InputBase)({
   fontSize: '14px',
 });
 
-const list = [
-  {
-    isOpponent: true,
-    name: '조은경',
-    bloodType: 'B+',
-    comment: '지인분께 한번 연락드려볼게요 에이호프님',
-    time: '12분전',
-  },
-  {
-    isOpponent: true,
-    name: '조은경1',
-    bloodType: 'B+',
-    comment: '지인분께 한번 연락드려볼게요 에이호프님',
-    time: '12분전',
-  },
-  {
-    isOpponent: true,
-    name: '조은경2',
-    bloodType: 'B+',
-    comment: '지인분께 한번 연락드려볼게요 에이호프님',
-    time: '12분전',
-  },
-  {
-    isOpponent: true,
-    name: '조은경3',
-    bloodType: 'B+',
-    comment: '지인분께 한번 연락드려볼게요 에이호프님',
-    time: '12분전',
-  },
-  {
-    isOpponent: true,
-    name: '조은경4',
-    bloodType: 'B+',
-    comment: '지인분께 한번 연락드려볼게요 에이호프님',
-    time: '12분전',
-  },
-  {
-    isOpponent: true,
-    name: '조은경5',
-    bloodType: 'B+',
-    comment: '지인분께 한번 연락드려볼게요 에이호프님',
-    time: '12분전',
-  },
-];
+const DetailPost: React.FC<IDetailPost> = ({
+  bloodProduct,
+  patient,
+  writer,
+  createdAt,
+  reply,
+  title,
+  content,
+  likes,
+  phoneNumber,
+  uuid,
+  viewsCount,
+  currentUserImageUrl,
+}) => {
+  const { bloodType } = patient;
+  const { displayName, profileImageUrl } = writer;
+  const rowRenderer = ({ index, key }) => {
+    const comment = reply[index];
+    return (
+      <Comment
+        key={key}
+        isOpponent={true}
+        name={comment.writer.displayName}
+        bloodType={comment.writer.bloodType}
+        comment={comment.content}
+        time={comment.createdAt}
+        profileImageUrl={comment.writer.profileImageUrl}
+      />
+    );
+  };
 
-const rowRenderer = ({ index, key }) => {
-  const comment = list[index];
-  return (
-    <Comment
-      key={key}
-      isOpponent={true}
-      name={comment.name}
-      bloodType={comment.bloodType}
-      comment={comment.comment}
-      time={comment.time}
-    />
-  );
-};
-
-const DetailPost: React.FC = () => {
   return (
     <RequestPostBlock>
       <MobileToolbar title="요청피드" isBack={true} />
-      <DetailFeedHeader bloodType="A+" sort="WHOLE" buttonText="도움주기" />
+      <DetailFeedHeader
+        bloodType={createBloodTypeString(bloodType.abo, bloodType.rh)}
+        sort={createBloodProductString(bloodProduct)}
+        buttonText="도움주기"
+      />
       <div className="content_top">
         <FeedUserInfo
-          nickname="며눅"
-          time="20223308"
-          imgUrl="http://k.kakaocdn.net/dn/nDWKQ/btrrxYujq3q/DhUNBMn41zpPrNnPJe6EsK/img_640x640.jpg"
+          nickname={displayName}
+          time={createdAt}
+          imgUrl={profileImageUrl}
         />
         <ClipBoard>
           <img src={clipboard} alt="" width={16} height={16} />
@@ -196,22 +176,15 @@ const DetailPost: React.FC = () => {
       </div>
 
       <Title>
-        <span>
-          너무 급합니다 ㅠㅠ너무 급합니다 ㅠㅠ너무 급합니다 ㅠㅠ너무 급합니다
-          ㅠㅠ
-        </span>
+        <span>{title}</span>
       </Title>
 
-      <Content>
-        아빠가 11월 2일 급성백혈병 재발로 인해 이식을 받으시고 회복중에 장출혈이
-        생기면서 매일 혈소판 수혈을 받으시고 계신 상황입니다. <br /> 병원에서
-        지정헌혈을 요청하셔서 백방으로 알아보는데 힘든상황입니다.
-      </Content>
+      <Content>{content}</Content>
 
       <PostState>
         <div className="post_content_footer_state">
           <img src={comments} width={16} height={16} />
-          <span>12</span>
+          <span>{reply.length}</span>
         </div>
 
         <div className="post_content_footer_state">
@@ -221,7 +194,7 @@ const DetailPost: React.FC = () => {
             width={16}
             height={16}
           />
-          <span>4</span>
+          <span>{likes.length}</span>
         </div>
       </PostState>
 
@@ -231,10 +204,10 @@ const DetailPost: React.FC = () => {
         <AutoSizer>
           {({ height, width }) => (
             <List
-              list={list}
+              list={reply}
               width={width}
               height={height}
-              rowCount={list.length}
+              rowCount={reply.length}
               rowHeight={91}
               rowRenderer={rowRenderer}
               overscan={3}
@@ -244,7 +217,7 @@ const DetailPost: React.FC = () => {
       </CommentBlock>
       <InputCommentBlock>
         <Avatar
-          src="http://k.kakaocdn.net/dn/nDWKQ/btrrxYujq3q/DhUNBMn41zpPrNnPJe6EsK/img_640x640.jpg"
+          src={currentUserImageUrl}
           sx={{ width: '40px', height: '40px', marginRight: '10px' }}
         />
         <Paper

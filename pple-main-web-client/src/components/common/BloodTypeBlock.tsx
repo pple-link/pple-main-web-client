@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { createBloodTypeString } from '../../lib/util';
 
 const BloodTypeBox = styled.div`
   font-family: 'Pretendard Variable';
@@ -18,11 +19,15 @@ const BloodTypeBox = styled.div`
 `;
 
 interface Props {
-  text: string;
+  bloodType: {
+    abo: 'A' | 'B' | 'O' | 'AB';
+    rh: 'POSITIVE' | 'NEGATIVE';
+  };
 }
 
-const BloodTypeBlock: React.FC<Props> = ({ text }) => {
-  return <BloodTypeBox>{text}</BloodTypeBox>;
+const BloodTypeBlock: React.FC<Props> = ({ bloodType }) => {
+  const bloodTypeString = createBloodTypeString(bloodType.abo, bloodType.rh);
+  return <BloodTypeBox>{bloodTypeString}</BloodTypeBox>;
 };
 
 export default BloodTypeBlock;

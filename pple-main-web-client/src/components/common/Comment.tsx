@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import BloodTypeBlock from './BloodTypeBlock';
 import dotmenu from '../../static/images/feed/dotmenu.png';
+import { createTimeFormatForComment } from '../../lib/util';
 const OpponentCommentBlock = styled.div`
   width: 100%;
   display: flex;
@@ -59,9 +60,13 @@ const TimeLine = styled.div`
 type Props = {
   isOpponent: boolean;
   name: string;
-  bloodType: string;
+  bloodType: {
+    abo: 'A' | 'B' | 'O' | 'AB';
+    rh: 'POSITIVE' | 'NEGATIVE';
+  };
   comment: string;
   time: string;
+  profileImageUrl: string;
 };
 
 const Comment: React.FC<Props> = ({
@@ -70,25 +75,23 @@ const Comment: React.FC<Props> = ({
   bloodType,
   comment,
   time,
+  profileImageUrl,
 }) => {
+  const timeLine = createTimeFormatForComment(time);
+
   return (
     <>
       {isOpponent ? (
         <OpponentCommentBlock>
           <Avatar sx={{ height: '40px', width: '40px' }}>
-            <img
-              src="http://k.kakaocdn.net/dn/nDWKQ/btrrxYujq3q/DhUNBMn41zpPrNnPJe6EsK/img_640x640.jpg"
-              alt=""
-              width={40}
-              height={40}
-            ></img>
+            <img src={profileImageUrl} alt="" width={40} height={40}></img>
           </Avatar>
           <div>
             <CommentBubble>
               <div className="user-info">
                 <div style={{ display: 'flex', alignContent: 'center' }}>
                   <span>{name}</span>
-                  <BloodTypeBlock text={bloodType} />
+                  <BloodTypeBlock bloodType={bloodType} />
                 </div>
                 <IconButton sx={{ padding: '0px', cursor: 'pointer' }}>
                   <img src={dotmenu} width={2} height={10} />
@@ -96,7 +99,7 @@ const Comment: React.FC<Props> = ({
               </div>
               <div className="comment">{comment}</div>
             </CommentBubble>
-            <TimeLine>12월 13일</TimeLine>
+            <TimeLine>{timeLine}</TimeLine>
           </div>
         </OpponentCommentBlock>
       ) : (
@@ -105,7 +108,7 @@ const Comment: React.FC<Props> = ({
             <CommentBubble>
               <div className="user-info">
                 <span>{name}</span>
-                <BloodTypeBlock text={bloodType} />
+                <BloodTypeBlock bloodType={bloodType} />
               </div>
               <div className="comment">{comment}</div>
             </CommentBubble>
