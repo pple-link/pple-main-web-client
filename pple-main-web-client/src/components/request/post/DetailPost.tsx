@@ -6,11 +6,12 @@ import { IconButton } from '@mui/material';
 import MobileToolbar from '../../common/navigation/MobileToolbar';
 import DetailFeedHeader from '../../common/feed/DetailFeedHeader';
 import FeedUserInfo from './feed/FeedUserInfo';
+import ConnectionModal from '../../common/modal/ConnectionModal';
 import { List, AutoSizer } from 'react-virtualized';
 import clipboard from '../../../static/images/feed/clipboard.png';
 import comments from '../../../static/images/feed/Chat.png';
-import sendIcon from '../../../static/images/feed/Send.png';
 import heart from '../../../static/images/feed/heart.png';
+import fullheart from '../../../static/images/feed/fullheart.png';
 import arrowUp from '../../../static/images/feed/arrow-up.png';
 import IDetailPost from '../../../lib/interface/IDetailPost';
 import {
@@ -19,6 +20,7 @@ import {
 } from '../../../lib/util';
 import { useDispatch } from 'react-redux';
 import { setComment } from '../../../models/comment';
+import LoginRequestModal from '../../common/modal/LoginRequestModal';
 const RequestPostBlock = styled2.div`
   font-family: Pretandard;
   height:100vh;
@@ -104,7 +106,7 @@ const CommentBlock = styled2.div`
   padding: 0px 17px;
   margin-top: 15px;
   width:100%;
-  height: calc(90% - 65px) ;
+  height: calc(60% - 65px) ;
   box-sizing:border-box;
 `;
 
@@ -139,10 +141,20 @@ const DetailPost: React.FC<IDetailPost> = ({
   uuid,
   viewsCount,
   currentUserImageUrl,
-  onSubmitComment,
+  jwt,
+  onPostDonationLike,
 }) => {
   const dispatch = useDispatch();
   const [commentValue, setCommentValue] = useState('');
+  const [connectionOpen, setConnectionOpen] = useState<boolean>(false);
+  const [loginOpen, setLoginOpen] = useState<boolean>(false);
+  const handleConnectionOpen = () => {
+    setConnectionOpen(!connectionOpen);
+  };
+  const handleLoginOpen = () => {
+    setLoginOpen(!loginOpen);
+  };
+
   const onChangeCommentValue = (event: any) => {
     setCommentValue(event.target.value);
   };
@@ -184,6 +196,7 @@ const DetailPost: React.FC<IDetailPost> = ({
     <RequestPostBlock>
       <MobileToolbar title="요청피드" isBack={true} />
       <DetailFeedHeader
+        onClick={jwt ? handleConnectionOpen : handleLoginOpen}
         bloodType={createBloodTypeString(bloodType.abo, bloodType.rh)}
         sort={createBloodProductString(bloodProduct)}
         buttonText="도움주기"
@@ -214,8 +227,9 @@ const DetailPost: React.FC<IDetailPost> = ({
 
         <div className="post_content_footer_state">
           <img
+            onClick={jwt ? onPostDonationLike : handleLoginOpen}
             style={{ cursor: 'pointer' }}
-            src={heart}
+            src={likes.length ? fullheart : heart}
             width={16}
             height={16}
           />
@@ -233,7 +247,7 @@ const DetailPost: React.FC<IDetailPost> = ({
               width={width}
               height={height}
               rowCount={reply.length}
-              rowHeight={130}
+              rowHeight={110}
               rowRenderer={rowRenderer}
             />
           )}
@@ -266,6 +280,13 @@ const DetailPost: React.FC<IDetailPost> = ({
           </IconButton>
         </Paper>
       </InputCommentBlock>
+
+      <ConnectionModal
+        open={connectionOpen}
+        handleOpen={handleConnectionOpen}
+        phoneNumber={phoneNumber}
+      />
+      <LoginRequestModal open={loginOpen} onClick={handleLoginOpen} />
     </RequestPostBlock>
   );
 };
