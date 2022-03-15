@@ -23,11 +23,6 @@ const CloseBox = styled('div')({
   textAlign: 'end',
 });
 
-const ImageBox = styled('div')({
-  textAlign: 'center',
-  marginBottom: '15px',
-});
-
 const TitleBox = styled('div')({
   fontStyle: 'normal',
   fontWeight: 'bold',
@@ -50,19 +45,30 @@ interface Props {
   open: boolean;
   setOpen: any;
   replyUuid: string;
+  accountUuid: string;
+  donationUuid: string;
 }
 
-const ReportCommentModal: React.FC<Props> = ({ open, setOpen, replyUuid }) => {
+const ReportCommentModal: React.FC<Props> = ({
+  open,
+  setOpen,
+  replyUuid,
+  accountUuid,
+  donationUuid,
+}) => {
   const onClick = () => {
     setOpen(!open);
   };
   const handleDelete = () => {
-    new Promise((resolve, reject)=>{
-      resolve(reportComment(replyUuid));
+    new Promise((resolve, reject) => {
+      resolve(reportComment(replyUuid, accountUuid, donationUuid));
     })
-    .then(res=>{
-      setOpen(!open); 
-    });
+      .then(res => {
+        setOpen(!open);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
   return (
     <>

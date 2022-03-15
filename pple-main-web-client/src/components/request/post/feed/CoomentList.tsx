@@ -6,10 +6,9 @@ import { List, AutoSizer } from 'react-virtualized';
 interface reply {
   reply: Array<IReply>;
   currentUuid: string;
+  donationUuid: string;
 }
-const CoomentList: React.FC<reply> = ({ reply, currentUuid }) => {
-  
-
+const CoomentList: React.FC<reply> = ({ reply, currentUuid, donationUuid }) => {
   const rowRenderer = useCallback(
     ({ index, key }) => {
       const comment = reply[index];
@@ -26,8 +25,8 @@ const CoomentList: React.FC<reply> = ({ reply, currentUuid }) => {
           commentAccountUuid={comment.writer.accountUuid}
           currentAccountUuid={currentUuid}
           replyUuid={comment.uuid}
+          donationUuid={donationUuid}
         />
-
       );
     },
     [reply],
