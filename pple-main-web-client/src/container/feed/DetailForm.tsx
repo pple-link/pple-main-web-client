@@ -10,6 +10,8 @@ import { getCookie } from '../../lib/hooks/CookieUtil';
 import IDetailPost from '../../lib/interface/IDetailPost';
 import { RootState } from '../../models';
 import LoginRequestModal from '../../components/common/modal/LoginRequestModal';
+import { Like } from '../../lib/interface/Like';
+import { likeDonation } from '../../lib/api/like';
 
 const ProgressBlock = styled('div')({
   width: '100%',
@@ -30,6 +32,7 @@ const DetailForm: React.FC = () => {
   const [detailPostInfo, setDetailPostInfo] = useState<IDetailPost>();
   const [currentUserImageUrl, setCurrentUserImageUrl] = useState<string>('');
   const [submitCheck, setSubmitCheck] = useState<boolean>(false);
+  const [likeCheck, setLikeCheck] = useState<boolean>(false);
   const [firstCall, setFirstCall] = useState<boolean>(true);
   const [loginModalOpen, setLoginModalOpen] = useState<boolean>(false);
   const handleLoginModalOpen = () => {
@@ -47,7 +50,10 @@ const DetailForm: React.FC = () => {
       });
     }
   };
-
+  const handleLikeEvent = (donationData: Like, currentAccountUuid: string) => {
+    setLikeCheck(!likeCheck);
+    likeDonation(donationData, currentAccountUuid);
+  };
   useEffect(() => {
     if (jwt && firstCall) {
       setFirstCall(!firstCall);
@@ -60,7 +66,7 @@ const DetailForm: React.FC = () => {
         setDetailPostInfo(res.data);
       });
     }, 1000);
-  }, [submitCheck]);
+  }, [submitCheck, likeCheck]);
 
   return detailPostInfo ? (
     <>
@@ -81,7 +87,7 @@ const DetailForm: React.FC = () => {
           currentUserImageUrl={currentUserImageUrl}
           onSubmitComment={onSubmitComment}
           currenUuid={detailPostInfo.writer.accountUuid}
-
+          handleLikeEvent={handleLikeEvent}
         />
       </form>
       <LoginRequestModal open={loginModalOpen} onClick={handleLoginModalOpen} />
