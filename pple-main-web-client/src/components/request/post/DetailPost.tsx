@@ -146,7 +146,7 @@ const DetailPost: React.FC<IDetailPost> = ({
   jwt,
 }) => {
   const dispatch = useDispatch();
-  const currentUuid = useSelector((state : RootState) => state.account.uuid); 
+  const currentUuid = useSelector((state: RootState) => state.account.uuid);
   const [commentValue, setCommentValue] = useState('');
   const [connectionOpen, setConnectionOpen] = useState<boolean>(false);
   const [loginOpen, setLoginOpen] = useState<boolean>(false);
@@ -164,7 +164,7 @@ const DetailPost: React.FC<IDetailPost> = ({
     dispatch(setComment(commentValue));
     setCommentValue('');
   };
-  
+
   const { bloodType } = patient;
   const { displayName, profileImageUrl } = writer;
 

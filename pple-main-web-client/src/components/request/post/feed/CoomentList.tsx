@@ -9,7 +9,7 @@ interface reply {
   currentUuid: string;
 }
 
-const CoomentList: React.FC<reply> = ({ reply,currentUuid }) => {
+const CoomentList: React.FC<reply> = ({ reply, currentUuid }) => {
   const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
   const handleDeleteModalOpen = (
     currenUuid: string,
