@@ -17,9 +17,10 @@ import {
   createBloodProductString,
   createBloodTypeString,
 } from '../../../lib/util';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setComment } from '../../../models/comment';
 import LoginRequestModal from '../../common/modal/LoginRequestModal';
+import { RootState } from '../../../models';
 
 const RequestPostBlock = styled2.div`
   font-family: Pretandard;
@@ -106,7 +107,7 @@ const CommentBlock = styled2.div`
   padding: 0px 17px;
   margin-top: 15px;
   width:100%;
-  height: calc(60% - 65px) ;
+  height: calc(60%) ;
   box-sizing:border-box;
 `;
 
@@ -142,9 +143,9 @@ const DetailPost: React.FC<IDetailPost> = ({
   viewsCount,
   currentUserImageUrl,
   jwt,
-  onPostDonationLike,
 }) => {
   const dispatch = useDispatch();
+  const currentUuid = useSelector((state: RootState) => state.account.uuid);
   const [commentValue, setCommentValue] = useState('');
   const [connectionOpen, setConnectionOpen] = useState<boolean>(false);
   const [loginOpen, setLoginOpen] = useState<boolean>(false);
@@ -209,13 +210,7 @@ const DetailPost: React.FC<IDetailPost> = ({
         </div>
 
         <div className="post_content_footer_state">
-          <img
-            onClick={jwt ? onPostDonationLike : handleLoginOpen}
-            style={{ cursor: 'pointer' }}
-            src={likes.length ? fullheart : heart}
-            width={16}
-            height={16}
-          />
+          <img src={likes.length ? fullheart : heart} width={16} height={16} />
           <span>{likes.length}</span>
         </div>
       </PostState>
@@ -223,7 +218,7 @@ const DetailPost: React.FC<IDetailPost> = ({
       <DIVIDER />
 
       <CommentBlock>
-        <CoomentList reply={reply} />
+        <CoomentList reply={reply} currentUuid={currentUuid} />
       </CommentBlock>
       <InputCommentBlock>
         <Avatar

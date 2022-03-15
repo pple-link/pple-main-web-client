@@ -1,5 +1,5 @@
 import { Avatar, IconButton } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import BloodTypeBlock from './BloodTypeBlock';
 import dotmenu from '../../static/images/feed/dotmenu.png';
@@ -68,6 +68,13 @@ type Props = {
   comment: string;
   time: string;
   profileImageUrl: string;
+  onClick?: any;
+  commentAccountUuid: string;
+  currentAccountUuid: string;
+  deleteOpen: boolean;
+  setDeleteOpen: any;
+  reportOpen: boolean;
+  setReportOpen: any;
 };
 
 const Comment: React.FC<Props> = ({
@@ -77,9 +84,22 @@ const Comment: React.FC<Props> = ({
   comment,
   time,
   profileImageUrl,
+  commentAccountUuid,
+  currentAccountUuid,
+  deleteOpen,
+  setDeleteOpen,
+  reportOpen,
+  setReportOpen,
 }) => {
   const timeLine = createTimeFormatForComment(time);
-
+  const handleDeleteOpen = () => {
+    console.log(commentAccountUuid + ' / ' + currentAccountUuid);
+    if (commentAccountUuid == currentAccountUuid) {
+      setDeleteOpen(!deleteOpen);
+      return;
+    }
+    setReportOpen(!reportOpen);
+  };
   return (
     <>
       {isOpponent ? (
@@ -94,7 +114,10 @@ const Comment: React.FC<Props> = ({
                   <span>{name}</span>
                   <BloodTypeBlock bloodType={bloodType} />
                 </div>
-                <IconButton sx={{ padding: '0px', cursor: 'pointer' }}>
+                <IconButton
+                  onClick={handleDeleteOpen}
+                  sx={{ padding: '0px', cursor: 'pointer' }}
+                >
                   <img src={dotmenu} width={2} height={10} />
                 </IconButton>
               </div>

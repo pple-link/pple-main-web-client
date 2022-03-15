@@ -1,4 +1,5 @@
 export default interface IDetailPost {
+  jwt: string | undefined;
   bloodProduct: string;
   content: string;
   createdAt: string;
@@ -26,12 +27,14 @@ export default interface IDetailPost {
   };
   currentUserImageUrl: string;
   onSubmitComment: any;
+  currenUuid: string;
 }
 
-interface IReply {
+export interface IReply {
   content: string;
   createdAt: string;
   report: true;
+  uuid: string;
   writer: {
     accountUuid: string;
     bloodType: {

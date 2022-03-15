@@ -83,7 +83,7 @@ const DetailForm: React.FC = () => {
           viewsCount={detailPostInfo.viewsCount}
           currentUserImageUrl={currentUserImageUrl}
           onSubmitComment={onSubmitComment}
-          onPostDonationLike={onPostDonationLike}
+          currenUuid={detailPostInfo.writer.accountUuid}
         />
       </form>
       <LoginRequestModal open={loginModalOpen} onClick={handleLoginModalOpen} />
