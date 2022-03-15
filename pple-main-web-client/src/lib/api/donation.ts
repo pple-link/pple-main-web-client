@@ -77,3 +77,13 @@ export const deleteDonation = (donationUuid: string, jwt: string) => {
       console.log(err);
     });
 };
+
+export const postDonationLike = (donationUuid: string, jwt: string) => {
+  return customAxios
+    .post(`/api/v1/donation/like/${donationUuid}`, {
+      headers: { 'X-AUTH-TOKEN': `${jwt}` },
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};

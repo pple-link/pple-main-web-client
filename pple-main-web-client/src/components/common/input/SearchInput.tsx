@@ -22,10 +22,9 @@ const SearchComponentsBox = styled('div')({
 
 interface ISearch {
   placeholder: string;
-  handleSearch?: any;
 }
 
-const SearchInput: React.FC<ISearch> = ({ placeholder, handleSearch }) => {
+const SearchInput: React.FC<ISearch> = ({ placeholder }) => {
   return (
     <SearchInputBlock>
       <Paper elevation={0}>
@@ -34,7 +33,6 @@ const SearchInput: React.FC<ISearch> = ({ placeholder, handleSearch }) => {
             placeholder={placeholder}
             sx={{ ml: 1, flex: 1, fontWeight: 'bold', color: '#B7B7B7' }}
             inputProps={{ 'aria-label': 'search request feed' }}
-            onChange={handleSearch}
           ></InputBase>
           <IconButton
             type="submit"

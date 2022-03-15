@@ -21,6 +21,7 @@ const ShowTemplate = (content: any) => {
       phoneNumber={content.phoneNumber}
       displayName={content.writer.displayName}
       profileImageUrl={content.writer.profileImageUrl}
+      uuid={content.uuid}
     />
   );
 };
@@ -83,39 +84,23 @@ const FilterBloodTypeAndBloodProduct = (
 
 const RequestPostListForm: React.FC = () => {
   const [contentArray, setContentArray] = useState([]);
-  const [search, setSearch] = useState<string>(undefined);
   const [filter, setFilter] = useState<FilterType>({
     bloodType: null,
     bloodProduct: null,
   });
-  const handleSearch = (e: any) => {
-    const { value } = e.target;
-    setSearch(value);
-  };
 
   useEffect(() => {
     getDonationsOfActiveStatus()
       .then(res => {
-        if (search != undefined) {
-          const newArray = res.data.content.filter(content =>
-            content.donationContent.includes(search),
-          );
-          setContentArray(newArray);
-          return;
-        }
         const newArray = res.data;
         setContentArray(newArray);
       })
       .catch(err => {
         console.log(err);
       });
-  }, [search]);
+  }, []);
   return (
-    <RequestPostList
-      handleSearch={handleSearch}
-      filter={filter}
-      setFilter={setFilter}
-    >
+    <RequestPostList filter={filter} setFilter={setFilter}>
       {filter.bloodProduct &&
       filter.bloodType &&
       filter.bloodType !== '전체보기' &&
