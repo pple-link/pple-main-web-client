@@ -142,7 +142,6 @@ const DetailPost: React.FC<IDetailPost> = ({
   viewsCount,
   currentUserImageUrl,
   jwt,
-  onPostDonationLike,
 }) => {
   const dispatch = useDispatch();
   const [commentValue, setCommentValue] = useState('');
@@ -210,7 +209,6 @@ const DetailPost: React.FC<IDetailPost> = ({
 
         <div className="post_content_footer_state">
           <img
-            onClick={jwt ? onPostDonationLike : handleLoginOpen}
             style={{ cursor: 'pointer' }}
             src={likes.length ? fullheart : heart}
             width={16}

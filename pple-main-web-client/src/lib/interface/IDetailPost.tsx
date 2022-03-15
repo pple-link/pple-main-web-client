@@ -26,6 +26,7 @@ export default interface IDetailPost {
   };
   currentUserImageUrl: string;
   onSubmitComment: any;
+  jwt: string;
 }
 
 interface IReply {
