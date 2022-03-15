@@ -144,6 +144,7 @@ const DetailPost: React.FC<IDetailPost> = ({
   viewsCount,
   currentUserImageUrl,
   jwt,
+  handleLikeEvent,
 }) => {
   const dispatch = useDispatch();
   const currentUuid = useSelector((state: RootState) => state.account.uuid);
@@ -164,7 +165,12 @@ const DetailPost: React.FC<IDetailPost> = ({
     dispatch(setComment(commentValue));
     setCommentValue('');
   };
-
+  const onClickHeart = () => {
+    handleLikeEvent(
+      { donationUuid: uuid, likes: likes, jwt: jwt },
+      currentUuid,
+    );
+  };
   const { bloodType } = patient;
   const { displayName, profileImageUrl } = writer;
 
@@ -202,7 +208,13 @@ const DetailPost: React.FC<IDetailPost> = ({
         </div>
 
         <div className="post_content_footer_state">
-          <img src={likes.length ? fullheart : heart} width={16} height={16} />
+          <img
+            src={likes.length ? fullheart : heart}
+            width={16}
+            height={16}
+            style={{ cursor: 'pointer' }}
+            onClick={onClickHeart}
+          />
 
           <span>{likes.length}</span>
         </div>
@@ -211,8 +223,11 @@ const DetailPost: React.FC<IDetailPost> = ({
       <DIVIDER />
 
       <CommentBlock>
-        <CoomentList reply={reply} currentUuid={currentUuid} />
-
+        <CoomentList
+          reply={reply}
+          currentUuid={currentUuid}
+          donationUuid={uuid}
+        />
       </CommentBlock>
       <InputCommentBlock>
         <Avatar

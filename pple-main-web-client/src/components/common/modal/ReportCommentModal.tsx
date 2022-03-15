@@ -5,6 +5,7 @@ import ModalButton from './ModalButton';
 import trashBasket from '../../../static/images/modal/trashbasket.png';
 import CloseIcon from '@mui/icons-material/Close';
 import { reportComment } from '../../../lib/api/comment';
+import DoneReportCommentModal from './DoneReportCommentModal';
 
 const StyledModal = styled(Modal)({
   position: 'fixed',
@@ -56,14 +57,16 @@ const ReportCommentModal: React.FC<Props> = ({
   accountUuid,
   donationUuid,
 }) => {
+  const [done, setDone] = useState<boolean>(false);
   const onClick = () => {
-    setOpen(!open);
+    setDone(!done);
   };
   const handleDelete = () => {
     new Promise((resolve, reject) => {
       resolve(reportComment(replyUuid, accountUuid, donationUuid));
     })
       .then(res => {
+        setDone(!done);
         setOpen(!open);
       })
       .catch(err => {
@@ -72,6 +75,7 @@ const ReportCommentModal: React.FC<Props> = ({
   };
   return (
     <>
+      <DoneReportCommentModal open={done} setOpen={setDone} />
       <StyledModal
         isOpen={open}
         style={{ overlay: { background: 'rgba(0, 0, 0, 0.4)' } }}
