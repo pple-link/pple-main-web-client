@@ -18,9 +18,10 @@ import {
   createBloodTypeString,
   onClickCopyUrl,
 } from '../../../lib/util';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setComment } from '../../../models/comment';
 import LoginRequestModal from '../../common/modal/LoginRequestModal';
+import { RootState } from '../../../models';
 
 const RequestPostBlock = styled2.div`
   font-family: Pretandard;
@@ -145,6 +146,7 @@ const DetailPost: React.FC<IDetailPost> = ({
   jwt,
 }) => {
   const dispatch = useDispatch();
+  const currentUuid = useSelector((state : RootState) => state.account.uuid); 
   const [commentValue, setCommentValue] = useState('');
   const [connectionOpen, setConnectionOpen] = useState<boolean>(false);
   const [loginOpen, setLoginOpen] = useState<boolean>(false);
@@ -213,7 +215,7 @@ const DetailPost: React.FC<IDetailPost> = ({
       <DIVIDER />
 
       <CommentBlock>
-        <CoomentList reply={reply} />
+        <CoomentList currentUuid={currentUuid} reply={reply} />
       </CommentBlock>
       <InputCommentBlock>
         <Avatar

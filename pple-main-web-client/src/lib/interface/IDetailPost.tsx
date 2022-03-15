@@ -30,6 +30,7 @@ export default interface IDetailPost {
 }
 
 export interface IReply {
+  replyUuid : string;
   content: string;
   createdAt: string;
   report: true;

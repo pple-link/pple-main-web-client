@@ -68,6 +68,9 @@ type Props = {
   comment: string;
   time: string;
   profileImageUrl: string;
+  handleDeleteModalOpen: any; 
+  currentUuid:string;
+  replyWriterUuid: string;
 };
 
 const Comment: React.FC<Props> = ({
@@ -77,6 +80,9 @@ const Comment: React.FC<Props> = ({
   comment,
   time,
   profileImageUrl,
+  handleDeleteModalOpen,
+  currentUuid,
+  replyWriterUuid,
 }) => {
   const timeLine = createTimeFormatForComment(time);
 
@@ -94,7 +100,7 @@ const Comment: React.FC<Props> = ({
                   <span>{name}</span>
                   <BloodTypeBlock bloodType={bloodType} />
                 </div>
-                <IconButton sx={{ padding: '0px', cursor: 'pointer' }}>
+                <IconButton sx={{ padding: '0px', cursor: 'pointer' }} onClick={handleDeleteModalOpen(currentUuid,replyWriterUuid)}>
                   <img src={dotmenu} width={2} height={10} />
                 </IconButton>
               </div>
