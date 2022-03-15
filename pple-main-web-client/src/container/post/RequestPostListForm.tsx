@@ -8,6 +8,7 @@ import { customAxios } from '../../lib/customAxios';
 const ShowTemplate = (content: any) => {
   return (
     <FeedTemplate
+      uuid={content.uuid}
       key={content.uuid}
       title={content.title}
       content={content.content}
@@ -103,7 +104,7 @@ const RequestPostListForm: React.FC = () => {
           setContentArray(newArray);
           return;
         }
-        const newArray = res.data.content;
+        const newArray = res.data;
         setContentArray(newArray);
       })
       .catch(err => {

@@ -44,18 +44,23 @@ const NameBox = styled('div')({
   },
 });
 
-const CountBox = styled('div')({});
+const CountBox = styled('div')({
+  fontSize: 'small',
+  color: '#767676',
+});
 const EditProfileButton = styled(ButtonBase)({
   width: '100%',
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'center',
   alignItems: 'center',
-  padding: '10px',
+  padding: '15px 10px',
   background: '#FFFFFF',
   border: '1px solid #B7B7B7',
   boxSizing: 'border-box',
   borderRadius: '15px',
+  fontWeight: 'bold',
+  fontSize: '15px',
 });
 
 const Profile: React.FC<ProfileInMyPage> = ({
@@ -73,7 +78,11 @@ const Profile: React.FC<ProfileInMyPage> = ({
       {jwt ? (
         <>
           <ProfileBox>
-            <Avatar src={profileImageUrl} alt="프로필 이미지" />
+            <Avatar
+              src={profileImageUrl}
+              alt="프로필 이미지"
+              sx={{ width: 56, height: 56 }}
+            />
             <div>
               <NameBox>
                 <div className="nick-name">{displayName}</div>

@@ -26,7 +26,6 @@ interface Style {
   backgroundColor?: string;
   textColor?: string;
   text: string;
-  padding?: string;
   onClick?: MouseEventHandler;
   type: 'button' | 'submit' | 'reset';
 }
@@ -35,7 +34,6 @@ const SquareButton: React.FC<Style> = ({
   backgroundColor,
   textColor,
   text,
-  padding,
   type,
   onClick,
 }) => {

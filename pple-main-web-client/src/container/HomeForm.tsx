@@ -7,61 +7,55 @@ import { getAccountProfile } from '../lib/api/account';
 import {
   getDonationsOfActiveStatus,
   getExpiredDonations,
-  getExpiredDonationsTest,
 } from '../lib/api/donation';
 import StoryModal from '../components/common/modal/StoryModal';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUuid } from '../models/auth/account';
 
 const HomeForm = () => {
-  setCookie();
-  checkUser();
   const [displayName, setDisplayName] = useState<string>('피플');
   const [extensionOpen, setExtensionOpen] = useState(false);
   const [expiredDonationUuid, setExpiredDonationUuid] = useState<string>('');
   const [contentArray, setContentArray] = useState([]);
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const jwt = getCookie();
 
+  setCookie();
   useEffect(() => {
     if (jwt) {
       getAccountProfile(jwt)
         .then(res => {
-          if (res.data) {
-            setDisplayName(res.data.displayName);
+          if (res.data.status == 'TEMP') {
+            navigate('/register');
+            return;
           }
+          setDisplayName(res.data.displayName);
+          dispatch(setUuid(res.data.uuid));
         })
         .catch(err => {
-          console.log('Token is undefined');
           console.log(err);
+          navigate('/login');
         });
 
       getExpiredDonations(jwt).then(res => {
-        console.log(res.data);
         if (res.data.length && res.data[0].status == 'ACTIVE') {
           setExtensionOpen(true);
           setExpiredDonationUuid(res.data[0].uuid);
         }
       });
-      // getExpiredDonationsTest()
-      //   .then(res => {
-      //     if (res.data.length && res.data[0].status == 'ACTIVE') {
-      //       setExtensionOpen(true);
-      //       setExpiredDonationUuid(res.data[0].uuid);
-      //     }
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //   });
     }
     getDonationsOfActiveStatus()
       .then(res => {
-        const newArray = res.data.content;
+        const newArray = res.data;
         setContentArray(newArray);
       })
       .catch(err => {
         console.log(err);
         console.log('ERROR_DONATION');
       });
-  }, [displayName]);
+  }, [jwt]);
   return (
     <>
       <StoryModal

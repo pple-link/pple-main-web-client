@@ -10,16 +10,11 @@ const CookieUtil = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
 
   useEffect(() => {
-    console.log(cookies.jwt);
     if (cookies.jwt == undefined) {
       const userToken = searchParams.get('token');
-      console.log(userToken);
       if (userToken == null) {
         navigator;
       }
-    }
-    if (cookies.jwt !== undefined) {
-      console.log('hi cookie');
     }
   }, []);
 };
@@ -30,17 +25,13 @@ export const setCookie = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const userToken = searchParams.get('token');
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    // 쿠기 없으면 설정
-    if (cookies.jwt === undefined || cookies.jwt == 'null') {
+    if (userToken) {
       setCookie('jwt', userToken);
-      dispatch(setToken(userToken));
+      // 토큰 날리기
+      navigate('/');
     }
-    // 토큰 날리기
-    navigate('/');
-    // 쿠기 만료 시 처리
   }, []);
 };
 

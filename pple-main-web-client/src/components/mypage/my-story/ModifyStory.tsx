@@ -4,9 +4,10 @@ import MyPageElementHeader from '../MyPageElementHeader';
 import BloodDonationType from '../../common/input/BloodDonationType';
 import BloodTypeGroup from '../../common/input/BloodTypeGroup';
 import PhoneInput from '../../common/input/PhoneInput';
-import { useNavigate } from 'react-router-dom';
 import OwnDonation from '../../../lib/interface/OwnDonation';
 import { isMobile } from 'react-device-detect';
+import DeleteModal from '../../common/modal/DeleteModal';
+import { getCookie } from '../../../lib/hooks/CookieUtil';
 
 const Block = styled('div')({
   display: 'flex',
@@ -16,6 +17,7 @@ const Block = styled('div')({
   position: 'relative',
   boxSizing: 'border-box',
   width: 'inherit',
+  height: '100vh',
 });
 
 const Divider = styled('div')({
@@ -40,7 +42,7 @@ type Detect = {
 };
 
 const ModifyButton = styled(ButtonBase)<Detect>(({ isMobile }) => ({
-  width: isMobile ? '100%' : '32rem',
+  width: isMobile ? '100%' : '27rem',
   // maxWidth: '32rem',
   background: '#FF6969',
   color: 'white',
@@ -58,6 +60,7 @@ interface Props {
   handleRh: any;
   handlePhoneNumber: any;
   handleBloodProduction: any;
+  phone: any;
 }
 
 const ModifyStory: React.FC<Props> = ({
@@ -67,12 +70,33 @@ const ModifyStory: React.FC<Props> = ({
   handleRh,
   handlePhoneNumber,
   handleBloodProduction,
+  phone,
 }) => {
+  const [open, setOpen] = useState<boolean>(false);
   const { title, content, patient, phoneNumber, bloodProduct } = ownDonation;
-  return (
+  const { first, second, third } = phone;
+  const [delayed, setDelayed] = useState<boolean>(false);
+  const jwt = getCookie();
+  useEffect(() => {
+    setTimeout(() => {
+      setDelayed(true);
+    }, 500);
+  }, []);
+  return delayed ? (
     <Block>
+      <DeleteModal
+        open={open}
+        setOpen={setOpen}
+        donationUuid={ownDonation.uuid}
+        jwt={jwt}
+      />
       <div>
-        <MyPageElementHeader title="사연수정" />
+        <MyPageElementHeader
+          title="사연수정"
+          isModify={true}
+          setOpen={setOpen}
+          open={open}
+        />
         <Divider />
         <InputBlock>
           <TextField
@@ -104,9 +128,9 @@ const ModifyStory: React.FC<Props> = ({
             handleBloodProduction={handleBloodProduction}
           />
           <PhoneInput
-            first={phoneNumber.slice(0, 3)}
-            second={phoneNumber.slice(3, 7)}
-            third={phoneNumber.slice(7, 11)}
+            first={first}
+            second={second}
+            third={third}
             handlePhoneNumber={handlePhoneNumber}
           />
         </InputBlock>
@@ -115,6 +139,8 @@ const ModifyStory: React.FC<Props> = ({
         수정 완료
       </ModifyButton>
     </Block>
+  ) : (
+    <></>
   );
 };
 

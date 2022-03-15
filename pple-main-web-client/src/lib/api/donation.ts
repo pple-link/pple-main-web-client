@@ -21,10 +21,12 @@ export const updateDonation = (
   });
 };
 
+export const getOneDonation = (donationUuid: string) => {
+  return customAxios.get(`/api/v1/donation/one/${donationUuid}`);
+};
+
 export const getDonationsOfActiveStatus = () => {
-  return customAxios.get('/api/v1/donation', {
-    params: { status: 'ACTIVE' },
-  });
+  return customAxios.get('/api/v1/donation/all');
 };
 
 export const getOwnDonations = (jwt: string) => {
@@ -36,20 +38,18 @@ export const getOwnDonations = (jwt: string) => {
 export const getExpiredDonations = (jwt: string) => {
   return customAxios.get('/api/v1/account/donation/days', {
     headers: { 'X-AUTH-TOKEN': `${jwt}` },
+    params: { validDays: '6' },
   });
 };
 
 export const getExpiredDonationsTest = () => {
-  return customAxios.get('/api/v1/account/donation/gus5427@naver.com/test');
+  return customAxios.get('/api/v1/account/donation/gus5427@naver.com/test', {});
 };
 
 export const updateExpiredDonation = (donationUuid: string, jwt: string) => {
   return customAxios
     .post(`/api/v1/account/donation/renew/${donationUuid}`, {
       headers: { 'X-AUTH-TOKEN': `${jwt}` },
-    })
-    .then(res => {
-      console.log(res);
     })
     .catch(err => {
       console.log(err);
@@ -62,11 +62,18 @@ export const deleteExpiredDonation = (donationUuid: string, jwt: string) => {
     .patch(`/api/v1/donation/delete/${donationUuid}`, {
       headers: { 'X-AUTH-TOKEN': `${jwt}` },
     })
-    .then(res => {
-      console.log(res);
-    })
     .catch(err => {
       console.log(err);
       console.log('Deleting Donation is failed');
+    });
+};
+
+export const deleteDonation = (donationUuid: string, jwt: string) => {
+  return customAxios
+    .delete(`/api/v1/donation/delete/${donationUuid}/test`, {
+      headers: { 'X-AUTH-TOKEN': `${jwt}` },
+    })
+    .catch(err => {
+      console.log(err);
     });
 };

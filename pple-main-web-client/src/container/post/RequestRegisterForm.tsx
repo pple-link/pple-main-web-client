@@ -108,7 +108,6 @@ const RequestRegisterForm: React.FC = () => {
       ...post,
       bloodProduct: value,
     });
-    console.log(post.bloodProduct);
     return;
   };
 

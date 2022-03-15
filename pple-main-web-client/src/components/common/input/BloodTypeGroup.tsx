@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   IconButton,
   styled,
@@ -44,6 +44,10 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)({
     background: `${palette.red[1]} !important`,
     color: 'white',
   },
+  '& .MuiToggleButton-root.Mui-selected:active': {
+    background: `${palette.red[1]} !important`,
+    color: 'white',
+  },
   '& #circle-toggle': {
     borderRadius: '100%',
     border: `1px solid #EDEDED`,
@@ -66,18 +70,50 @@ const BloodTypeGroup: React.FC<IBlood> = ({ onChange, abo, rh, handleRh }) => {
     handleRh();
   };
 
+  useEffect(() => {
+    if (rh == 'POSITIVE') {
+      setSelect(false);
+    } else {
+      setSelect(true);
+    }
+  }, []);
+
   const children = [
-    <ToggleButton id="circle-toggle" value="A" key="A+" aria-label="abo">
-      <span>A</span>
+    <ToggleButton
+      sx={{ fontWeight: 'bold', maxWidth: '35px' }}
+      id="circle-toggle"
+      value="A"
+      key="A+"
+      aria-label="abo"
+    >
+      <span>{select || rh == 'NEGATIVE' ? 'A-' : 'A+'}</span>
     </ToggleButton>,
-    <ToggleButton id="circle-toggle" value="B" key="B+" aria-label="abo">
-      <span>B</span>
+    <ToggleButton
+      sx={{ fontWeight: 'bold', maxWidth: '35px' }}
+      id="circle-toggle"
+      value="B"
+      key="B+"
+      aria-label="abo"
+    >
+      <span>{select || rh == 'NEGATIVE' ? 'B-' : 'B+'}</span>
     </ToggleButton>,
-    <ToggleButton id="circle-toggle" value="O" key="O+" aria-label="abo">
-      <span>O</span>
+    <ToggleButton
+      sx={{ fontWeight: 'bold', maxWidth: '35px' }}
+      id="circle-toggle"
+      value="O"
+      key="O+"
+      aria-label="abo"
+    >
+      <span>{select || rh == 'NEGATIVE' ? 'O-' : 'O+'}</span>
     </ToggleButton>,
-    <ToggleButton id="circle-toggle" value="AB" key="AB+" aria-label="abo">
-      <span>AB</span>
+    <ToggleButton
+      sx={{ fontWeight: 'bold', maxWidth: '35px' }}
+      id="circle-toggle"
+      value="AB"
+      key="AB+"
+      aria-label="abo"
+    >
+      <span>{select || rh == 'NEGATIVE' ? 'AB-' : 'AB+'}</span>
     </ToggleButton>,
   ];
   return (

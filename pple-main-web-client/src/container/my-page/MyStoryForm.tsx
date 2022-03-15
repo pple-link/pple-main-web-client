@@ -41,7 +41,6 @@ const MyStoryForm = () => {
   useEffect(() => {
     getOwnDonations(jwt)
       .then(async res => {
-        console.log(res);
         const newContent = [];
         await res.data.content.map(story => {
           newContent.push(story);
@@ -64,7 +63,7 @@ const MyStoryForm = () => {
           <div>등록된 게시글이 없습니다</div>
         )
       ) : (
-        <div>로그인 후 이용해주세요</div>
+        <div style={{ height: '100vh' }}>로그인 후 이용해주세요</div>
       )}
     </MyStory>
   );
