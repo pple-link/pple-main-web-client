@@ -2,12 +2,6 @@ import React, { useCallback, useState } from 'react';
 import Comment from '../../../common/Comment';
 import { IReply } from '../../../../lib/interface/IDetailPost';
 import { List, AutoSizer } from 'react-virtualized';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../../models';
-import { deleteComment } from '../../../../lib/api/comment';
-import DeleteCommentModal from '../../../common/modal/DeleteCommentModal';
-import ReportCommentModal from '../../../common/modal/ReportCommentModal';
-
 
 interface reply {
   reply: Array<IReply>;

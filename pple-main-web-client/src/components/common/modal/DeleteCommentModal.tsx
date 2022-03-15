@@ -66,7 +66,7 @@ const DeleteCommentModal: React.FC<Props> = ({ open, setOpen, replyUuid }) => {
     .then(res=>{
       setOpen(!open); 
       window.location.reload(); 
-    })
+    });
 
   };
   return (

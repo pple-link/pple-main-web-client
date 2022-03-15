@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 import ModalButton from './ModalButton';
 import trashBasket from '../../../static/images/modal/trashbasket.png';
 import CloseIcon from '@mui/icons-material/Close';
-import DoneDeleteModal from './DoneDeleteModal';
+import { reportComment } from '../../../lib/api/comment';
 
 const StyledModal = styled(Modal)({
   position: 'fixed',
@@ -49,20 +49,23 @@ const ButtonBox = styled('div')({
 interface Props {
   open: boolean;
   setOpen: any;
+  replyUuid: string;
 }
 
-const ReportCommentModal: React.FC<Props> = ({ open, setOpen }) => {
-  const [done, setDone] = useState<boolean>(false);
+const ReportCommentModal: React.FC<Props> = ({ open, setOpen, replyUuid }) => {
   const onClick = () => {
     setOpen(!open);
   };
   const handleDelete = () => {
-    setOpen(!open);
-    setDone(!done);
+    new Promise((resolve, reject)=>{
+      resolve(reportComment(replyUuid));
+    })
+    .then(res=>{
+      setOpen(!open); 
+    });
   };
   return (
     <>
-      <DoneDeleteModal open={done} setOpen={setDone} />
       <StyledModal
         isOpen={open}
         style={{ overlay: { background: 'rgba(0, 0, 0, 0.4)' } }}
@@ -78,9 +81,6 @@ const ReportCommentModal: React.FC<Props> = ({ open, setOpen }) => {
             </IconButton>
           </CloseBox>
           {/* 이미지 영억 */}
-          <ImageBox>
-            <img src={trashBasket} alt="시계 이미지" width={90} height={90} />
-          </ImageBox>
           {/* 제목 */}
           <TitleBox>댓글을 신고하시겠어요?</TitleBox>
           <ButtonBox>

@@ -5,6 +5,8 @@ import BloodTypeBlock from './BloodTypeBlock';
 import dotmenu from '../../static/images/feed/dotmenu.png';
 import { createTimeFormatForComment } from '../../lib/util';
 import DeleteCommentModal from './modal/DeleteCommentModal';
+import ReportCommentModal from './modal/ReportCommentModal';
+
 const OpponentCommentBlock = styled.div`
   width: 100%;
   display: flex;
@@ -100,6 +102,7 @@ const Comment: React.FC<Props> = ({
   return (
     <>
       <DeleteCommentModal open={deleteOpen} setOpen={setDeleteOpen} replyUuid={replyUuid} />
+      <ReportCommentModal open={reportOpen} setOpen={setReportOpen} replyUuid={replyUuid} />
       {isOpponent ? (
         <OpponentCommentBlock>
           <Avatar sx={{ height: '40px', width: '40px' }}>

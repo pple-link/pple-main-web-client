@@ -10,7 +10,9 @@ export const saveComment = (
 };
 
 export const deleteComment = (replyUuid: string) => {
-  return customAxios.delete(`/api/v1/reply/delete/${replyUuid}/test
-`);
-
+  return customAxios.delete(`/api/v1/reply/delete/${replyUuid}/test`);
 };
+
+export const reportComment = (replyUuid:string) => {
+  return customAxios.post(`/api/v1/report/reply`,{replyUuid:replyUuid}); 
+}
