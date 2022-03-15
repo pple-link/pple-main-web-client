@@ -90,6 +90,7 @@ const Comment: React.FC<Props> = ({
   setDeleteOpen,
   reportOpen,
   setReportOpen,
+
 }) => {
   const timeLine = createTimeFormatForComment(time);
   const handleDeleteOpen = () => {
@@ -118,6 +119,7 @@ const Comment: React.FC<Props> = ({
                   onClick={handleDeleteOpen}
                   sx={{ padding: '0px', cursor: 'pointer' }}
                 >
+
                   <img src={dotmenu} width={2} height={10} />
                 </IconButton>
               </div>

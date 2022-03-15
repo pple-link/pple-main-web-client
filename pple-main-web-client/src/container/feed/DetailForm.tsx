@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import DetailPost from '../../components/request/post/DetailPost';
 import { getAccountProfile } from '../../lib/api/account';
 import { saveComment } from '../../lib/api/comment';
-import { getOneDonation, postDonationLike } from '../../lib/api/donation';
+import { getOneDonation } from '../../lib/api/donation';
 import { getCookie } from '../../lib/hooks/CookieUtil';
 import IDetailPost from '../../lib/interface/IDetailPost';
 import { RootState } from '../../models';
@@ -47,9 +47,6 @@ const DetailForm: React.FC = () => {
       });
     }
   };
-  const onPostDonationLike = () => {
-    postDonationLike(donationUuid, jwt);
-  };
 
   useEffect(() => {
     if (jwt && firstCall) {
@@ -84,6 +81,7 @@ const DetailForm: React.FC = () => {
           currentUserImageUrl={currentUserImageUrl}
           onSubmitComment={onSubmitComment}
           currenUuid={detailPostInfo.writer.accountUuid}
+
         />
       </form>
       <LoginRequestModal open={loginModalOpen} onClick={handleLoginModalOpen} />

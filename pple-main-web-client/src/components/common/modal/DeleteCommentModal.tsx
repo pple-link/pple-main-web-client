@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import ModalButton from './ModalButton';
 import trashBasket from '../../../static/images/modal/trashbasket.png';
 import CloseIcon from '@mui/icons-material/Close';
+
 import DoneDeleteModal from './DoneDeleteModal';
 import { deleteComment } from '../../../lib/api/comment';
 
@@ -49,6 +50,7 @@ const ContentBox = styled('div')({
   minWidth: '280px',
   marginBottom: '25px',
 });
+
 const ButtonBox = styled('div')({
   boxSizing: 'border-box',
   width: '100%',
@@ -70,6 +72,7 @@ const DeleteCommentModal: React.FC<Props> = ({ open, setOpen, replyUuid }) => {
   };
   const onClickDelete = () => {
     deleteComment(replyUuid);
+
   };
   return (
     <>
@@ -101,6 +104,7 @@ const DeleteCommentModal: React.FC<Props> = ({ open, setOpen, replyUuid }) => {
               color="#B7B7B7"
             />
             <ModalButton onClick={onClickDelete} text="삭제" />
+
           </ButtonBox>
         </StylePaper>
       </StyledModal>

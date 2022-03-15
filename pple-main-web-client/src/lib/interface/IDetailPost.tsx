@@ -31,6 +31,7 @@ export default interface IDetailPost {
 }
 
 export interface IReply {
+
   content: string;
   createdAt: string;
   report: true;

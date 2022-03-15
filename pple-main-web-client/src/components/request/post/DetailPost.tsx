@@ -16,6 +16,7 @@ import IDetailPost from '../../../lib/interface/IDetailPost';
 import {
   createBloodProductString,
   createBloodTypeString,
+  onClickCopyUrl,
 } from '../../../lib/util';
 import { useDispatch, useSelector } from 'react-redux';
 import { setComment } from '../../../models/comment';
@@ -163,16 +164,7 @@ const DetailPost: React.FC<IDetailPost> = ({
     dispatch(setComment(commentValue));
     setCommentValue('');
   };
-  const onClickCopyUrl = () => {
-    const textarea = document.createElement('textarea');
-    textarea.value = window.location.href;
-    document.body.appendChild(textarea);
-    textarea.focus();
-    textarea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textarea);
-    alert('클립보드에 복사되었습니다.');
-  };
+
   const { bloodType } = patient;
   const { displayName, profileImageUrl } = writer;
 
@@ -211,6 +203,7 @@ const DetailPost: React.FC<IDetailPost> = ({
 
         <div className="post_content_footer_state">
           <img src={likes.length ? fullheart : heart} width={16} height={16} />
+
           <span>{likes.length}</span>
         </div>
       </PostState>
@@ -219,6 +212,7 @@ const DetailPost: React.FC<IDetailPost> = ({
 
       <CommentBlock>
         <CoomentList reply={reply} currentUuid={currentUuid} />
+
       </CommentBlock>
       <InputCommentBlock>
         <Avatar

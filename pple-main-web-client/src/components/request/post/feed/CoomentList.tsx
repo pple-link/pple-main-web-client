@@ -8,6 +8,7 @@ import { deleteComment } from '../../../../lib/api/comment';
 import DeleteCommentModal from '../../../common/modal/DeleteCommentModal';
 import ReportCommentModal from '../../../common/modal/ReportCommentModal';
 
+
 interface reply {
   reply: Array<IReply>;
   currentUuid: string;
@@ -15,6 +16,7 @@ interface reply {
 const CoomentList: React.FC<reply> = ({ reply, currentUuid }) => {
   const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
   const [reportOpen, setReportOpen] = useState<boolean>(false);
+
 
   const rowRenderer = useCallback(
     ({ index, key }) => {
@@ -36,6 +38,7 @@ const CoomentList: React.FC<reply> = ({ reply, currentUuid }) => {
           reportOpen={reportOpen}
           setReportOpen={setReportOpen}
         />
+
       );
     },
     [reply],

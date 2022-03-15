@@ -12,4 +12,5 @@ export const saveComment = (
 export const deleteComment = (replyUuid: string) => {
   return customAxios.delete(`/api/v1/reply/delete/${replyUuid}/test
 `);
+
 };
