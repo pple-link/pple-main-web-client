@@ -4,9 +4,7 @@ import Modal from 'react-modal';
 import ModalButton from './ModalButton';
 import trashBasket from '../../../static/images/modal/trashbasket.png';
 import CloseIcon from '@mui/icons-material/Close';
-
 import DoneDeleteModal from './DoneDeleteModal';
-import { deleteComment } from '../../../lib/api/comment';
 
 const StyledModal = styled(Modal)({
   position: 'fixed',
@@ -39,17 +37,6 @@ const TitleBox = styled('div')({
   color: '#222222',
   marginBottom: '10px',
 });
-const ContentBox = styled('div')({
-  fontStyle: 'normal',
-  fontWeight: '600',
-  fontSize: '16px',
-  lineHeight: '150%',
-  textAlign: 'center',
-  color: '#B7B7B7',
-  padding: '0px 38px',
-  minWidth: '280px',
-  marginBottom: '25px',
-});
 
 const ButtonBox = styled('div')({
   boxSizing: 'border-box',
@@ -62,20 +49,20 @@ const ButtonBox = styled('div')({
 interface Props {
   open: boolean;
   setOpen: any;
-  replyUuid: string;
 }
 
-const DeleteCommentModal: React.FC<Props> = ({ open, setOpen, replyUuid }) => {
+const ReportCommentModal: React.FC<Props> = ({ open, setOpen }) => {
   const [done, setDone] = useState<boolean>(false);
   const onClick = () => {
     setOpen(!open);
   };
-  const onClickDelete = () => {
-    deleteComment(replyUuid);
-
+  const handleDelete = () => {
+    setOpen(!open);
+    setDone(!done);
   };
   return (
     <>
+      <DoneDeleteModal open={done} setOpen={setDone} />
       <StyledModal
         isOpen={open}
         style={{ overlay: { background: 'rgba(0, 0, 0, 0.4)' } }}
@@ -95,7 +82,7 @@ const DeleteCommentModal: React.FC<Props> = ({ open, setOpen, replyUuid }) => {
             <img src={trashBasket} alt="시계 이미지" width={90} height={90} />
           </ImageBox>
           {/* 제목 */}
-          <TitleBox>댓글을 삭제하시겠어요?</TitleBox>
+          <TitleBox>댓글을 신고하시겠어요?</TitleBox>
           <ButtonBox>
             <ModalButton
               onClick={onClick}
@@ -103,8 +90,7 @@ const DeleteCommentModal: React.FC<Props> = ({ open, setOpen, replyUuid }) => {
               background="#F4F4F4"
               color="#B7B7B7"
             />
-            <ModalButton onClick={onClickDelete} text="삭제" />
-
+            <ModalButton onClick={handleDelete} text="신고" />
           </ButtonBox>
         </StylePaper>
       </StyledModal>
@@ -112,4 +98,4 @@ const DeleteCommentModal: React.FC<Props> = ({ open, setOpen, replyUuid }) => {
   );
 };
 
-export default DeleteCommentModal;
+export default ReportCommentModal;

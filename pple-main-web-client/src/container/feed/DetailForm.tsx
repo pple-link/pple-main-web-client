@@ -80,6 +80,8 @@ const DetailForm: React.FC = () => {
           viewsCount={detailPostInfo.viewsCount}
           currentUserImageUrl={currentUserImageUrl}
           onSubmitComment={onSubmitComment}
+          currenUuid={detailPostInfo.writer.accountUuid}
+
         />
       </form>
       <LoginRequestModal open={loginModalOpen} onClick={handleLoginModalOpen} />
