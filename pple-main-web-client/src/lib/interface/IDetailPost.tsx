@@ -29,7 +29,7 @@ export default interface IDetailPost {
   jwt: string;
 }
 
-interface IReply {
+export interface IReply {
   content: string;
   createdAt: string;
   report: true;
