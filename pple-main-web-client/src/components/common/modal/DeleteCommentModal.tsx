@@ -60,14 +60,12 @@ const DeleteCommentModal: React.FC<Props> = ({ open, setOpen, replyUuid }) => {
     setOpen(!open);
   };
   const onClickDelete = () => {
-    new Promise((resolve, reject)=>{
+    new Promise((resolve, reject) => {
       resolve(deleteComment(replyUuid));
-    })
-    .then(res=>{
-      setOpen(!open); 
-      window.location.reload(); 
+    }).then(res => {
+      setOpen(!open);
+      window.location.reload();
     });
-
   };
   return (
     <>
@@ -84,13 +82,9 @@ const DeleteCommentModal: React.FC<Props> = ({ open, setOpen, replyUuid }) => {
               <CloseIcon style={{ color: '#C7C7C7' }} />
             </IconButton>
           </CloseBox>
-          
-          <ImageBox>
-            <img src={trashBasket} alt="시계 이미지" width={90} height={90} />
-          </ImageBox>
 
           <TitleBox>댓글을 삭제하시겠어요?</TitleBox>
-          
+
           <ButtonBox>
             <ModalButton
               onClick={onClick}
@@ -99,7 +93,6 @@ const DeleteCommentModal: React.FC<Props> = ({ open, setOpen, replyUuid }) => {
               color="#B7B7B7"
             />
             <ModalButton onClick={onClickDelete} text="삭제" />
-
           </ButtonBox>
         </StylePaper>
       </StyledModal>
