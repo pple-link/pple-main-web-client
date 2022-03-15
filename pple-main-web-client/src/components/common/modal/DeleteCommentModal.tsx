@@ -7,6 +7,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import DoneDeleteModal from './DoneDeleteModal';
 import { deleteComment } from '../../../lib/api/comment';
+import { resolve } from 'path';
 
 const StyledModal = styled(Modal)({
   position: 'fixed',
@@ -39,17 +40,6 @@ const TitleBox = styled('div')({
   color: '#222222',
   marginBottom: '10px',
 });
-const ContentBox = styled('div')({
-  fontStyle: 'normal',
-  fontWeight: '600',
-  fontSize: '16px',
-  lineHeight: '150%',
-  textAlign: 'center',
-  color: '#B7B7B7',
-  padding: '0px 38px',
-  minWidth: '280px',
-  marginBottom: '25px',
-});
 
 const ButtonBox = styled('div')({
   boxSizing: 'border-box',
@@ -66,12 +56,17 @@ interface Props {
 }
 
 const DeleteCommentModal: React.FC<Props> = ({ open, setOpen, replyUuid }) => {
-  const [done, setDone] = useState<boolean>(false);
   const onClick = () => {
     setOpen(!open);
   };
   const onClickDelete = () => {
-    deleteComment(replyUuid);
+    new Promise((resolve, reject)=>{
+      resolve(deleteComment(replyUuid));
+    })
+    .then(res=>{
+      setOpen(!open); 
+      window.location.reload(); 
+    })
 
   };
   return (
@@ -81,7 +76,6 @@ const DeleteCommentModal: React.FC<Props> = ({ open, setOpen, replyUuid }) => {
         style={{ overlay: { background: 'rgba(0, 0, 0, 0.4)' } }}
       >
         <StylePaper elevation={2}>
-          {/* 닫기 버튼 */}
           <CloseBox>
             <IconButton
               sx={{ marginTop: '10px', marginRight: '10px' }}
@@ -90,12 +84,13 @@ const DeleteCommentModal: React.FC<Props> = ({ open, setOpen, replyUuid }) => {
               <CloseIcon style={{ color: '#C7C7C7' }} />
             </IconButton>
           </CloseBox>
-          {/* 이미지 영억 */}
+          
           <ImageBox>
             <img src={trashBasket} alt="시계 이미지" width={90} height={90} />
           </ImageBox>
-          {/* 제목 */}
+
           <TitleBox>댓글을 삭제하시겠어요?</TitleBox>
+          
           <ButtonBox>
             <ModalButton
               onClick={onClick}

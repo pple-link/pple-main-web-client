@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import BloodTypeBlock from './BloodTypeBlock';
 import dotmenu from '../../static/images/feed/dotmenu.png';
 import { createTimeFormatForComment } from '../../lib/util';
+import DeleteCommentModal from './modal/DeleteCommentModal';
 const OpponentCommentBlock = styled.div`
   width: 100%;
   display: flex;
@@ -71,10 +72,7 @@ type Props = {
   onClick?: any;
   commentAccountUuid: string;
   currentAccountUuid: string;
-  deleteOpen: boolean;
-  setDeleteOpen: any;
-  reportOpen: boolean;
-  setReportOpen: any;
+  replyUuid: string; 
 };
 
 const Comment: React.FC<Props> = ({
@@ -86,15 +84,13 @@ const Comment: React.FC<Props> = ({
   profileImageUrl,
   commentAccountUuid,
   currentAccountUuid,
-  deleteOpen,
-  setDeleteOpen,
-  reportOpen,
-  setReportOpen,
-
+  replyUuid
 }) => {
   const timeLine = createTimeFormatForComment(time);
+  const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
+  const [reportOpen, setReportOpen] = useState<boolean>(false);
+
   const handleDeleteOpen = () => {
-    console.log(commentAccountUuid + ' / ' + currentAccountUuid);
     if (commentAccountUuid == currentAccountUuid) {
       setDeleteOpen(!deleteOpen);
       return;
@@ -103,6 +99,7 @@ const Comment: React.FC<Props> = ({
   };
   return (
     <>
+      <DeleteCommentModal open={deleteOpen} setOpen={setDeleteOpen} replyUuid={replyUuid} />
       {isOpponent ? (
         <OpponentCommentBlock>
           <Avatar sx={{ height: '40px', width: '40px' }}>

@@ -14,9 +14,7 @@ interface reply {
   currentUuid: string;
 }
 const CoomentList: React.FC<reply> = ({ reply, currentUuid }) => {
-  const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
-  const [reportOpen, setReportOpen] = useState<boolean>(false);
-
+  
 
   const rowRenderer = useCallback(
     ({ index, key }) => {
@@ -33,10 +31,7 @@ const CoomentList: React.FC<reply> = ({ reply, currentUuid }) => {
           profileImageUrl={comment.writer.profileImageUrl}
           commentAccountUuid={comment.writer.accountUuid}
           currentAccountUuid={currentUuid}
-          deleteOpen={deleteOpen}
-          setDeleteOpen={setDeleteOpen}
-          reportOpen={reportOpen}
-          setReportOpen={setReportOpen}
+          replyUuid={comment.uuid}
         />
 
       );
@@ -45,7 +40,6 @@ const CoomentList: React.FC<reply> = ({ reply, currentUuid }) => {
   );
   return (
     <>
-      <ReportCommentModal open={reportOpen} setOpen={setReportOpen} />
       <AutoSizer>
         {({ height, width }) => (
           <List

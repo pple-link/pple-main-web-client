@@ -8,6 +8,7 @@ import { customAxios } from '../../lib/customAxios';
 const ShowTemplate = (content: any) => {
   return (
     <FeedTemplate
+      uuid={content.uuid}
       key={content.uuid}
       title={content.title}
       content={content.content}
