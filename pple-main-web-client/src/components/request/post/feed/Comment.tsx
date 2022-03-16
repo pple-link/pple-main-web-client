@@ -1,65 +1,11 @@
 import { Avatar, IconButton } from '@mui/material';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import BloodTypeBlock from './BloodTypeBlock';
-import dotmenu from '../../static/images/feed/dotmenu.png';
-import { createTimeFormatForComment } from '../../lib/util';
-import DeleteCommentModal from './modal/DeleteCommentModal';
-import ReportCommentModal from './modal/ReportCommentModal';
-
-const OpponentCommentBlock = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-`;
-
-const UserCommentBlock = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-`;
-
-const CommentBubble = styled.div`
-  font-family: 'Pretendard Variable';
-  /* width: 100%; */
-  background: #f4f4f4;
-  border-radius: 14px;
-  padding: 10px 12px 12px 12px;
-  margin-left: 8px;
-  & .user-info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  & span {
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 17px;
-    color: #767676;
-  }
-  & .comment {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
-    letter-spacing: -0.03em;
-    color: #767676;
-    margin-top: 2px;
-  }
-`;
-
-const TimeLine = styled.div`
-  font-family: 'Pretendard Variable';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 14px;
-  letter-spacing: -0.03em;
-  color: #aeaeae;
-  margin-left: 16px;
-  margin-top: 4px;
-  margin-bottom: 15px;
-`;
+import BloodTypeBlock from '../../../common/BloodTypeBlock';
+import dotmenu from '../../../../static/images/feed/dotmenu.png';
+import { createTimeFormatForComment } from '../../../../lib/util';
+import DeleteCommentModal from '../../../common/modal/DeleteCommentModal';
+import ReportCommentModal from '../../../common/modal/ReportCommentModal';
 
 type Props = {
   isOpponent: boolean;
@@ -148,5 +94,59 @@ const Comment: React.FC<Props> = ({
     </>
   );
 };
+
+const OpponentCommentBlock = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+`;
+
+const UserCommentBlock = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+const CommentBubble = styled.div`
+  font-family: 'Pretendard Variable';
+  /* width: 100%; */
+  background: #f4f4f4;
+  border-radius: 14px;
+  padding: 10px 12px 12px 12px;
+  margin-left: 8px;
+  & .user-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  & span {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    color: #767676;
+  }
+  & .comment {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: -0.03em;
+    color: #767676;
+    margin-top: 2px;
+  }
+`;
+
+const TimeLine = styled.div`
+  font-family: 'Pretendard Variable';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: -0.03em;
+  color: #aeaeae;
+  margin-left: 16px;
+  margin-top: 4px;
+  margin-bottom: 15px;
+`;
 
 export default Comment;

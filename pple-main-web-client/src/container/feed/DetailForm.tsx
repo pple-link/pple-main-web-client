@@ -10,17 +10,8 @@ import { getCookie } from '../../lib/hooks/CookieUtil';
 import IDetailPost from '../../lib/interface/IDetailPost';
 import { RootState } from '../../models';
 import LoginRequestModal from '../../components/common/modal/LoginRequestModal';
-
-const ProgressBlock = styled('div')({
-  width: '100%',
-  height: '100vh',
-  '& .MuiCircularProgress-root': {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transForm: 'translate(-50%,-50%)',
-  },
-});
+import { likeDonation } from '../../lib/api/like';
+import { LikeDonationData } from '../../lib/interface/LikeArray';
 
 const DetailForm: React.FC = () => {
   const jwt = getCookie();
@@ -30,11 +21,18 @@ const DetailForm: React.FC = () => {
   const [detailPostInfo, setDetailPostInfo] = useState<IDetailPost>();
   const [currentUserImageUrl, setCurrentUserImageUrl] = useState<string>('');
   const [submitCheck, setSubmitCheck] = useState<boolean>(false);
+  const [likeCheck, setLikeCheck] = useState<boolean>(false); 
   const [firstCall, setFirstCall] = useState<boolean>(true);
   const [loginModalOpen, setLoginModalOpen] = useState<boolean>(false);
   const handleLoginModalOpen = () => {
     setLoginModalOpen(!loginModalOpen);
   };
+  
+  const onClickLike = (donationData : LikeDonationData, currentUuid : string, jwt: string)=>{
+    setLikeCheck(!likeCheck); 
+    likeDonation(donationData, currentUuid,jwt); 
+  };
+
   const onSubmitComment = (event: any) => {
     event.preventDefault();
     if (!jwt) {
@@ -60,7 +58,7 @@ const DetailForm: React.FC = () => {
         setDetailPostInfo(res.data);
       });
     }, 1000);
-  }, [submitCheck]);
+  }, [submitCheck,likeCheck]);
 
   return detailPostInfo ? (
     <>
@@ -81,7 +79,7 @@ const DetailForm: React.FC = () => {
           currentUserImageUrl={currentUserImageUrl}
           onSubmitComment={onSubmitComment}
           currenUuid={detailPostInfo.writer.accountUuid}
-
+          onClickLike={onClickLike}
         />
       </form>
       <LoginRequestModal open={loginModalOpen} onClick={handleLoginModalOpen} />
@@ -92,5 +90,16 @@ const DetailForm: React.FC = () => {
     </ProgressBlock>
   );
 };
+
+const ProgressBlock = styled('div')({
+  width: '100%',
+  height: '100vh',
+  '& .MuiCircularProgress-root': {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transForm: 'translate(-50%,-50%)',
+  },
+});
 
 export default DetailForm;

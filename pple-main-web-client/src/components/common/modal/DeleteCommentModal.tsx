@@ -2,52 +2,8 @@ import React, { useState } from 'react';
 import { styled, Paper, IconButton } from '@mui/material';
 import Modal from 'react-modal';
 import ModalButton from './ModalButton';
-import trashBasket from '../../../static/images/modal/trashbasket.png';
 import CloseIcon from '@mui/icons-material/Close';
-
-import DoneDeleteModal from './DoneDeleteModal';
 import { deleteComment } from '../../../lib/api/comment';
-import { resolve } from 'path';
-
-const StyledModal = styled(Modal)({
-  position: 'fixed',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  fontFamily: 'Pretendard',
-  outline: 'none',
-});
-
-const StylePaper = styled(Paper)({
-  borderRadius: '20px',
-});
-const CloseBox = styled('div')({
-  width: '100%',
-  textAlign: 'end',
-});
-
-const ImageBox = styled('div')({
-  textAlign: 'center',
-  marginBottom: '15px',
-});
-
-const TitleBox = styled('div')({
-  fontStyle: 'normal',
-  fontWeight: 'bold',
-  fontSize: '22px',
-  lineHeight: '28px',
-  textAlign: 'center',
-  color: '#222222',
-  marginBottom: '10px',
-});
-
-const ButtonBox = styled('div')({
-  boxSizing: 'border-box',
-  width: '100%',
-  display: 'flex',
-  justifyContent: 'space-between',
-  padding: '0px 25px 25px 25px',
-});
 
 interface Props {
   open: boolean;
@@ -99,5 +55,45 @@ const DeleteCommentModal: React.FC<Props> = ({ open, setOpen, replyUuid }) => {
     </>
   );
 };
+
+const StyledModal = styled(Modal)({
+  position: 'fixed',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  fontFamily: 'Pretendard',
+  outline: 'none',
+});
+
+const StylePaper = styled(Paper)({
+  borderRadius: '20px',
+});
+const CloseBox = styled('div')({
+  width: '100%',
+  textAlign: 'end',
+});
+
+const ImageBox = styled('div')({
+  textAlign: 'center',
+  marginBottom: '15px',
+});
+
+const TitleBox = styled('div')({
+  fontStyle: 'normal',
+  fontWeight: 'bold',
+  fontSize: '22px',
+  lineHeight: '28px',
+  textAlign: 'center',
+  color: '#222222',
+  marginBottom: '10px',
+});
+
+const ButtonBox = styled('div')({
+  boxSizing: 'border-box',
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'space-between',
+  padding: '0px 25px 25px 25px',
+});
 
 export default DeleteCommentModal;

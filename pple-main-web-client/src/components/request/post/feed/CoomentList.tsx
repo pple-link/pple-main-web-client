@@ -1,51 +1,28 @@
 import React, { useCallback, useState } from 'react';
-import Comment from '../../../common/Comment';
+import Comment from './Comment';
 import { IReply } from '../../../../lib/interface/IDetailPost';
-import { List, AutoSizer } from 'react-virtualized';
 
 interface reply {
   reply: Array<IReply>;
   currentUuid: string;
 }
 const CoomentList: React.FC<reply> = ({ reply, currentUuid }) => {
-  
-
-  const rowRenderer = useCallback(
-    ({ index, key }) => {
-      const comment = reply[index];
-
-      return (
-        <Comment
-          key={key}
-          isOpponent={true}
-          name={comment.writer.displayName}
-          bloodType={comment.writer.bloodType}
-          comment={comment.content}
-          time={comment.createdAt}
-          profileImageUrl={comment.writer.profileImageUrl}
-          commentAccountUuid={comment.writer.accountUuid}
-          currentAccountUuid={currentUuid}
-          replyUuid={comment.uuid}
-        />
-
-      );
-    },
-    [reply],
-  );
   return (
     <>
-      <AutoSizer>
-        {({ height, width }) => (
-          <List
-            list={reply}
-            width={width}
-            height={height}
-            rowCount={reply.length}
-            rowHeight={108}
-            rowRenderer={rowRenderer}
-          />
-        )}
-      </AutoSizer>
+      {reply.map((reply, index) => (
+        <Comment
+          key={index}
+          isOpponent={true}
+          name={reply.writer.displayName}
+          bloodType={reply.writer.bloodType}
+          comment={reply.content}
+          time={reply.createdAt}
+          profileImageUrl={reply.writer.profileImageUrl}
+          commentAccountUuid={reply.writer.accountUuid}
+          currentAccountUuid={currentUuid}
+          replyUuid={reply.uuid}
+        />
+      ))}
     </>
   );
 };

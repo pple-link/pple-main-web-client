@@ -157,9 +157,9 @@ const DetailPost: React.FC<IDetailPost> = ({
 
 const RequestPostBlock = styled2.div`
   font-family: Pretandard;
-  height:100vh;
-  overflow: hidden;
   position:relative; 
+  overflow: auto;
+  height: fit-content;
   & .content_top {
     padding: 0 18px;
     display: flex;
@@ -240,8 +240,8 @@ const CommentBlock = styled2.div`
   padding: 0px 17px;
   margin-top: 15px;
   width:100%;
-  height: calc(60%) ;
   box-sizing:border-box;
+  overflow: auto;
 `;
 
 const InputCommentBlock = styled('div')<DeviceDetect>(({ isMobile }) => ({
