@@ -22,6 +22,138 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setComment } from '../../../models/comment';
 import LoginRequestModal from '../../common/modal/LoginRequestModal';
 import { RootState } from '../../../models';
+import { isMobile } from 'react-device-detect';
+import DeviceDetect from '../../../lib/interface/DeviceDetect';
+
+const DetailPost: React.FC<IDetailPost> = ({
+  bloodProduct,
+  patient,
+  writer,
+  createdAt,
+  reply,
+  title,
+  content,
+  likes,
+  phoneNumber,
+  uuid,
+  viewsCount,
+  currentUserImageUrl,
+  jwt,
+  onClickLike,
+}) => {
+  const dispatch = useDispatch();
+  const currentUuid = useSelector((state: RootState) => state.account.uuid);
+  const [commentValue, setCommentValue] = useState('');
+  const [connectionOpen, setConnectionOpen] = useState<boolean>(false);
+  const [loginOpen, setLoginOpen] = useState<boolean>(false);
+  const handleConnectionOpen = () => {
+    setConnectionOpen(!connectionOpen);
+  };
+  const handleLoginOpen = () => {
+    setLoginOpen(!loginOpen);
+  };
+  const handleLikeEvent = () => {
+    onClickLike({ likes: likes, donationUuid: uuid }, currentUuid, jwt);
+  };
+
+  const onChangeCommentValue = (event: any) => {
+    setCommentValue(event.target.value);
+  };
+  const onClickCommentSubmit = () => {
+    dispatch(setComment(commentValue));
+    setCommentValue('');
+  };
+
+  const { bloodType } = patient;
+  const { displayName, profileImageUrl } = writer;
+
+  return (
+    <RequestPostBlock>
+      <MobileToolbar title="요청피드" isBack={true} />
+      <DetailFeedHeader
+        onClick={jwt ? handleConnectionOpen : handleLoginOpen}
+        bloodType={createBloodTypeString(bloodType.abo, bloodType.rh)}
+        sort={createBloodProductString(bloodProduct)}
+        buttonText="도움주기"
+      />
+      <div className="content_top">
+        <FeedUserInfo
+          nickname={displayName}
+          time={createdAt}
+          imgUrl={profileImageUrl}
+        />
+        <ClipBoard onClick={onClickCopyUrl}>
+          <img src={clipboard} alt="" width={16} height={16} />
+          <span>게시물 복사</span>
+        </ClipBoard>
+      </div>
+
+      <Title>
+        <span>{title}</span>
+      </Title>
+
+      <Content>{content}</Content>
+
+      <PostState>
+        <div className="post_content_footer_state">
+          <img src={comments} width={16} height={16} />
+          <span>{reply.length}</span>
+        </div>
+
+        <div className="post_content_footer_state">
+          <img
+            style={{ cursor: 'pointer' }}
+            src={likes.length ? fullheart : heart}
+            width={16}
+            height={16}
+            onClick={handleLikeEvent}
+          />
+          <span>{likes.length}</span>
+        </div>
+      </PostState>
+
+      <DIVIDER />
+
+      <CommentBlock>
+        <CoomentList reply={reply} currentUuid={currentUuid} />
+      </CommentBlock>
+      <InputCommentBlock isMobile={isMobile}>
+        <Avatar
+          src={currentUserImageUrl}
+          sx={{ width: '40px', height: '40px', marginRight: '10px' }}
+        />
+        <Paper
+          elevation={0}
+          sx={{
+            background: '#F9F9F9',
+            border: '1px solid #EDEDED',
+            borderRadius: '100px',
+            width: '100%',
+            display: 'flex',
+            alignContent: 'center',
+          }}
+        >
+          <StyledInput
+            sx={{ ml: 1, flex: 1, width: '100%' }}
+            placeholder="댓글을 남겨주세요"
+            value={commentValue}
+            onChange={onChangeCommentValue}
+          />
+          <IconButton type="submit" onClick={onClickCommentSubmit}>
+            <img src={arrowUp} width={30} height={30} />
+          </IconButton>
+        </Paper>
+      </InputCommentBlock>
+
+      <ConnectionModal
+        open={connectionOpen}
+        handleOpen={handleConnectionOpen}
+        phoneNumber={phoneNumber}
+      />
+      <LoginRequestModal open={loginOpen} onClick={handleLoginOpen} />
+    </RequestPostBlock>
+  );
+};
 
 const RequestPostBlock = styled2.div`
   font-family: Pretandard;
@@ -112,144 +244,22 @@ const CommentBlock = styled2.div`
   box-sizing:border-box;
 `;
 
-const InputCommentBlock = styled2.div`
-padding:0px 17px;
-  width: 100%;
-  position:absolute;
-  bottom:0;
-  display: flex;
-  justify-content:space-between; 
-  align-items :center;
-  box-sizing: border-box;
-  padding-bottom: 10px;
-  background:white;
-  `;
+const InputCommentBlock = styled('div')<DeviceDetect>(({ isMobile }) => ({
+  padding: '0px 17px',
+  width: isMobile ? '100%' : '28rem',
+  position: 'fixed',
+  bottom: 0,
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  boxSizing: 'border-box',
+  paddingBottom: '10px',
+  background: 'white',
+}));
 
 const StyledInput = styled(InputBase)({
   padding: '5px 17px',
   fontSize: '14px',
 });
-
-const DetailPost: React.FC<IDetailPost> = ({
-  bloodProduct,
-  patient,
-  writer,
-  createdAt,
-  reply,
-  title,
-  content,
-  likes,
-  phoneNumber,
-  uuid,
-  viewsCount,
-  currentUserImageUrl,
-  jwt,
-}) => {
-  const dispatch = useDispatch();
-  const currentUuid = useSelector((state: RootState) => state.account.uuid);
-  const [commentValue, setCommentValue] = useState('');
-  const [connectionOpen, setConnectionOpen] = useState<boolean>(false);
-  const [loginOpen, setLoginOpen] = useState<boolean>(false);
-  const handleConnectionOpen = () => {
-    setConnectionOpen(!connectionOpen);
-  };
-  const handleLoginOpen = () => {
-    setLoginOpen(!loginOpen);
-  };
-
-  const onChangeCommentValue = (event: any) => {
-    setCommentValue(event.target.value);
-  };
-  const onClickCommentSubmit = () => {
-    dispatch(setComment(commentValue));
-    setCommentValue('');
-  };
-
-  const { bloodType } = patient;
-  const { displayName, profileImageUrl } = writer;
-
-  return (
-    <RequestPostBlock>
-      <MobileToolbar title="요청피드" isBack={true} />
-      <DetailFeedHeader
-        onClick={jwt ? handleConnectionOpen : handleLoginOpen}
-        bloodType={createBloodTypeString(bloodType.abo, bloodType.rh)}
-        sort={createBloodProductString(bloodProduct)}
-        buttonText="도움주기"
-      />
-      <div className="content_top">
-        <FeedUserInfo
-          nickname={displayName}
-          time={createdAt}
-          imgUrl={profileImageUrl}
-        />
-        <ClipBoard onClick={onClickCopyUrl}>
-          <img src={clipboard} alt="" width={16} height={16} />
-          <span>게시물 복사</span>
-        </ClipBoard>
-      </div>
-
-      <Title>
-        <span>{title}</span>
-      </Title>
-
-      <Content>{content}</Content>
-
-      <PostState>
-        <div className="post_content_footer_state">
-          <img src={comments} width={16} height={16} />
-          <span>{reply.length}</span>
-        </div>
-
-        <div className="post_content_footer_state">
-          <img src={likes.length ? fullheart : heart} width={16} height={16} />
-
-          <span>{likes.length}</span>
-        </div>
-      </PostState>
-
-      <DIVIDER />
-
-      <CommentBlock>
-        <CoomentList reply={reply} currentUuid={currentUuid} />
-
-      </CommentBlock>
-      <InputCommentBlock>
-        <Avatar
-          src={currentUserImageUrl}
-          sx={{ width: '40px', height: '40px', marginRight: '10px' }}
-        />
-        <Paper
-          elevation={0}
-          sx={{
-            background: '#F9F9F9',
-            border: '1px solid #EDEDED',
-            borderRadius: '100px',
-            width: '100%',
-            display: 'flex',
-            alignContent: 'center',
-          }}
-        >
-          <StyledInput
-            sx={{ ml: 1, flex: 1, width: '100%' }}
-            placeholder="댓글을 남겨주세요"
-            value={commentValue}
-            onChange={onChangeCommentValue}
-          />
-          <IconButton type="submit" onClick={onClickCommentSubmit}>
-            <img src={arrowUp} width={30} height={30} />
-          </IconButton>
-        </Paper>
-      </InputCommentBlock>
-
-      <ConnectionModal
-        open={connectionOpen}
-        handleOpen={handleConnectionOpen}
-        phoneNumber={phoneNumber}
-      />
-      <LoginRequestModal open={loginOpen} onClick={handleLoginOpen} />
-    </RequestPostBlock>
-  );
-};
 
 export default React.memo(DetailPost);
