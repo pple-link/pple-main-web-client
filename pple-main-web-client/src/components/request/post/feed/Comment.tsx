@@ -20,7 +20,8 @@ type Props = {
   onClick?: any;
   commentAccountUuid: string;
   currentAccountUuid: string;
-  replyUuid: string; 
+  replyUuid: string;
+  donationUuid: string;
 };
 
 const Comment: React.FC<Props> = ({
@@ -32,7 +33,8 @@ const Comment: React.FC<Props> = ({
   profileImageUrl,
   commentAccountUuid,
   currentAccountUuid,
-  replyUuid
+  replyUuid,
+  donationUuid,
 }) => {
   const timeLine = createTimeFormatForComment(time);
   const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
@@ -47,8 +49,18 @@ const Comment: React.FC<Props> = ({
   };
   return (
     <>
-      <DeleteCommentModal open={deleteOpen} setOpen={setDeleteOpen} replyUuid={replyUuid} />
-      <ReportCommentModal open={reportOpen} setOpen={setReportOpen} replyUuid={replyUuid} />
+      <DeleteCommentModal
+        open={deleteOpen}
+        setOpen={setDeleteOpen}
+        replyUuid={replyUuid}
+      />
+      <ReportCommentModal
+        open={reportOpen}
+        setOpen={setReportOpen}
+        replyUuid={replyUuid}
+        accountUuid={commentAccountUuid}
+        donationUuid={donationUuid}
+      />
       {isOpponent ? (
         <OpponentCommentBlock>
           <Avatar sx={{ height: '40px', width: '40px' }}>
@@ -65,7 +77,6 @@ const Comment: React.FC<Props> = ({
                   onClick={handleDeleteOpen}
                   sx={{ padding: '0px', cursor: 'pointer' }}
                 >
-
                   <img src={dotmenu} width={2} height={10} />
                 </IconButton>
               </div>

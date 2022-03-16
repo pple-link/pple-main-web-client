@@ -4,7 +4,6 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 import account from './auth/account';
-import search from './search/search';
 import comment from './comment';
 const persistConfig = {
   key: 'root',
@@ -14,7 +13,6 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   account,
-  search,
   comment,
 });
 

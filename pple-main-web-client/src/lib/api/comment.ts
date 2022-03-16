@@ -13,6 +13,18 @@ export const deleteComment = (replyUuid: string) => {
   return customAxios.delete(`/api/v1/reply/delete/${replyUuid}/test`);
 };
 
-export const reportComment = (replyUuid:string) => {
-  return customAxios.post(`/api/v1/report/reply`,{replyUuid:replyUuid}); 
-}
+export const reportComment = (
+  replyUuid: string,
+  accountUuid: string,
+  donationUuid: string,
+) => {
+  return customAxios
+    .post(`/api/v1/report/reply`, {
+      replyUuid: replyUuid,
+      accountUuid: accountUuid,
+      donationUuid: donationUuid,
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};

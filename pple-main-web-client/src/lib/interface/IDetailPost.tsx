@@ -28,6 +28,7 @@ export default interface IDetailPost {
   currentUserImageUrl: string;
   onSubmitComment: any;
   currenUuid: string;
+  handleLikeEvent: any;
 }
 
 export interface IReply {

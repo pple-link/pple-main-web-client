@@ -39,7 +39,6 @@ const DetailPost: React.FC<IDetailPost> = ({
   viewsCount,
   currentUserImageUrl,
   jwt,
-  onClickLike,
 }) => {
   const dispatch = useDispatch();
   const currentUuid = useSelector((state: RootState) => state.account.uuid);
@@ -51,9 +50,6 @@ const DetailPost: React.FC<IDetailPost> = ({
   };
   const handleLoginOpen = () => {
     setLoginOpen(!loginOpen);
-  };
-  const handleLikeEvent = () => {
-    onClickLike({ likes: likes, donationUuid: uuid }, currentUuid, jwt);
   };
 
   const onChangeCommentValue = (event: any) => {
@@ -106,7 +102,6 @@ const DetailPost: React.FC<IDetailPost> = ({
             src={likes.length ? fullheart : heart}
             width={16}
             height={16}
-            onClick={handleLikeEvent}
           />
           <span>{likes.length}</span>
         </div>
@@ -115,7 +110,7 @@ const DetailPost: React.FC<IDetailPost> = ({
       <DIVIDER />
 
       <CommentBlock>
-        <CoomentList reply={reply} currentUuid={currentUuid} />
+        <CoomentList reply={reply} currentUuid={currentUuid} donationUuid={uuid}/>
       </CommentBlock>
       <InputCommentBlock isMobile={isMobile}>
         <Avatar
@@ -159,7 +154,6 @@ const RequestPostBlock = styled2.div`
   font-family: Pretandard;
   position:relative; 
   overflow: auto;
-  height: fit-content;
   & .content_top {
     padding: 0 18px;
     display: flex;

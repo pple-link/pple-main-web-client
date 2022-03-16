@@ -10,8 +10,8 @@ import { getCookie } from '../../lib/hooks/CookieUtil';
 import IDetailPost from '../../lib/interface/IDetailPost';
 import { RootState } from '../../models';
 import LoginRequestModal from '../../components/common/modal/LoginRequestModal';
+import { Like } from '../../lib/interface/Like';
 import { likeDonation } from '../../lib/api/like';
-import { LikeDonationData } from '../../lib/interface/LikeArray';
 
 const DetailForm: React.FC = () => {
   const jwt = getCookie();
@@ -21,16 +21,16 @@ const DetailForm: React.FC = () => {
   const [detailPostInfo, setDetailPostInfo] = useState<IDetailPost>();
   const [currentUserImageUrl, setCurrentUserImageUrl] = useState<string>('');
   const [submitCheck, setSubmitCheck] = useState<boolean>(false);
-  const [likeCheck, setLikeCheck] = useState<boolean>(false); 
+  const [likeCheck, setLikeCheck] = useState<boolean>(false);
   const [firstCall, setFirstCall] = useState<boolean>(true);
   const [loginModalOpen, setLoginModalOpen] = useState<boolean>(false);
   const handleLoginModalOpen = () => {
     setLoginModalOpen(!loginModalOpen);
   };
   
-  const onClickLike = (donationData : LikeDonationData, currentUuid : string, jwt: string)=>{
+  const onClickLike = (donationData : Like, currentUuid : string)=>{
     setLikeCheck(!likeCheck); 
-    likeDonation(donationData, currentUuid,jwt); 
+    likeDonation(donationData, currentUuid); 
   };
 
   const onSubmitComment = (event: any) => {
@@ -45,7 +45,10 @@ const DetailForm: React.FC = () => {
       });
     }
   };
-
+  const handleLikeEvent = (donationData: Like, currentAccountUuid: string) => {
+    setLikeCheck(!likeCheck);
+    likeDonation(donationData, currentAccountUuid);
+  };
   useEffect(() => {
     if (jwt && firstCall) {
       setFirstCall(!firstCall);
@@ -58,7 +61,7 @@ const DetailForm: React.FC = () => {
         setDetailPostInfo(res.data);
       });
     }, 1000);
-  }, [submitCheck,likeCheck]);
+  }, [submitCheck, likeCheck]);
 
   return detailPostInfo ? (
     <>
@@ -79,7 +82,7 @@ const DetailForm: React.FC = () => {
           currentUserImageUrl={currentUserImageUrl}
           onSubmitComment={onSubmitComment}
           currenUuid={detailPostInfo.writer.accountUuid}
-          onClickLike={onClickLike}
+          handleLikeEvent={handleLikeEvent}
         />
       </form>
       <LoginRequestModal open={loginModalOpen} onClick={handleLoginModalOpen} />

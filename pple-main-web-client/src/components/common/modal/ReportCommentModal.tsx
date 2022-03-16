@@ -5,6 +5,7 @@ import ModalButton from './ModalButton';
 import trashBasket from '../../../static/images/modal/trashbasket.png';
 import CloseIcon from '@mui/icons-material/Close';
 import { reportComment } from '../../../lib/api/comment';
+import DoneReportCommentModal from './DoneReportCommentModal';
 
 const StyledModal = styled(Modal)({
   position: 'fixed',
@@ -21,11 +22,6 @@ const StylePaper = styled(Paper)({
 const CloseBox = styled('div')({
   width: '100%',
   textAlign: 'end',
-});
-
-const ImageBox = styled('div')({
-  textAlign: 'center',
-  marginBottom: '15px',
 });
 
 const TitleBox = styled('div')({
@@ -50,22 +46,36 @@ interface Props {
   open: boolean;
   setOpen: any;
   replyUuid: string;
+  accountUuid: string;
+  donationUuid: string;
 }
 
-const ReportCommentModal: React.FC<Props> = ({ open, setOpen, replyUuid }) => {
+const ReportCommentModal: React.FC<Props> = ({
+  open,
+  setOpen,
+  replyUuid,
+  accountUuid,
+  donationUuid,
+}) => {
+  const [done, setDone] = useState<boolean>(false);
   const onClick = () => {
-    setOpen(!open);
+    setDone(!done);
   };
   const handleDelete = () => {
-    new Promise((resolve, reject)=>{
-      resolve(reportComment(replyUuid));
+    new Promise((resolve, reject) => {
+      resolve(reportComment(replyUuid, accountUuid, donationUuid));
     })
-    .then(res=>{
-      setOpen(!open); 
-    });
+      .then(res => {
+        setDone(!done);
+        setOpen(!open);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
   return (
     <>
+      <DoneReportCommentModal open={done} setOpen={setDone} />
       <StyledModal
         isOpen={open}
         style={{ overlay: { background: 'rgba(0, 0, 0, 0.4)' } }}
