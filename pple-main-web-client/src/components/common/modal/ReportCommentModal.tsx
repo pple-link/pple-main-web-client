@@ -59,7 +59,7 @@ const ReportCommentModal: React.FC<Props> = ({
 }) => {
   const [done, setDone] = useState<boolean>(false);
   const onClick = () => {
-    setDone(!done);
+    setOpen(!open);
   };
   const handleDelete = () => {
     new Promise((resolve, reject) => {
