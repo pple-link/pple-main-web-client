@@ -110,7 +110,11 @@ const DetailPost: React.FC<IDetailPost> = ({
       <DIVIDER />
 
       <CommentBlock>
-        <CoomentList reply={reply} currentUuid={currentUuid} donationUuid={uuid}/>
+        <CoomentList
+          reply={reply}
+          currentUuid={currentUuid}
+          donationUuid={uuid}
+        />
       </CommentBlock>
       <InputCommentBlock isMobile={isMobile}>
         <Avatar
@@ -154,6 +158,7 @@ const RequestPostBlock = styled2.div`
   font-family: Pretandard;
   position:relative; 
   overflow: auto;
+  margin-bottom: 70px;
   & .content_top {
     padding: 0 18px;
     display: flex;
