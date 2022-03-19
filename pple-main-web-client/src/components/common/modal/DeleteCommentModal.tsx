@@ -45,7 +45,10 @@ const DeleteCommentModal: React.FC<Props> = ({
             </IconButton>
           </CloseBox>
 
-          <TitleBox>댓글을 삭제하시겠어요?</TitleBox>
+          <TitleBox>
+            댓글을 삭제하시겠어요?
+            <br />
+          </TitleBox>
 
           <ButtonBox>
             <ModalButton
@@ -91,7 +94,8 @@ const TitleBox = styled('div')({
   lineHeight: '28px',
   textAlign: 'center',
   color: '#222222',
-  marginBottom: '10px',
+  marginBottom: '20px',
+  padding: '0px 55px 0px 55px',
 });
 
 const ButtonBox = styled('div')({
@@ -99,7 +103,7 @@ const ButtonBox = styled('div')({
   width: '100%',
   display: 'flex',
   justifyContent: 'space-between',
-  padding: '0px 25px 25px 25px',
+  padding: '0px 10px 25px 10px',
 });
 
 export default DeleteCommentModal;
