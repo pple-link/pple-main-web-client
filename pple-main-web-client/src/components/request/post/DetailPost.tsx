@@ -68,12 +68,16 @@ const DetailPost: React.FC<IDetailPost> = ({
   };
 
   const handleLikeDonation = () => {
-    const donationData: Like = {
-      donationUuid: uuid,
-      likes: likes,
-      jwt: jwt,
-    };
-    onClickLike(donationData);
+    if (jwt) {
+      const donationData: Like = {
+        donationUuid: uuid,
+        likes: likes,
+        jwt: jwt,
+      };
+      onClickLike(donationData);
+      return;
+    }
+    setLoginOpen(!loginOpen);
   };
   return (
     <RequestPostBlock>
