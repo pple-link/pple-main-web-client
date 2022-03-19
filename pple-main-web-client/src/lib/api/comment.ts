@@ -4,7 +4,7 @@ export const saveComment = (
   jwt: string,
   body: { content: string; donationUuid: string },
 ) => {
-  return customAxios.post('/api/v1/donation/reply', body, {
+  return customAxios.post('/api/v1/donation/write/reply', body, {
     headers: { 'X-AUTH-TOKEN': `${jwt}` },
   });
 };
