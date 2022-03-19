@@ -10,6 +10,8 @@ import {
 } from '../lib/api/donation';
 import StoryModal from '../components/common/modal/StoryModal';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUuid } from '../models/auth/account';
 
 const HomeForm = () => {
   const [displayName, setDisplayName] = useState<string>('피플');
@@ -17,7 +19,7 @@ const HomeForm = () => {
   const [expiredDonationUuid, setExpiredDonationUuid] = useState<string>('');
   const [contentArray, setContentArray] = useState([]);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const jwt = getCookie();
 
   setCookie();
@@ -30,6 +32,7 @@ const HomeForm = () => {
             return;
           }
           setDisplayName(res.data.displayName);
+          dispatch(setUuid(res.data.uuid));
         })
         .catch(err => {
           console.log(err);

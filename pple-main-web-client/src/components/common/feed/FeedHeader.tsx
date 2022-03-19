@@ -10,6 +10,7 @@ import O from '../../../static/images/bloodType/O.svg';
 import On from '../../../static/images/bloodType/O-.svg';
 import AB from '../../../static/images/bloodType/AB.svg';
 import ABn from '../../../static/images/bloodType/AB-.svg';
+import { createBloodProductString } from '../../../lib/util';
 
 interface FeedHeaderBlockProp {
   noBorderRadius?: boolean;
@@ -72,22 +73,6 @@ const CardComponentHeaderColumn = styled('div')({
     fontWeight: 'bold',
   },
 });
-
-const createBloodProduct = (bloodProduct: string) => {
-  if (bloodProduct == 'WHOLE') {
-    return '전혈';
-  } else if (bloodProduct == 'PLATELET') {
-    return '성분채혈 혈소판';
-  } else if (bloodProduct == 'LEUKOCYTE') {
-    return '성분채혈 백혈구';
-  } else if (bloodProduct == 'PACKED_RED_BLOOD_CELL') {
-    return '농축 적혈구';
-  } else if (bloodProduct == 'LEUKOCYTE_REDUCED_RED_BLOOD_CELL') {
-    return '백혈구여과제거적혈구';
-  } else {
-    return '오타있습니다';
-  }
-};
 
 const createTimeFormat = (time: string) => {
   return `${time.slice(0, 4)}년 ${time.slice(5, 7)}월 ${time.slice(
@@ -158,7 +143,7 @@ const FeedHeader: React.FC<CardProps> = ({
                     marginTop: '5px',
                   }}
                 >
-                  {sort ? createBloodProduct(sort) : 'none'}
+                  {sort ? createBloodProductString(sort) : 'none'}
                 </div>
               </div>
             </CardComponentHeaderColumn>

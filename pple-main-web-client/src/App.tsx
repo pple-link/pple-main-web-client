@@ -8,7 +8,6 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import RequestPostPage from './pages/RequestPostPage';
 import RequestRegisterPage from './pages/RequestRegisterPage';
-import RequestPost from './components/request/post/RequestPost';
 import MyPage from './pages/MyPage';
 import FAQ from './components/mypage/faq/FAQ';
 import Helped from './components/mypage/help/Helped';
@@ -19,10 +18,13 @@ import PrivacyPolicy from './components/mypage/etc/PrivacyPolicy';
 import TermsOfService from './components/mypage/etc/TermsOfService';
 import ModifyStoryForm from './container/my-page/ModifyStoryForm';
 import HandleOAuthRedirectUrl from './container/auth/HandleOAuthRedirectUrl';
+import DetailPost from './components/request/post/DetailPost';
 import './static/fonts/fonts.css';
 import Introduce from './pages/Introduce';
 import { isMobile } from 'react-device-detect';
 import amplitude from 'amplitude-js';
+import 'react-virtualized/styles.css';
+import DetailForm from './container/feed/DetailForm';
 
 const GlobalStyles = createGlobalStyle`
   ${reset};
@@ -70,6 +72,7 @@ const App: React.FC = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/post" element={<RequestPostPage />} />
+            <Route path="/post/:donationUuid" element={<DetailForm />} />
             <Route path="/post/register" element={<RequestRegisterPage />} />
             <Route path="/page" element={<MyPage />} />
             <Route path="/page/modify" element={<ModifyProfileForm />} />
@@ -98,6 +101,7 @@ const App: React.FC = () => {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/post" element={<RequestPostPage />} />
+              <Route path="/post/:donationUuid" element={<DetailForm />} />
               <Route path="/post/register" element={<RequestRegisterPage />} />
               <Route path="/page" element={<MyPage />} />
               <Route path="/page/modify" element={<ModifyProfileForm />} />

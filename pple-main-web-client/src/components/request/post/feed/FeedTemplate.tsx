@@ -31,9 +31,9 @@ interface Props {
   displayName: string;
   profileImageUrl: string;
   phoneNumber: string;
-
   title: string;
   content: string;
+  uuid: string;
 }
 
 const FeedTemplate: React.FC<Props> = ({
@@ -45,10 +45,15 @@ const FeedTemplate: React.FC<Props> = ({
   content,
   phoneNumber,
   profileImageUrl,
+  uuid,
 }) => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(!open);
+  };
+  const onClick = () => {
+    navigate(`/post/${uuid}`);
   };
 
   return (
@@ -71,7 +76,7 @@ const FeedTemplate: React.FC<Props> = ({
             buttonText="도움주기"
             time={time}
           />
-          <FeedContentBox>
+          <FeedContentBox onClick={onClick}>
             <FeedUserInfo
               imgUrl={profileImageUrl}
               time={time}

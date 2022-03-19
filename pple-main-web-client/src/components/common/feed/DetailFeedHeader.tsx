@@ -153,7 +153,7 @@ const DetailFeedHeader: React.FC<CardProps> = ({
                     marginTop: '5px',
                   }}
                 >
-                  {sort ? createBloodProduct(sort) : 'none'}
+                  {sort ? sort : 'none'}
                 </div>
               </div>
             </CardComponentHeaderColumn>

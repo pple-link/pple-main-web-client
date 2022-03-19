@@ -21,6 +21,10 @@ export const updateDonation = (
   });
 };
 
+export const getOneDonation = (donationUuid: string) => {
+  return customAxios.get(`/api/v1/donation/one/${donationUuid}`);
+};
+
 export const getDonationsOfActiveStatus = () => {
   return customAxios.get('/api/v1/donation/all');
 };
