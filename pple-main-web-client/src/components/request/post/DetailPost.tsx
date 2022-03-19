@@ -25,6 +25,7 @@ import { RootState } from '../../../models';
 import { isMobile } from 'react-device-detect';
 import DeviceDetect from '../../../lib/interface/DeviceDetect';
 import { Like } from '../../../lib/interface/Like';
+import { clickHelpButton } from '../../../lib/ampli';
 
 const DetailPost: React.FC<IDetailPost> = ({
   bloodProduct,
@@ -52,6 +53,7 @@ const DetailPost: React.FC<IDetailPost> = ({
 
   const handleConnectionOpen = () => {
     setConnectionOpen(!connectionOpen);
+    clickHelpButton();
   };
 
   const handleLoginOpen = () => {

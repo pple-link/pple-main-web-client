@@ -8,6 +8,7 @@ import ConnectionModal from '../common/modal/ConnectionModal';
 import LoginRequestModal from '../common/modal/LoginRequestModal';
 import { getCookie } from '../../lib/hooks/CookieUtil';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { clickHelpButton } from '../../lib/ampli';
 
 const CardComponentBlock = styled('div')({
   width: '100%',
@@ -84,6 +85,7 @@ const CardComponent: React.FC<Props> = ({
       handleLoginOpen();
       return;
     }
+    clickHelpButton();
     setOpen(!open);
   };
 
