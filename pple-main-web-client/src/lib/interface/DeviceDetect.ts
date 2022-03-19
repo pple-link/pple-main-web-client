@@ -1,3 +1,3 @@
 export default interface DeviceDetect {
-    isMobile : boolean; 
+  ismobile: string;
 }

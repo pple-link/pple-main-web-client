@@ -27,10 +27,10 @@ const DetailForm: React.FC = () => {
   const handleLoginModalOpen = () => {
     setLoginModalOpen(!loginModalOpen);
   };
-  
-  const onClickLike = (donationData : Like, currentUuid : string)=>{
-    setLikeCheck(!likeCheck); 
-    likeDonation(donationData, currentUuid); 
+
+  const onClickLike = (donationData: Like) => {
+    setLikeCheck(!likeCheck);
+    likeDonation(donationData);
   };
 
   const onSubmitComment = (event: any) => {
@@ -45,10 +45,7 @@ const DetailForm: React.FC = () => {
       });
     }
   };
-  const handleLikeEvent = (donationData: Like, currentAccountUuid: string) => {
-    setLikeCheck(!likeCheck);
-    likeDonation(donationData, currentAccountUuid);
-  };
+
   useEffect(() => {
     if (jwt && firstCall) {
       setFirstCall(!firstCall);
@@ -82,7 +79,7 @@ const DetailForm: React.FC = () => {
           currentUserImageUrl={currentUserImageUrl}
           onSubmitComment={onSubmitComment}
           currenUuid={detailPostInfo.writer.accountUuid}
-          handleLikeEvent={handleLikeEvent}
+          onClickLike={onClickLike}
         />
       </form>
       <LoginRequestModal open={loginModalOpen} onClick={handleLoginModalOpen} />

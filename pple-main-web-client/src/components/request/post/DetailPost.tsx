@@ -24,6 +24,7 @@ import LoginRequestModal from '../../common/modal/LoginRequestModal';
 import { RootState } from '../../../models';
 import { isMobile } from 'react-device-detect';
 import DeviceDetect from '../../../lib/interface/DeviceDetect';
+import { Like } from '../../../lib/interface/Like';
 
 const DetailPost: React.FC<IDetailPost> = ({
   bloodProduct,
@@ -39,15 +40,20 @@ const DetailPost: React.FC<IDetailPost> = ({
   viewsCount,
   currentUserImageUrl,
   jwt,
+  onClickLike,
 }) => {
   const dispatch = useDispatch();
   const currentUuid = useSelector((state: RootState) => state.account.uuid);
   const [commentValue, setCommentValue] = useState('');
   const [connectionOpen, setConnectionOpen] = useState<boolean>(false);
   const [loginOpen, setLoginOpen] = useState<boolean>(false);
+  const { bloodType } = patient;
+  const { displayName, profileImageUrl } = writer;
+
   const handleConnectionOpen = () => {
     setConnectionOpen(!connectionOpen);
   };
+
   const handleLoginOpen = () => {
     setLoginOpen(!loginOpen);
   };
@@ -55,14 +61,20 @@ const DetailPost: React.FC<IDetailPost> = ({
   const onChangeCommentValue = (event: any) => {
     setCommentValue(event.target.value);
   };
+
   const onClickCommentSubmit = () => {
     dispatch(setComment(commentValue));
     setCommentValue('');
   };
 
-  const { bloodType } = patient;
-  const { displayName, profileImageUrl } = writer;
-
+  const handleLikeDonation = () => {
+    const donationData: Like = {
+      donationUuid: uuid,
+      likes: likes,
+      jwt: jwt,
+    };
+    onClickLike(donationData);
+  };
   return (
     <RequestPostBlock>
       <MobileToolbar title="요청피드" isBack={true} />
@@ -96,7 +108,7 @@ const DetailPost: React.FC<IDetailPost> = ({
           <span>{reply.length}</span>
         </div>
 
-        <div className="post_content_footer_state">
+        <div className="post_content_footer_state" onClick={handleLikeDonation}>
           <img
             style={{ cursor: 'pointer' }}
             src={likes.length ? fullheart : heart}
@@ -116,7 +128,7 @@ const DetailPost: React.FC<IDetailPost> = ({
           donationUuid={uuid}
         />
       </CommentBlock>
-      <InputCommentBlock isMobile={isMobile}>
+      <InputCommentBlock ismobile={isMobile.valueOf.toString()}>
         <Avatar
           src={currentUserImageUrl}
           sx={{ width: '40px', height: '40px', marginRight: '10px' }}
@@ -243,9 +255,9 @@ const CommentBlock = styled2.div`
   overflow: auto;
 `;
 
-const InputCommentBlock = styled('div')<DeviceDetect>(({ isMobile }) => ({
+const InputCommentBlock = styled('div')<DeviceDetect>(({ ismobile }) => ({
   padding: '0px 17px',
-  width: isMobile ? '100%' : '28rem',
+  width: ismobile == 'true' ? '100%' : '28rem',
   position: 'fixed',
   bottom: 0,
   display: 'flex',
