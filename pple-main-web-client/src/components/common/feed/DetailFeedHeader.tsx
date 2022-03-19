@@ -68,22 +68,6 @@ const CardComponentHeaderColumn = styled('div')({
   },
 });
 
-const createBloodProduct = (bloodProduct: string) => {
-  if (bloodProduct == 'WHOLE') {
-    return '전혈';
-  } else if (bloodProduct == 'PLATELET') {
-    return '성분채혈 혈소판';
-  } else if (bloodProduct == 'LEUKOCYTE') {
-    return '성분채혈 백혈구';
-  } else if (bloodProduct == 'PACKED_RED_BLOOD_CELL') {
-    return '농축 적혈구';
-  } else if (bloodProduct == 'LEUKOCYTE_REDUCED_RED_BLOOD_CELL') {
-    return '백혈구여과제거적혈구';
-  } else {
-    return '오타있습니다';
-  }
-};
-
 const createTimeFormat = (time: string) => {
   return `${time.slice(0, 4)}년 ${time.slice(5, 7)}월 ${time.slice(
     8,
