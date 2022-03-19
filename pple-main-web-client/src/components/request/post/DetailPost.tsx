@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import styled2 from 'styled-components';
-import { Avatar, InputBase, Paper, styled } from '@mui/material';
+import { Avatar, ButtonBase, InputBase, Paper, styled } from '@mui/material';
 import { IconButton } from '@mui/material';
 import MobileToolbar from '../../common/navigation/MobileToolbar';
 import DetailFeedHeader from '../../common/feed/DetailFeedHeader';
@@ -90,10 +90,6 @@ const DetailPost: React.FC<IDetailPost> = ({
           time={createdAt}
           imgUrl={profileImageUrl}
         />
-        <ClipBoard onClick={onClickCopyUrl}>
-          <img src={clipboard} alt="" width={16} height={16} />
-          <span>게시물 복사</span>
-        </ClipBoard>
       </div>
 
       <Title>
@@ -105,19 +101,35 @@ const DetailPost: React.FC<IDetailPost> = ({
       <PostState>
         <div className="post_content_footer_state">
           <img src={comments} width={16} height={16} />
-          <span>{reply.length}</span>
+          <span>{reply.length}개</span>
         </div>
 
-        <div className="post_content_footer_state" onClick={handleLikeDonation}>
+        <div className="post_content_footer_state">
+          <img src={likes.length ? fullheart : heart} width={16} height={16} />
+          <span>{likes.length}개</span>
+        </div>
+      </PostState>
+
+      <FunctionButton>
+        <StyledButton onClick={handleLikeDonation}>
           <img
-            style={{ cursor: 'pointer' }}
-            src={likes.length ? fullheart : heart}
+            style={{ marginRight: '7px' }}
+            src={heart}
             width={16}
             height={16}
           />
-          <span>{likes.length}</span>
-        </div>
-      </PostState>
+          <span>응원하기</span>
+        </StyledButton>
+        <StyledButton onClick={onClickCopyUrl}>
+          <img
+            style={{ marginRight: '7px' }}
+            src={clipboard}
+            width={16}
+            height={16}
+          />
+          <span>사연복사</span>
+        </StyledButton>
+      </FunctionButton>
 
       <DIVIDER />
 
@@ -180,20 +192,6 @@ const RequestPostBlock = styled2.div`
   }
 `;
 
-const ClipBoard = styled2.div`
-  display: flex;
-  align-items: center;
-  font-size: 13px;
-  line-height: 15.6px;
-  font-weight: 500;
-  letter-spacing: -0.03em;
-  color: #b7b7b7;
-  cursor: pointer;
-  & span {
-    margin-left: 5px;
-  }
-`;
-
 const Title = styled2.div`
   padding: 0px 18px;
   font-weight: 700;
@@ -242,6 +240,24 @@ const PostState = styled2.div`
     }
   }
 `;
+
+const FunctionButton = styled('div')({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  borderTop: '1px solid #F4F4F4',
+});
+
+const StyledButton = styled(ButtonBase)({
+  padding: '12px 0px',
+  width: '50%',
+  cursor: 'pointer',
+  fontWeight: '500',
+  fontSize: '13px',
+  lineHeight: '16px',
+  letterSpacing: '-0.03em',
+  color: '#B7B7B7',
+});
 
 const DIVIDER = styled2.div`
   background: #f4f4f4;
