@@ -22,6 +22,7 @@ type Props = {
   currentAccountUuid: string;
   replyUuid: string;
   donationUuid: string;
+  jwt: string;
 };
 
 const Comment: React.FC<Props> = ({
@@ -35,6 +36,7 @@ const Comment: React.FC<Props> = ({
   currentAccountUuid,
   replyUuid,
   donationUuid,
+  jwt,
 }) => {
   const timeLine = createTimeFormatForComment(time);
   const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
@@ -53,6 +55,7 @@ const Comment: React.FC<Props> = ({
         open={deleteOpen}
         setOpen={setDeleteOpen}
         replyUuid={replyUuid}
+        jwt={jwt}
       />
       <ReportCommentModal
         open={reportOpen}

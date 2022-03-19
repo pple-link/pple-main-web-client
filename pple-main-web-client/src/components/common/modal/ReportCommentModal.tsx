@@ -75,7 +75,7 @@ const ReportCommentModal: React.FC<Props> = ({
   };
   return (
     <>
-      <DoneReportCommentModal open={done} setOpen={setDone} />
+      <DoneReportCommentModal open={done} setOpen={setDone} isReport={true} />
       <StyledModal
         isOpen={open}
         style={{ overlay: { background: 'rgba(0, 0, 0, 0.4)' } }}

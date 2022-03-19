@@ -126,6 +126,7 @@ const DetailPost: React.FC<IDetailPost> = ({
           reply={reply}
           currentUuid={currentUuid}
           donationUuid={uuid}
+          jwt={jwt}
         />
       </CommentBlock>
       <InputCommentBlock ismobile={isMobile.valueOf.toString()}>

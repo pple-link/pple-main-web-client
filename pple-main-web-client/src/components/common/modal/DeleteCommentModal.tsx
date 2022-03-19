@@ -9,15 +9,21 @@ interface Props {
   open: boolean;
   setOpen: any;
   replyUuid: string;
+  jwt: string;
 }
 
-const DeleteCommentModal: React.FC<Props> = ({ open, setOpen, replyUuid }) => {
+const DeleteCommentModal: React.FC<Props> = ({
+  open,
+  setOpen,
+  replyUuid,
+  jwt,
+}) => {
   const onClick = () => {
     setOpen(!open);
   };
   const onClickDelete = () => {
     new Promise((resolve, reject) => {
-      resolve(deleteComment(replyUuid));
+      resolve(deleteComment(replyUuid, jwt));
     }).then(res => {
       setOpen(!open);
       window.location.reload();

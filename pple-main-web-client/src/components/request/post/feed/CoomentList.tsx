@@ -1,12 +1,18 @@
 import React, { useCallback, useState } from 'react';
 import { IReply } from '../../../../lib/interface/IDetailPost';
-import Comment from './Comment'; 
+import Comment from './Comment';
 interface reply {
   reply: Array<IReply>;
   currentUuid: string;
   donationUuid: string;
+  jwt: string;
 }
-const CoomentList: React.FC<reply> = ({ reply, currentUuid,donationUuid }) => {
+const CoomentList: React.FC<reply> = ({
+  reply,
+  currentUuid,
+  donationUuid,
+  jwt,
+}) => {
   return (
     <>
       {reply.map((reply, index) => (
@@ -22,6 +28,7 @@ const CoomentList: React.FC<reply> = ({ reply, currentUuid,donationUuid }) => {
           currentAccountUuid={currentUuid}
           replyUuid={reply.uuid}
           donationUuid={donationUuid}
+          jwt={jwt}
         />
       ))}
     </>
