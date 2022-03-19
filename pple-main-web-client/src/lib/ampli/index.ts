@@ -23,5 +23,9 @@ export const clickIntroButton = () => {
   amplitude.getInstance().logEvent('소개 페이지 버튼 클릭');
 };
 
+export const showDetailPost = () => {
+  amplitude.getInstance().logEvent('상세페이지 조회');
+};
+
 //TODO : 리텐션.......
 // UTM, GTM

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import HomePageHeader from '../components/home/HomePageHeader';
 import { getCookie, setCookie } from '../lib/hooks/CookieUtil';
-import { checkUser } from '../lib/hooks/CookieUtil';
 import HomeCardTemplateForm from './feed/HomeCardTemplateForm';
 import { getAccountProfile } from '../lib/api/account';
 import {

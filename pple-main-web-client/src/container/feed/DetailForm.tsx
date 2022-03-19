@@ -12,6 +12,7 @@ import { RootState } from '../../models';
 import LoginRequestModal from '../../components/common/modal/LoginRequestModal';
 import { Like } from '../../lib/interface/Like';
 import { likeDonation } from '../../lib/api/like';
+import { showDetailPost } from '../../lib/ampli';
 
 const DetailForm: React.FC = () => {
   const jwt = getCookie();
@@ -47,6 +48,7 @@ const DetailForm: React.FC = () => {
   };
 
   useEffect(() => {
+    showDetailPost();
     if (jwt && firstCall) {
       setFirstCall(!firstCall);
       getAccountProfile(jwt).then(res => {
