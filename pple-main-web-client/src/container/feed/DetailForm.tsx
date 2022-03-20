@@ -38,6 +38,7 @@ const DetailForm: React.FC = () => {
     event.preventDefault();
     if (!jwt) {
       handleLoginModalOpen();
+      return;
     }
     if (commentValue) {
       setSubmitCheck(!submitCheck);
