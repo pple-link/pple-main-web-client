@@ -9,6 +9,7 @@ import LoginRequestModal from '../common/modal/LoginRequestModal';
 import { getCookie } from '../../lib/hooks/CookieUtil';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { useNavigate } from 'react-router-dom';
+import { showDetailPost } from '../../lib/ampli';
 
 interface Props {
   title: string;
@@ -38,7 +39,7 @@ const CardComponent: React.FC<Props> = ({
     setOpen(!open);
   };
   const handleDetail = () => {
-    // setDetail(!detail);
+    showDetailPost();
     navigate(`/post/${donationUuid}`);
   };
   const handleLoginOpen = () => {
