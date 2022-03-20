@@ -5,63 +5,7 @@ import palette from '../../lib/styles/palette';
 import SortingButtonGroup from '../common/buttons/SortingButtonGroup';
 import CardComponent from './CardComponent';
 import ChevronRightIcon from '../../static/images/ChevronRightIcon.svg';
-
-const CardContainerBlock = styles.div`
-  width: 100%;
-  display: flex;
-  padding: 0rem 1rem;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  & .pagination {
-    margin-top: 20px;
-  }
-  box-sizing:border-box;
-`;
-
-const ButtonGroup = styles.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  & div {
-    display: flex;
-    align-items: center;
-  }
-  padding:20px 0px 5px 0px;
-`;
-
-const StyledButton = styled(Button)({
-  fontSize: 'small',
-  color: `${palette.gray[1]}`,
-  display: 'flex',
-  justifyContent: 'flex-end',
-  alignItems: 'center',
-  '& span': {
-    display: 'inline-block',
-    marginRight: '5px',
-  },
-  '&:hover': {
-    color: `${palette.gray[2]}`,
-  },
-});
-
-const ChangeBloodProductValue = (bloodProduct: string) => {
-  switch (bloodProduct) {
-    case '전혈':
-      return 'WHOLE';
-    case '성분채혈 혈소판':
-      return 'PLATELET';
-    case '성분채혈 백혈구':
-      return 'LEUKOCYTE';
-    case '농축적혈구':
-      return 'PACKED_RED_BLOOD_CELL';
-    case '백혈구여과제거적혈구':
-      return 'LEUKOCYTE_REDUCED_RED_BLOOD_CELL';
-    default:
-      break;
-  }
-};
+import { createBloodProductString } from '../../lib/util';
 
 const returnCardComponent = (content: any) => {
   return (
@@ -77,6 +21,7 @@ const returnCardComponent = (content: any) => {
       }
       time={content.createdAt}
       phoneNumber={content.phoneNumber}
+      donationUuid={content.uuid}
     />
   );
 };
@@ -97,7 +42,7 @@ const FilterBloodType = (bloodType: string, contentArray: any) => {
 
 const FilterBloodProduct = (bloodProduct: string, contentArray: any) => {
   return contentArray.map((content, idx) =>
-    content.bloodProduct == ChangeBloodProductValue(bloodProduct) ? (
+    content.bloodProduct == createBloodProductString(bloodProduct) ? (
       returnCardComponent(content)
     ) : (
       <div key={idx}></div>
@@ -112,7 +57,7 @@ const FilterBloodTypeAndBloodProduct = (
 ) => {
   return contentArray.map((content, idx) =>
     content.patient.bloodType.abo == bloodType.replace('형', '') &&
-    content.bloodProduct == ChangeBloodProductValue(bloodProduct) ? (
+    content.bloodProduct == createBloodProductString(bloodProduct) ? (
       returnCardComponent(content)
     ) : (
       <div key={idx}></div>
@@ -171,5 +116,45 @@ const CardTemplate: React.FC<CardTemplateType> = ({
     </CardContainerBlock>
   );
 };
+
+const CardContainerBlock = styles.div`
+  width: 100%;
+  display: flex;
+  padding: 0rem 1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  & .pagination {
+    margin-top: 20px;
+  }
+  box-sizing:border-box;
+`;
+
+const ButtonGroup = styles.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & div {
+    display: flex;
+    align-items: center;
+  }
+  padding:20px 0px 5px 0px;
+`;
+
+const StyledButton = styled(Button)({
+  fontSize: 'small',
+  color: `${palette.gray[1]}`,
+  display: 'flex',
+  justifyContent: 'flex-end',
+  alignItems: 'center',
+  '& span': {
+    display: 'inline-block',
+    marginRight: '5px',
+  },
+  '&:hover': {
+    color: `${palette.gray[2]}`,
+  },
+});
 
 export default CardTemplate;
