@@ -9,7 +9,7 @@ import LoginRequestModal from '../common/modal/LoginRequestModal';
 import { getCookie } from '../../lib/hooks/CookieUtil';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { useNavigate } from 'react-router-dom';
-import { showDetailPost } from '../../lib/ampli';
+import { clickHelpButton, showDetailPost } from '../../lib/ampli';
 
 interface Props {
   title: string;
@@ -51,6 +51,7 @@ const CardComponent: React.FC<Props> = ({
       handleLoginOpen();
       return;
     }
+    clickHelpButton();
     setOpen(!open);
   };
 
