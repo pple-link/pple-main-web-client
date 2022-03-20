@@ -58,7 +58,7 @@ const ReportCommentModal: React.FC<Props> = ({
           {/* 이미지 영억 */}
           {/* 제목 */}
           <TitleBox>
-            댓글을 신고하시겠어요?
+            댓글을 <br /> 신고하시겠어요?
             <br />
           </TitleBox>
           <ButtonBox>
@@ -83,6 +83,7 @@ const StyledModal = styled(Modal)({
   transform: 'translate(-50%, -50%)',
   fontFamily: 'Pretendard',
   outline: 'none',
+  minWidth: '120px',
 });
 
 const StylePaper = styled(Paper)({
@@ -102,6 +103,7 @@ const TitleBox = styled('div')({
   color: '#222222',
   marginBottom: '20px',
   padding: '0px 55px 0px 55px',
+  minWidth: '120px',
 });
 
 const ButtonBox = styled('div')({

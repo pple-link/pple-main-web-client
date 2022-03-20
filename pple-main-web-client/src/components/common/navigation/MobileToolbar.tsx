@@ -36,7 +36,7 @@ const MobileToolbar: React.FC<Props> = ({
 }) => {
   const navigate = useNavigate();
   const handleBack: MouseEventHandler = () => {
-    navigate(-1);
+    navigate('/');
   };
   const goPostRegister: MouseEventHandler = () => {
     navigate('/post/register');

@@ -51,6 +51,7 @@ const CardComponent: React.FC<Props> = ({
       handleLoginOpen();
       return;
     }
+    clickHelpButton();
     setOpen(!open);
   };
 
