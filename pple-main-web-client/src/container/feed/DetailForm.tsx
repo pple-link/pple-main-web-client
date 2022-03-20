@@ -13,6 +13,7 @@ import LoginRequestModal from '../../components/common/modal/LoginRequestModal';
 import { Like } from '../../lib/interface/Like';
 import { likeDonation } from '../../lib/api/like';
 import { showDetailPost } from '../../lib/ampli';
+import amplitude from 'amplitude-js';
 
 const DetailForm: React.FC = () => {
   const jwt = getCookie();
@@ -50,6 +51,7 @@ const DetailForm: React.FC = () => {
 
   useEffect(() => {
     showDetailPost();
+    amplitude.getInstance().init(`${process.env.REACT_APP_AMPLITUDE_API}`);
     if (jwt && firstCall) {
       setFirstCall(!firstCall);
       getAccountProfile(jwt).then(res => {

@@ -25,6 +25,7 @@ import { RootState } from '../../../models';
 import { isMobile } from 'react-device-detect';
 import DeviceDetect from '../../../lib/interface/DeviceDetect';
 import { Like } from '../../../lib/interface/Like';
+import { clickHelpButton } from '../../../lib/ampli';
 
 const DetailPost: React.FC<IDetailPost> = ({
   bloodProduct,
@@ -52,6 +53,7 @@ const DetailPost: React.FC<IDetailPost> = ({
 
   const handleConnectionOpen = () => {
     setConnectionOpen(!connectionOpen);
+    clickHelpButton();
   };
 
   const handleLoginOpen = () => {
@@ -145,7 +147,7 @@ const DetailPost: React.FC<IDetailPost> = ({
           jwt={jwt}
         />
       </CommentBlock>
-      <InputCommentBlock ismobile={isMobile.valueOf.toString()}>
+      <InputCommentBlock isMobile={isMobile}>
         <Avatar
           src={currentUserImageUrl}
           sx={{ width: '40px', height: '40px', marginRight: '10px' }}
@@ -276,9 +278,13 @@ const CommentBlock = styled2.div`
   overflow: auto;
 `;
 
-const InputCommentBlock = styled('div')<DeviceDetect>(({ ismobile }) => ({
+type Detect = {
+  isMobile: boolean;
+};
+
+const InputCommentBlock = styled('div')<Detect>(({ isMobile }) => ({
   padding: '0px 17px',
-  width: ismobile == 'true' ? '100%' : '28rem',
+  width: isMobile ? '100%' : '28rem',
   position: 'fixed',
   bottom: 0,
   display: 'flex',

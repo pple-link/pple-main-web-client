@@ -46,7 +46,7 @@ const DeleteCommentModal: React.FC<Props> = ({
           </CloseBox>
 
           <TitleBox>
-            댓글을 삭제하시겠어요?
+            댓글을 <br /> 삭제하시겠어요?
             <br />
           </TitleBox>
 
