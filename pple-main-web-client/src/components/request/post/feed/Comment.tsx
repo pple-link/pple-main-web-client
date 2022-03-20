@@ -6,6 +6,7 @@ import dotmenu from '../../../../static/images/feed/dotmenu.png';
 import { createTimeFormatForComment } from '../../../../lib/util';
 import DeleteCommentModal from '../../../common/modal/DeleteCommentModal';
 import ReportCommentModal from '../../../common/modal/ReportCommentModal';
+import LoginRequestModal from '../../../common/modal/LoginRequestModal';
 
 type Props = {
   isOpponent: boolean;
@@ -41,16 +42,27 @@ const Comment: React.FC<Props> = ({
   const timeLine = createTimeFormatForComment(time);
   const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
   const [reportOpen, setReportOpen] = useState<boolean>(false);
+  const [loginOpen, setLoginOpen] = useState<boolean>(false);
 
   const handleDeleteOpen = () => {
+    if (!jwt) {
+      setLoginOpen(!loginOpen);
+      return;
+    }
+
     if (commentAccountUuid == currentAccountUuid) {
       setDeleteOpen(!deleteOpen);
       return;
     }
     setReportOpen(!reportOpen);
   };
+
+  const handleLoginRquestModal = () => {
+    setLoginOpen(!loginOpen);
+  };
   return (
     <>
+      <LoginRequestModal open={loginOpen} onClick={handleLoginRquestModal} />
       <DeleteCommentModal
         open={deleteOpen}
         setOpen={setDeleteOpen}
