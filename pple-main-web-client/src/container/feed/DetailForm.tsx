@@ -41,6 +41,10 @@ const DetailForm: React.FC = () => {
       handleLoginModalOpen();
       return;
     }
+    if (commentValue.length > 300) {
+      alert('300자 이하로 작성해주세요!');
+      return;
+    }
     if (commentValue) {
       setSubmitCheck(!submitCheck);
       saveComment(jwt, { content: commentValue, donationUuid }).catch(err => {

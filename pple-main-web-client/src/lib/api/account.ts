@@ -18,7 +18,7 @@ export const patchUserDisplayName = (
   jwt: string,
   displayName: any,
 ) => {
-  return customAxios.patch(`/api/v1/account/${uuid}`, displayName, {
+  return customAxios.patch(`/api/v1/account/displayName/${uuid}`, displayName, {
     headers: { 'X-AUTH-TOKEN': `${jwt}` },
   });
 };
