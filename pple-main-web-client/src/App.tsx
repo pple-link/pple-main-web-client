@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 import styled from 'styled-components';
@@ -18,54 +18,32 @@ import PrivacyPolicy from './components/mypage/etc/PrivacyPolicy';
 import TermsOfService from './components/mypage/etc/TermsOfService';
 import ModifyStoryForm from './container/my-page/ModifyStoryForm';
 import HandleOAuthRedirectUrl from './container/auth/HandleOAuthRedirectUrl';
-import DetailPost from './components/request/post/DetailPost';
 import './static/fonts/fonts.css';
 import Introduce from './pages/Introduce';
 import { isMobile } from 'react-device-detect';
 import amplitude from 'amplitude-js';
 import 'react-virtualized/styles.css';
 import DetailForm from './container/feed/DetailForm';
-
-const GlobalStyles = createGlobalStyle`
-  ${reset};
-  font-family: "Pretendard";
-
-`;
-
-const PCBlock = styled.div`
-  width: 100%;
-  margin: 0 auto;
-  overflow: auto;
-  font-family: 'Pretendard';
-`;
-
-const AppBlock = styled.div`
-  width: 100%;
-  height: auto;
-  font-family: 'Pretendard';
-`;
-
-const PCBox = styled.div`
-  width: 28rem;
-  margin: 0 auto;
-  height: 100vh;
-  overflow: auto;
-  font-family: 'Pretendard';
-`;
-
-const ContentBlock = styled.div`
-  width: auto;
-  height: 100%;
-`;
+import { Admin, Resource, ListGuesser } from 'react-admin';
+import jsonServerProvider from 'ra-data-json-server';
+import createAdminStore from './createAdminStore';
 
 const App: React.FC = () => {
   useEffect(() => {
     amplitude.getInstance().init(`${process.env.REACT_APP_AMPLITUDE_API}`);
   });
+  const [admin, setAdmin] = useState<boolean>(true);
+  const dataProvider = jsonServerProvider(
+    `${process.env.REACT_APP_BASE_URL}/api/v1/account/all`,
+  );
   return (
     <>
       <GlobalStyles />
-      {isMobile ? (
+      {admin ? (
+        <Admin dataProvider={dataProvider}>
+          <Resource name="user" list={ListGuesser} />
+        </Admin>
+      ) : isMobile ? (
         <AppBlock style={{ background: 'white' }}>
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -125,5 +103,32 @@ const App: React.FC = () => {
     </>
   );
 };
+
+const GlobalStyles = createGlobalStyle`
+  ${reset};
+  font-family: "Pretendard";
+
+`;
+
+const PCBlock = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  overflow: auto;
+  font-family: 'Pretendard';
+`;
+
+const AppBlock = styled.div`
+  width: 100%;
+  height: auto;
+  font-family: 'Pretendard';
+`;
+
+const PCBox = styled.div`
+  width: 28rem;
+  margin: 0 auto;
+  height: 100vh;
+  overflow: auto;
+  font-family: 'Pretendard';
+`;
 
 export default App;
