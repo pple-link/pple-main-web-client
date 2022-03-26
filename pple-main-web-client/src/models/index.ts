@@ -5,6 +5,8 @@ import storage from 'redux-persist/lib/storage';
 
 import account from './auth/account';
 import comment from './comment';
+import search from './search';
+
 const persistConfig = {
   key: 'root',
   storage,
@@ -14,6 +16,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   account,
   comment,
+  search,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

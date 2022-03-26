@@ -112,11 +112,7 @@ const RequestPostListForm: React.FC = () => {
       });
   }, [search]);
   return (
-    <RequestPostList
-      handleSearch={handleSearch}
-      filter={filter}
-      setFilter={setFilter}
-    >
+    <RequestPostList filter={filter} setFilter={setFilter}>
       {filter.bloodProduct &&
       filter.bloodType &&
       filter.bloodType !== '전체보기' &&
