@@ -20,6 +20,12 @@ export const updateDonation = (
   });
 };
 
+export const getSearchDonations = (keyword: string) => {
+  return customAxios.get('/api/v1/donation/search', {
+    params: { keyword: keyword },
+  });
+};
+
 export const getOneDonation = (donationUuid: string) => {
   return customAxios.get(`/api/v1/donation/one/${donationUuid}`);
 };

@@ -7,64 +7,6 @@ import CardComponent from './CardComponent';
 import ChevronRightIcon from '../../static/images/ChevronRightIcon.svg';
 import { createBloodProductString } from '../../lib/util';
 
-const returnCardComponent = (content: any) => {
-  return (
-    <CardComponent
-      key={content.uuid}
-      title={content.title}
-      content={content.content}
-      sort={content.bloodProduct}
-      bloodType={
-        content.patient.bloodType.rh == 'POSITIVE'
-          ? `${content.patient.bloodType.abo}+`
-          : `${content.patient.bloodType.abo}-`
-      }
-      time={content.createdAt}
-      phoneNumber={content.phoneNumber}
-      donationUuid={content.uuid}
-    />
-  );
-};
-
-const RenderPost = (contentArray: any) => {
-  return contentArray.map((content, idx) => returnCardComponent(content));
-};
-
-const FilterBloodType = (bloodType: string, contentArray: any) => {
-  return contentArray.map((content, idx) =>
-    content.patient.bloodType.abo == bloodType.replace('형', '') ? (
-      returnCardComponent(content)
-    ) : (
-      <div key={idx}></div>
-    ),
-  );
-};
-
-const FilterBloodProduct = (bloodProduct: string, contentArray: any) => {
-  return contentArray.map((content, idx) =>
-    content.bloodProduct == createBloodProductString(bloodProduct) ? (
-      returnCardComponent(content)
-    ) : (
-      <div key={idx}></div>
-    ),
-  );
-};
-
-const FilterBloodTypeAndBloodProduct = (
-  bloodType: string,
-  bloodProduct: string,
-  contentArray,
-) => {
-  return contentArray.map((content, idx) =>
-    content.patient.bloodType.abo == bloodType.replace('형', '') &&
-    content.bloodProduct == createBloodProductString(bloodProduct) ? (
-      returnCardComponent(content)
-    ) : (
-      <div key={idx}></div>
-    ),
-  );
-};
-
 type CardTemplateType = {
   handleAuth: any;
   contentArray: any;
@@ -114,6 +56,64 @@ const CardTemplate: React.FC<CardTemplateType> = ({
         ? FilterBloodType(filter.bloodType, contentArray)
         : RenderPost(contentArray)}
     </CardContainerBlock>
+  );
+};
+
+const returnCardComponent = (content: any) => {
+  return (
+    <CardComponent
+      key={content.uuid}
+      title={content.title}
+      content={content.content}
+      sort={content.bloodProduct}
+      bloodType={
+        content.patient.bloodType.rh == 'POSITIVE'
+          ? `${content.patient.bloodType.abo}+`
+          : `${content.patient.bloodType.abo}-`
+      }
+      time={content.createdAt}
+      phoneNumber={content.phoneNumber}
+      donationUuid={content.uuid}
+    />
+  );
+};
+
+const RenderPost = (contentArray: any) => {
+  return contentArray.map((content, idx) => returnCardComponent(content));
+};
+
+const FilterBloodType = (bloodType: string, contentArray: any) => {
+  return contentArray.map((content, idx) =>
+    content.patient.bloodType.abo == bloodType.replace('형', '') ? (
+      returnCardComponent(content)
+    ) : (
+      <div key={idx}></div>
+    ),
+  );
+};
+
+const FilterBloodProduct = (bloodProduct: string, contentArray: any) => {
+  return contentArray.map((content, idx) =>
+    createBloodProductString(content.bloodProduct) == bloodProduct ? (
+      returnCardComponent(content)
+    ) : (
+      <div key={idx}></div>
+    ),
+  );
+};
+
+const FilterBloodTypeAndBloodProduct = (
+  bloodType: string,
+  bloodProduct: string,
+  contentArray,
+) => {
+  return contentArray.map((content, idx) =>
+    content.patient.bloodType.abo == bloodType.replace('형', '') &&
+    content.bloodProduct == createBloodProductString(bloodProduct) ? (
+      returnCardComponent(content)
+    ) : (
+      <div key={idx}></div>
+    ),
   );
 };
 
