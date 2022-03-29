@@ -3,7 +3,10 @@ import { getDonationsOfActiveStatus } from '../../lib/api/donation';
 import { FilterType } from '../../components/home/CardTemplate';
 import FeedTemplate from '../../components/request/post/feed/FeedTemplate';
 import RequestPostList from '../../components/request/post/RequestPostList';
-import { customAxios } from '../../lib/customAxios';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../models';
+import { setKeyWord } from '../../models/search';
+import { getSearchDonations } from '../../lib/api/donation';
 
 const ShowTemplate = (content: any) => {
   return (
@@ -84,35 +87,50 @@ const FilterBloodTypeAndBloodProduct = (
 
 const RequestPostListForm: React.FC = () => {
   const [contentArray, setContentArray] = useState([]);
-  const [search, setSearch] = useState<string>(undefined);
+  const [enterWatch, setEnterWatch] = useState<boolean>(false);
+  const keyword = useSelector((state: RootState) => state.search.keyword);
+  const dispatch = useDispatch();
   const [filter, setFilter] = useState<FilterType>({
     bloodType: null,
     bloodProduct: null,
   });
-  const handleSearch = (e: any) => {
-    const { value } = e.target;
-    setSearch(value);
-  };
 
   useEffect(() => {
+    console.log(keyword + ' / ');
+    if (keyword) {
+      getSearchDonations(keyword)
+        .then(res => {
+          console.log(res.data.content);
+          const newArray = res.data.content;
+          setContentArray(newArray);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+        .finally(() => {
+          dispatch(setKeyWord(''));
+        });
+      return;
+    }
     getDonationsOfActiveStatus()
       .then(res => {
-        if (search != undefined) {
-          const newArray = res.data.content.filter(content =>
-            content.donationContent.includes(search),
-          );
-          setContentArray(newArray);
-          return;
-        }
         const newArray = res.data;
         setContentArray(newArray);
       })
       .catch(err => {
         console.log(err);
+      })
+      .finally(() => {
+        setKeyWord('');
       });
-  }, [search]);
+  }, [enterWatch]);
   return (
-    <RequestPostList filter={filter} setFilter={setFilter}>
+    <RequestPostList
+      filter={filter}
+      setFilter={setFilter}
+      enterWatch={enterWatch}
+      handleEnterWatch={setEnterWatch}
+    >
       {filter.bloodProduct &&
       filter.bloodType &&
       filter.bloodType !== '전체보기' &&

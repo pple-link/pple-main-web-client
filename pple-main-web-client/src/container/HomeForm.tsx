@@ -35,7 +35,7 @@ const HomeForm = () => {
         })
         .catch(err => {
           console.log(err);
-          navigate('/login');
+          // navigate('/login');
         });
 
       getExpiredDonations(jwt).then(res => {

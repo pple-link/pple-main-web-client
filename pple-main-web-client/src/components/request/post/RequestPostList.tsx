@@ -12,14 +12,26 @@ const RequestPostListBlock = styled('div')({
 interface Props {
   filter: FilterType;
   setFilter: any;
+  handleEnterWatch: any;
+  enterWatch: boolean;
 }
 
-const RequestPostList: React.FC<Props> = ({ children, filter, setFilter }) => {
+const RequestPostList: React.FC<Props> = ({
+  children,
+  filter,
+  setFilter,
+  handleEnterWatch,
+  enterWatch,
+}) => {
   return (
     <>
       <MobileToolbar title="요청 피드" isBack={true} isWrite={true} />
       <RequestPostListBlock>
-        <SearchInput placeholder="요청을 검색해보세요" />
+        <SearchInput
+          placeholder="요청을 검색해보세요"
+          handleEnterWatch={handleEnterWatch}
+          enterWatch={enterWatch}
+        />
         <SortingButtonGroup filter={filter} setFilter={setFilter} />
         {children}
       </RequestPostListBlock>

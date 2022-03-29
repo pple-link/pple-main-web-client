@@ -25,9 +25,15 @@ const SearchComponentsBox = styled('div')({
 
 interface ISearch {
   placeholder: string;
+  handleEnterWatch?: any;
+  enterWatch?: boolean;
 }
 
-const SearchInput: React.FC<ISearch> = ({ placeholder }) => {
+const SearchInput: React.FC<ISearch> = ({
+  placeholder,
+  handleEnterWatch,
+  enterWatch,
+}) => {
   const dispatch = useDispatch();
   const [keyword, setKeywords] = useState<string>('');
   const onChange = (event: any) => {
@@ -37,6 +43,7 @@ const SearchInput: React.FC<ISearch> = ({ placeholder }) => {
     if (event.key == 'Enter' && keyword.length > 0) {
       dispatch(setKeyWord(keyword));
       setKeywords('');
+      handleEnterWatch(!enterWatch);
     }
   };
   return (
