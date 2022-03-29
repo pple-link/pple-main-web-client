@@ -109,7 +109,7 @@ const FilterBloodTypeAndBloodProduct = (
 ) => {
   return contentArray.map((content, idx) =>
     content.patient.bloodType.abo == bloodType.replace('형', '') &&
-    content.bloodProduct == createBloodProductString(bloodProduct) ? (
+    createBloodProductString(content.bloodProduct) == bloodProduct ? (
       returnCardComponent(content)
     ) : (
       <div key={idx}></div>
