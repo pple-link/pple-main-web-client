@@ -96,16 +96,15 @@ const RequestPostListForm: React.FC = () => {
   });
 
   useEffect(() => {
-    console.log(keyword + ' / ');
     if (keyword) {
       getSearchDonations(keyword)
         .then(res => {
-          console.log(res.data.content);
           const newArray = res.data.content;
           setContentArray(newArray);
         })
         .catch(err => {
           console.log(err);
+          alert('서버 문제입니다. 관리자에게 문의해주세요.');
         })
         .finally(() => {
           dispatch(setKeyWord(''));
