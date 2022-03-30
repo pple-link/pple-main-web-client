@@ -11,6 +11,7 @@ import { setUuid } from '../../models/auth/account';
 const ModifyProfileForm = () => {
   const [displayName, setDisplayName] = useState<string>();
   const [profileImageUrl, setProfileImageUrl] = useState<string>('');
+  const [newProfileImage, setNewProfileImage] = useState<File>(null);
   const uuid = useSelector((state: RootState) => state.account.uuid);
   const jwt = getCookie();
   const dispatch = useDispatch();
@@ -38,17 +39,20 @@ const ModifyProfileForm = () => {
 
   const onSubmit = (e: any) => {
     e.preventDefault();
-    const body = {
-      displayName: displayName,
-    };
-
-    patchUserDisplayName(uuid, jwt, body)
+    if (displayName.length == 0) {
+      alert('닉네임을 입력해주세요');
+      return;
+    }
+    console.log(newProfileImage);
+    patchUserDisplayName(uuid, jwt, displayName, newProfileImage)
       .then(res => {
+        console.log(res.config.data);
         navigate('/page');
       })
       .catch(err => {
-        console.log(err);
-        console.log('Patch User DisplayName Error');
+        if (err.response.status == 404) {
+          alert('서버 문제입니다. 관리자에게 문의해주세요');
+        }
       });
   };
   return (
@@ -58,6 +62,8 @@ const ModifyProfileForm = () => {
           profileImageUrl={profileImageUrl}
           displayName={displayName}
           onChange={onChange}
+          setNewProfileImage={setNewProfileImage}
+          setProfileImageUrl={setProfileImageUrl}
         />
       </form>
     </>
