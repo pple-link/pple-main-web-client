@@ -46,7 +46,6 @@ const ModifyProfileForm = () => {
     console.log(newProfileImage);
     patchUserDisplayName(uuid, jwt, displayName, newProfileImage)
       .then(res => {
-        console.log(res.config.data);
         navigate('/page');
       })
       .catch(err => {
