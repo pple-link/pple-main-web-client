@@ -21,8 +21,13 @@ export const patchUserDisplayName = (
 ) => {
   const formData = new FormData();
   formData.append('displayName', displayName);
-  formData.append('file', profileImageFile);
+  formData.append('uploadProfileImage', profileImageFile);
+  console.log(profileImageFile);
   return customAxios.patch(`/api/v1/account/${uuid}`, formData, {
-    headers: { 'X-AUTH-TOKEN': `${jwt}` },
+    headers: {
+      'X-AUTH-TOKEN': `${jwt}`,
+      'Media-Types': 'application/json',
+      'Content-Type': 'multipart/form-data',
+    },
   });
 };
