@@ -41,13 +41,13 @@ export const patchUserDisplayName = (
   displayName: string,
   profileImageFile: File,
 ) => {
-  const body = {
-    displayName: displayName,
-  };
-  // const formData = new FormData();
-  // formData.append('displayName', displayName);
-  // formData.append('file', profileImageFile);
-  return customAxios.patch(`/api/v1/account/displayName/${uuid}`, body, {
+  // const body = {
+  //   displayName: displayName,
+  // };
+  const formData = new FormData();
+  formData.append('displayName', displayName);
+  formData.append('uploadProfileImage', profileImageFile);
+  return customAxios.patch(`/api/v1/account/${uuid}`, formData, {
     headers: {
       'X-AUTH-TOKEN': `${jwt}`,
       'Media-Types': 'application/json',

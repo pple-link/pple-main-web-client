@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ModifyProfile from '../../components/mypage/ModifyProfile';
 import { getAccountProfile, patchUserDisplayName } from '../../lib/api/account';
-import { customAxios } from '../../lib/customAxios';
 import { getCookie, getUuid } from '../../lib/hooks/CookieUtil';
 import { notifyError } from '../../lib/util/error';
 import { RootState } from '../../models';
@@ -49,7 +48,7 @@ const ModifyProfileForm = () => {
         navigate('/page');
       })
       .catch(err => {
-        notifyError(err.response.status);
+        notifyError(err);
       });
   };
   return (
