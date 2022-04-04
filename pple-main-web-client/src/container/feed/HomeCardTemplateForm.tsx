@@ -18,7 +18,7 @@ const HomeCardTemplateForm: React.FC<ContentArray> = ({ contentArray }) => {
   };
 
   const handleAuth = () => {
-    clickShowAll();
+    // clickShowAll();
     if (jwt == undefined) {
       setOpen(!open);
       return;

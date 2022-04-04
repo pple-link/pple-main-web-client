@@ -10,8 +10,6 @@ import {
   TextField,
 } from '@mui/material';
 import palette from '../../lib/styles/palette';
-import Compressor from 'compressorjs';
-import fs from 'fs';
 
 type ModifyProfileType = {
   displayName: string;
