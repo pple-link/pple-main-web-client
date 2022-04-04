@@ -66,8 +66,8 @@ const ModifyProfile: React.FC<ModifyProfileType> = ({
                 <SmallAvatar
                   alt="프로필 이미지 수정"
                   src={Camera}
-                  style={{ cursor: 'pointer' }}
-                  onClick={handleClickBadge}
+                  // style={{ cursor: 'pointer' }}
+                  // onClick={handleClickBadge}
                 ></SmallAvatar>
               }
             >
