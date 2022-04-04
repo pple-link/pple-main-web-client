@@ -6,7 +6,7 @@ export const notifyError = (errorCode: number) => {
       break;
 
     case 400:
-      alert('Bad Request');
+      alert('잘못된 요청입니다.');
       break;
 
     default:
