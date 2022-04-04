@@ -5,6 +5,7 @@ import ModifyProfile from '../../components/mypage/ModifyProfile';
 import { getAccountProfile, patchUserDisplayName } from '../../lib/api/account';
 import { customAxios } from '../../lib/customAxios';
 import { getCookie, getUuid } from '../../lib/hooks/CookieUtil';
+import { notifyError } from '../../lib/util/error';
 import { RootState } from '../../models';
 import { setUuid } from '../../models/auth/account';
 
@@ -43,15 +44,12 @@ const ModifyProfileForm = () => {
       alert('닉네임을 입력해주세요');
       return;
     }
-    // console.log(newProfileImage);
     patchUserDisplayName(uuid, jwt, displayName, newProfileImage)
       .then(res => {
         navigate('/page');
       })
       .catch(err => {
-        if (err.response.status == 404) {
-          alert('서버 문제입니다. 관리자에게 문의해주세요');
-        }
+        notifyError(err.response.status);
       });
   };
   return (
