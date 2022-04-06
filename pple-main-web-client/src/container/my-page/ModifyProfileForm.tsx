@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ModifyProfile from '../../components/mypage/ModifyProfile';
 import { getAccountProfile, patchUserDisplayName } from '../../lib/api/account';
-import { customAxios } from '../../lib/customAxios';
 import { getCookie, getUuid } from '../../lib/hooks/CookieUtil';
+import { notifyError } from '../../lib/util/error';
 import { RootState } from '../../models';
 import { setUuid } from '../../models/auth/account';
 
@@ -43,16 +43,16 @@ const ModifyProfileForm = () => {
       alert('닉네임을 입력해주세요');
       return;
     }
-    console.log(newProfileImage);
     patchUserDisplayName(uuid, jwt, displayName, newProfileImage)
       .then(res => {
-        console.log(res.config.data);
+        if (res.status == 202) {
+          alert('이미 등록된 닉네임입니다. 다른 닉네임으로 변경해주세요');
+          return;
+        }
         navigate('/page');
       })
       .catch(err => {
-        if (err.response.status == 404) {
-          alert('서버 문제입니다. 관리자에게 문의해주세요');
-        }
+        notifyError(err);
       });
   };
   return (

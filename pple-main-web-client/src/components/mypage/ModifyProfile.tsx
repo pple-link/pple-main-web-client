@@ -10,8 +10,6 @@ import {
   TextField,
 } from '@mui/material';
 import palette from '../../lib/styles/palette';
-import Compressor from 'compressorjs';
-import fs from 'fs';
 
 type ModifyProfileType = {
   displayName: string;
@@ -32,27 +30,23 @@ const ModifyProfile: React.FC<ModifyProfileType> = ({
   const handleClickBadge = () => {
     hiddenFileInput.current.click();
   };
+
   const handleFileInputChange = event => {
-    setNewProfileImage(event.target.files[0]);
-    setProfileImageUrl(changeFileObjectToURL(event.target.files[0]));
+    const currentImageFile = event.target.files[0];
+    if (isAllowImageSize(currentImageFile)) {
+      setNewProfileImage(currentImageFile);
+      setProfileImageUrl(URL.createObjectURL(currentImageFile));
+      return;
+    }
+
+    alert('이미지 사이즈가 50MB 를 초과할 수 없습니다');
   };
 
-  const changeFileObjectToURL = (file: File) => {
-    // if (file.size >= 1000000) {
-    //   const modifiedTime = new Date().getTime();
-    //   pngToJpeg({ quality: 90 }).then(output =>
-    //     fs.writeFileSync(`pk_${modifiedTime}`, output),
-    //   );
-    //   new Compressor(file, {
-    //     quality: 0,
-    //     success(result) {
-    //       const compressFile = new File([result], `pk_${modifiedTime}`);
-    //       console.log(file.size + '/' + compressFile.size);
-    //       URL.createObjectURL(compressFile);
-    //     },
-    //   });
-    // }
-    return URL.createObjectURL(file);
+  const isAllowImageSize = (file: File) => {
+    if (file.size <= 50000000) {
+      return true;
+    }
+    return false;
   };
 
   return (
@@ -86,6 +80,7 @@ const ModifyProfile: React.FC<ModifyProfileType> = ({
               id="profile_image"
               style={{ display: 'none' }}
               onChange={handleFileInputChange}
+              accept="image/*"
             />
           </div>
           <StyledInput
