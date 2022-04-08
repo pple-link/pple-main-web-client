@@ -7,41 +7,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import { reportComment } from '../../../lib/api/comment';
 import DoneReportCommentModal from './DoneReportCommentModal';
 
-const StyledModal = styled(Modal)({
-  position: 'fixed',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  fontFamily: 'Pretendard',
-  outline: 'none',
-});
-
-const StylePaper = styled(Paper)({
-  borderRadius: '20px',
-});
-const CloseBox = styled('div')({
-  width: '100%',
-  textAlign: 'end',
-});
-
-const TitleBox = styled('div')({
-  fontStyle: 'normal',
-  fontWeight: 'bold',
-  fontSize: '22px',
-  lineHeight: '28px',
-  textAlign: 'center',
-  color: '#222222',
-  marginBottom: '10px',
-});
-
-const ButtonBox = styled('div')({
-  boxSizing: 'border-box',
-  width: '100%',
-  display: 'flex',
-  justifyContent: 'space-between',
-  padding: '0px 25px 25px 25px',
-});
-
 interface Props {
   open: boolean;
   setOpen: any;
@@ -59,7 +24,7 @@ const ReportCommentModal: React.FC<Props> = ({
 }) => {
   const [done, setDone] = useState<boolean>(false);
   const onClick = () => {
-    setDone(!done);
+    setOpen(!open);
   };
   const handleDelete = () => {
     new Promise((resolve, reject) => {
@@ -75,7 +40,7 @@ const ReportCommentModal: React.FC<Props> = ({
   };
   return (
     <>
-      <DoneReportCommentModal open={done} setOpen={setDone} />
+      <DoneReportCommentModal open={done} setOpen={setDone} isReport={true} />
       <StyledModal
         isOpen={open}
         style={{ overlay: { background: 'rgba(0, 0, 0, 0.4)' } }}
@@ -92,7 +57,10 @@ const ReportCommentModal: React.FC<Props> = ({
           </CloseBox>
           {/* 이미지 영억 */}
           {/* 제목 */}
-          <TitleBox>댓글을 신고하시겠어요?</TitleBox>
+          <TitleBox>
+            댓글을 <br /> 신고하시겠어요?
+            <br />
+          </TitleBox>
           <ButtonBox>
             <ModalButton
               onClick={onClick}
@@ -107,5 +75,43 @@ const ReportCommentModal: React.FC<Props> = ({
     </>
   );
 };
+
+const StyledModal = styled(Modal)({
+  position: 'fixed',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  fontFamily: 'Pretendard',
+  outline: 'none',
+  minWidth: '120px',
+});
+
+const StylePaper = styled(Paper)({
+  borderRadius: '20px',
+});
+const CloseBox = styled('div')({
+  width: '100%',
+  textAlign: 'end',
+});
+
+const TitleBox = styled('div')({
+  fontStyle: 'normal',
+  fontWeight: 'bold',
+  fontSize: '22px',
+  lineHeight: '28px',
+  textAlign: 'center',
+  color: '#222222',
+  marginBottom: '20px',
+  padding: '0px 55px 0px 55px',
+  minWidth: '120px',
+});
+
+const ButtonBox = styled('div')({
+  boxSizing: 'border-box',
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'space-between',
+  padding: '0px 10px 25px 10px',
+});
 
 export default ReportCommentModal;

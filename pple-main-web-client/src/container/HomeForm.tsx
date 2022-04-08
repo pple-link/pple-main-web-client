@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import HomePageHeader from '../components/home/HomePageHeader';
-import { getCookie, setCookie } from '../lib/hooks/CookieUtil';
-import { checkUser } from '../lib/hooks/CookieUtil';
+import { getCookie, getRefreshToken, setCookie } from '../lib/hooks/CookieUtil';
 import HomeCardTemplateForm from './feed/HomeCardTemplateForm';
-import { getAccountProfile } from '../lib/api/account';
+import { getAccountProfile, returnReissue } from '../lib/api/account';
 import {
   getDonationsOfActiveStatus,
   getExpiredDonations,
@@ -12,6 +11,7 @@ import StoryModal from '../components/common/modal/StoryModal';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUuid } from '../models/auth/account';
+import { AxiosError } from 'axios';
 
 const HomeForm = () => {
   const [displayName, setDisplayName] = useState<string>('피플');
@@ -21,6 +21,7 @@ const HomeForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const jwt = getCookie();
+  // const refreshToken = getRefreshToken();
 
   setCookie();
   useEffect(() => {
@@ -34,9 +35,12 @@ const HomeForm = () => {
           setDisplayName(res.data.displayName);
           dispatch(setUuid(res.data.uuid));
         })
-        .catch(err => {
-          console.log(err);
-          navigate('/login');
+        .catch(error => {
+          const err = error as AxiosError;
+          // if (err.response.status == 404) {
+          //   returnReissue(jwt, refreshToken);
+          // }
+          // navigate('/login');
         });
 
       getExpiredDonations(jwt).then(res => {

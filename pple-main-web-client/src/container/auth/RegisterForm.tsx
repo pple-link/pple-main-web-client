@@ -190,7 +190,11 @@ const RegisterForm = () => {
     }
 
     postSignUpBody(body, jwt)
-      .then(() => {
+      .then(res => {
+        if (res.status == 202) {
+          alert('이미 등록된 닉네임입니다. 다른 닉네임으로 변경해주세요');
+          return;
+        }
         navigate('/');
       })
       .catch(err => {

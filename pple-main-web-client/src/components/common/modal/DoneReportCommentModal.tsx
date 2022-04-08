@@ -55,12 +55,20 @@ const ContentBox = styled('div')({
 interface Props {
   open: boolean;
   setOpen: any;
+  isReport?: boolean;
 }
 
-const DoneReportCommentModal: React.FC<Props> = ({ open, setOpen }) => {
+const DoneReportCommentModal: React.FC<Props> = ({
+  open,
+  setOpen,
+  isReport,
+}) => {
   const navigate = useNavigate();
   const onClick = () => {
     setOpen(!open);
+    if (isReport) {
+      return;
+    }
     navigate(-1);
   };
 

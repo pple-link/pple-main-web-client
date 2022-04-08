@@ -5,6 +5,7 @@ import { getCookie } from '../../lib/hooks/CookieUtil';
 import { useNavigate } from 'react-router-dom';
 import DoneRegisterModal from '../../components/common/modal/DoneRegisterModal';
 import { postDonation } from '../../lib/api/donation';
+import { clickPostRegister } from '../../lib/ampli';
 
 export type RequestState = {
   bloodProduct: string;
@@ -156,6 +157,7 @@ const RequestRegisterForm: React.FC = () => {
     }
     setModalOpen(!modalOpen);
     postDonation(body, jwt);
+    clickPostRegister();
   };
   return (
     <>

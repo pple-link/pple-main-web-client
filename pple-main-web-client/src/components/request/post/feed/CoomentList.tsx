@@ -1,50 +1,36 @@
 import React, { useCallback, useState } from 'react';
-import Comment from '../../../common/Comment';
 import { IReply } from '../../../../lib/interface/IDetailPost';
-import { List, AutoSizer } from 'react-virtualized';
-
+import Comment from './Comment';
 interface reply {
   reply: Array<IReply>;
   currentUuid: string;
   donationUuid: string;
+  jwt: string;
 }
-const CoomentList: React.FC<reply> = ({ reply, currentUuid, donationUuid }) => {
-  const rowRenderer = useCallback(
-    ({ index, key }) => {
-      const comment = reply[index];
-
-      return (
-        <Comment
-          key={key}
-          isOpponent={true}
-          name={comment.writer.displayName}
-          bloodType={comment.writer.bloodType}
-          comment={comment.content}
-          time={comment.createdAt}
-          profileImageUrl={comment.writer.profileImageUrl}
-          commentAccountUuid={comment.writer.accountUuid}
-          currentAccountUuid={currentUuid}
-          replyUuid={comment.uuid}
-          donationUuid={donationUuid}
-        />
-      );
-    },
-    [reply],
-  );
+const CoomentList: React.FC<reply> = ({
+  reply,
+  currentUuid,
+  donationUuid,
+  jwt,
+}) => {
   return (
     <>
-      <AutoSizer>
-        {({ height, width }) => (
-          <List
-            list={reply}
-            width={width}
-            height={height}
-            rowCount={reply.length}
-            rowHeight={108}
-            rowRenderer={rowRenderer}
-          />
-        )}
-      </AutoSizer>
+      {reply.map((reply, index) => (
+        <Comment
+          key={index}
+          isOpponent={true}
+          name={reply.writer.displayName}
+          bloodType={reply.writer.bloodType}
+          comment={reply.content}
+          time={reply.createdAt}
+          profileImageUrl={reply.writer.profileImageUrl}
+          commentAccountUuid={reply.writer.accountUuid}
+          currentAccountUuid={currentUuid}
+          replyUuid={reply.uuid}
+          donationUuid={donationUuid}
+          jwt={jwt}
+        />
+      ))}
     </>
   );
 };

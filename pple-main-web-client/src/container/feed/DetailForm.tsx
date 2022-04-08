@@ -12,17 +12,8 @@ import { RootState } from '../../models';
 import LoginRequestModal from '../../components/common/modal/LoginRequestModal';
 import { Like } from '../../lib/interface/Like';
 import { likeDonation } from '../../lib/api/like';
-
-const ProgressBlock = styled('div')({
-  width: '100%',
-  height: '100vh',
-  '& .MuiCircularProgress-root': {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transForm: 'translate(-50%,-50%)',
-  },
-});
+import { showDetailPost } from '../../lib/ampli';
+import amplitude from 'amplitude-js';
 
 const DetailForm: React.FC = () => {
   const jwt = getCookie();
@@ -38,10 +29,21 @@ const DetailForm: React.FC = () => {
   const handleLoginModalOpen = () => {
     setLoginModalOpen(!loginModalOpen);
   };
+
+  const onClickLike = (donationData: Like) => {
+    setLikeCheck(!likeCheck);
+    likeDonation(donationData);
+  };
+
   const onSubmitComment = (event: any) => {
     event.preventDefault();
     if (!jwt) {
       handleLoginModalOpen();
+      return;
+    }
+    if (commentValue.length > 300) {
+      alert('300자 이하로 작성해주세요!');
+      return;
     }
     if (commentValue) {
       setSubmitCheck(!submitCheck);
@@ -50,11 +52,10 @@ const DetailForm: React.FC = () => {
       });
     }
   };
-  const handleLikeEvent = (donationData: Like, currentAccountUuid: string) => {
-    setLikeCheck(!likeCheck);
-    likeDonation(donationData, currentAccountUuid);
-  };
+
   useEffect(() => {
+    showDetailPost();
+    amplitude.getInstance().init(`${process.env.REACT_APP_AMPLITUDE_API}`);
     if (jwt && firstCall) {
       setFirstCall(!firstCall);
       getAccountProfile(jwt).then(res => {
@@ -87,7 +88,7 @@ const DetailForm: React.FC = () => {
           currentUserImageUrl={currentUserImageUrl}
           onSubmitComment={onSubmitComment}
           currenUuid={detailPostInfo.writer.accountUuid}
-          handleLikeEvent={handleLikeEvent}
+          onClickLike={onClickLike}
         />
       </form>
       <LoginRequestModal open={loginModalOpen} onClick={handleLoginModalOpen} />
@@ -98,5 +99,16 @@ const DetailForm: React.FC = () => {
     </ProgressBlock>
   );
 };
+
+const ProgressBlock = styled('div')({
+  width: '100%',
+  height: '100vh',
+  '& .MuiCircularProgress-root': {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transForm: 'translate(-50%,-50%)',
+  },
+});
 
 export default DetailForm;

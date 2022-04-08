@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled, Paper, InputBase, IconButton } from '@mui/material';
 import palette from '../../../lib/styles/palette';
 import searchImg from '../../../static/images/Search.png';
-
+import { FormTextProps } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { setKeyWord } from '../../../models/search';
+import { RootState } from '../../../models/index';
 const SearchInputBlock = styled('div')({
   margin: '20px 0px 10px 0px',
   width: '100%',
@@ -22,19 +25,38 @@ const SearchComponentsBox = styled('div')({
 
 interface ISearch {
   placeholder: string;
-  handleSearch?: any;
+  handleEnterWatch?: any;
+  enterWatch?: boolean;
 }
 
-const SearchInput: React.FC<ISearch> = ({ placeholder, handleSearch }) => {
+const SearchInput: React.FC<ISearch> = ({
+  placeholder,
+  handleEnterWatch,
+  enterWatch,
+}) => {
+  const dispatch = useDispatch();
+  const [keyword, setKeywords] = useState<string>('');
+  const onChange = (event: any) => {
+    setKeywords(event.target.value);
+  };
+  const onKeyPress = (event: any) => {
+    if (event.key == 'Enter' && keyword.length > 0) {
+      dispatch(setKeyWord(keyword));
+      setKeywords('');
+      handleEnterWatch(!enterWatch);
+    }
+  };
   return (
     <SearchInputBlock>
       <Paper elevation={0}>
         <SearchComponentsBox>
           <InputBase
+            onChange={onChange}
+            value={keyword}
             placeholder={placeholder}
             sx={{ ml: 1, flex: 1, fontWeight: 'bold', color: '#B7B7B7' }}
             inputProps={{ 'aria-label': 'search request feed' }}
-            onChange={handleSearch}
+            onKeyPress={onKeyPress}
           ></InputBase>
           <IconButton
             type="submit"

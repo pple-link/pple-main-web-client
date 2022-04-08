@@ -7,6 +7,7 @@ import FeedFooter from '../../../common/feed/FeedFooter';
 import { useNavigate } from 'react-router-dom';
 import FeedUserInfo from './FeedUserInfo';
 import ConnectionModal from '../../../common/modal/ConnectionModal';
+import { clickHelpButton } from '../../../../lib/ampli';
 
 const FeedTemplateBlock = styled('div')({
   '& .feed': {
@@ -51,6 +52,7 @@ const FeedTemplate: React.FC<Props> = ({
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(!open);
+    clickHelpButton();
   };
   const onClick = () => {
     navigate(`/post/${uuid}`);

@@ -1,11 +1,125 @@
 import { Avatar, IconButton } from '@mui/material';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import BloodTypeBlock from './BloodTypeBlock';
-import dotmenu from '../../static/images/feed/dotmenu.png';
-import { createTimeFormatForComment } from '../../lib/util';
-import DeleteCommentModal from './modal/DeleteCommentModal';
-import ReportCommentModal from './modal/ReportCommentModal';
+import BloodTypeBlock from '../../../common/BloodTypeBlock';
+import dotmenu from '../../../../static/images/feed/dotmenu.png';
+import { createTimeFormatForComment } from '../../../../lib/util';
+import DeleteCommentModal from '../../../common/modal/DeleteCommentModal';
+import ReportCommentModal from '../../../common/modal/ReportCommentModal';
+import LoginRequestModal from '../../../common/modal/LoginRequestModal';
+
+type Props = {
+  isOpponent: boolean;
+  name: string;
+  bloodType: {
+    abo: 'A' | 'B' | 'O' | 'AB';
+    rh: 'POSITIVE' | 'NEGATIVE';
+  };
+  comment: string;
+  time: string;
+  profileImageUrl: string;
+  onClick?: any;
+  commentAccountUuid: string;
+  currentAccountUuid: string;
+  replyUuid: string;
+  donationUuid: string;
+  jwt: string;
+};
+
+const Comment: React.FC<Props> = ({
+  isOpponent,
+  name,
+  bloodType,
+  comment,
+  time,
+  profileImageUrl,
+  commentAccountUuid,
+  currentAccountUuid,
+  replyUuid,
+  donationUuid,
+  jwt,
+}) => {
+  const timeLine = createTimeFormatForComment(time);
+  const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
+  const [reportOpen, setReportOpen] = useState<boolean>(false);
+  const [loginOpen, setLoginOpen] = useState<boolean>(false);
+
+  const handleDeleteOpen = () => {
+    if (!jwt) {
+      setLoginOpen(!loginOpen);
+      return;
+    }
+
+    if (commentAccountUuid == currentAccountUuid) {
+      setDeleteOpen(!deleteOpen);
+      return;
+    }
+    setReportOpen(!reportOpen);
+  };
+
+  const handleLoginRquestModal = () => {
+    setLoginOpen(!loginOpen);
+  };
+  return (
+    <>
+      <LoginRequestModal open={loginOpen} onClick={handleLoginRquestModal} />
+      <DeleteCommentModal
+        open={deleteOpen}
+        setOpen={setDeleteOpen}
+        replyUuid={replyUuid}
+        jwt={jwt}
+      />
+      <ReportCommentModal
+        open={reportOpen}
+        setOpen={setReportOpen}
+        replyUuid={replyUuid}
+        accountUuid={commentAccountUuid}
+        donationUuid={donationUuid}
+      />
+      {isOpponent ? (
+        <OpponentCommentBlock>
+          <Avatar sx={{ height: '40px', width: '40px' }}>
+            <img src={profileImageUrl} alt="" width={40} height={40}></img>
+          </Avatar>
+          <div style={{ width: '100%' }}>
+            <CommentBubble>
+              <div className="user-info">
+                <div style={{ display: 'flex', alignContent: 'center' }}>
+                  <span>{name}</span>
+                  <BloodTypeBlock bloodType={bloodType} />
+                </div>
+                <IconButton
+                  onClick={handleDeleteOpen}
+                  sx={{ padding: '0px', cursor: 'pointer' }}
+                >
+                  <img src={dotmenu} width={2} height={10} />
+                </IconButton>
+              </div>
+              <div className="comment">{comment}</div>
+            </CommentBubble>
+            <TimeLine>{timeLine}</TimeLine>
+          </div>
+        </OpponentCommentBlock>
+      ) : (
+        <UserCommentBlock>
+          <div>
+            <CommentBubble>
+              <div className="user-info">
+                <span>{name}</span>
+                <BloodTypeBlock bloodType={bloodType} />
+              </div>
+              <div className="comment">{comment}</div>
+            </CommentBubble>
+            <div className="comment-footer">
+              <span>{time}</span>
+              <button>답글달기</button>
+            </div>
+          </div>
+        </UserCommentBlock>
+      )}
+    </>
+  );
+};
 
 const OpponentCommentBlock = styled.div`
   width: 100%;
@@ -60,104 +174,5 @@ const TimeLine = styled.div`
   margin-top: 4px;
   margin-bottom: 15px;
 `;
-
-type Props = {
-  isOpponent: boolean;
-  name: string;
-  bloodType: {
-    abo: 'A' | 'B' | 'O' | 'AB';
-    rh: 'POSITIVE' | 'NEGATIVE';
-  };
-  comment: string;
-  time: string;
-  profileImageUrl: string;
-  onClick?: any;
-  commentAccountUuid: string;
-  currentAccountUuid: string;
-  replyUuid: string;
-  donationUuid: string;
-};
-
-const Comment: React.FC<Props> = ({
-  isOpponent,
-  name,
-  bloodType,
-  comment,
-  time,
-  profileImageUrl,
-  commentAccountUuid,
-  currentAccountUuid,
-  replyUuid,
-  donationUuid,
-}) => {
-  const timeLine = createTimeFormatForComment(time);
-  const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
-  const [reportOpen, setReportOpen] = useState<boolean>(false);
-
-  const handleDeleteOpen = () => {
-    if (commentAccountUuid == currentAccountUuid) {
-      setDeleteOpen(!deleteOpen);
-      return;
-    }
-    setReportOpen(!reportOpen);
-  };
-  return (
-    <>
-      <DeleteCommentModal
-        open={deleteOpen}
-        setOpen={setDeleteOpen}
-        replyUuid={replyUuid}
-      />
-      <ReportCommentModal
-        open={reportOpen}
-        setOpen={setReportOpen}
-        replyUuid={replyUuid}
-        accountUuid={commentAccountUuid}
-        donationUuid={donationUuid}
-      />
-      {isOpponent ? (
-        <OpponentCommentBlock>
-          <Avatar sx={{ height: '40px', width: '40px' }}>
-            <img src={profileImageUrl} alt="" width={40} height={40}></img>
-          </Avatar>
-          <div style={{ width: '100%' }}>
-            <CommentBubble>
-              <div className="user-info">
-                <div style={{ display: 'flex', alignContent: 'center' }}>
-                  <span>{name}</span>
-                  <BloodTypeBlock bloodType={bloodType} />
-                </div>
-                <IconButton
-                  onClick={handleDeleteOpen}
-                  sx={{ padding: '0px', cursor: 'pointer' }}
-                >
-                  <img src={dotmenu} width={2} height={10} />
-                </IconButton>
-              </div>
-              <div className="comment">{comment}</div>
-            </CommentBubble>
-            <TimeLine>{timeLine}</TimeLine>
-          </div>
-        </OpponentCommentBlock>
-      ) : (
-        <UserCommentBlock>
-          <div>
-            <CommentBubble>
-              <div className="user-info">
-                <span>{name}</span>
-                <BloodTypeBlock bloodType={bloodType} />
-              </div>
-              <div className="comment">{comment}</div>
-            </CommentBubble>
-            <div className="comment-footer">
-              <span>{time}</span>
-              <button>답글달기</button>
-            </div>
-          </div>
-        </UserCommentBlock>
-      )}
-    </>
-  );
-};
 
 export default Comment;

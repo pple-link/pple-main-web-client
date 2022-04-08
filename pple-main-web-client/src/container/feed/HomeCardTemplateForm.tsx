@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoginRequestModal from '../../components/common/modal/LoginRequestModal';
 import CardTemplate from '../../components/home/CardTemplate';
+import { clickShowAll } from '../../lib/ampli';
 import { getCookie } from '../../lib/hooks/CookieUtil';
 
 interface ContentArray {
@@ -17,6 +18,7 @@ const HomeCardTemplateForm: React.FC<ContentArray> = ({ contentArray }) => {
   };
 
   const handleAuth = () => {
+    // clickShowAll();
     if (jwt == undefined) {
       setOpen(!open);
       return;

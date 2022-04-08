@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { customAxios } from '../customAxios';
 import PostDonation from '../interface/PostDontaion';
 
@@ -18,6 +17,12 @@ export const updateDonation = (
       'Content-Type': 'application/json;charset=UTF-8',
       'X-AUTH-TOKEN': `${jwt}`,
     },
+  });
+};
+
+export const getSearchDonations = (keyword: string) => {
+  return customAxios.get('/api/v1/donation/search', {
+    params: { keyword: keyword },
   });
 };
 

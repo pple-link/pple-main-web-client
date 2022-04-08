@@ -60,5 +60,5 @@ export const onClickCopyUrl = () => {
   textarea.select();
   document.execCommand('copy');
   document.body.removeChild(textarea);
-  alert('클립보드에 복사되었습니다.');
+  alert('클립보드에 URL이 복사되었습니다. 해당 URL을 공유해주세요');
 };

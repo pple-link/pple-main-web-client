@@ -1,8 +1,106 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import MyPageElementHeader from './MyPageElementHeader';
 import Camera from '../../static/images/Camera.svg';
-import { Avatar, Badge, Button, styled, TextField } from '@mui/material';
+import {
+  Avatar,
+  Badge,
+  Button,
+  CircularProgress,
+  styled,
+  TextField,
+} from '@mui/material';
 import palette from '../../lib/styles/palette';
+
+type ModifyProfileType = {
+  displayName: string;
+  onChange: any;
+  profileImageUrl: string;
+  setNewProfileImage: any;
+  setProfileImageUrl: any;
+};
+
+const ModifyProfile: React.FC<ModifyProfileType> = ({
+  displayName,
+  onChange,
+  profileImageUrl,
+  setNewProfileImage,
+  setProfileImageUrl,
+}) => {
+  const hiddenFileInput = useRef(null);
+  const handleClickBadge = () => {
+    hiddenFileInput.current.click();
+  };
+
+  const handleFileInputChange = event => {
+    const currentImageFile = event.target.files[0];
+    if (isAllowImageSize(currentImageFile)) {
+      setNewProfileImage(currentImageFile);
+      setProfileImageUrl(URL.createObjectURL(currentImageFile));
+      return;
+    }
+
+    alert('이미지 사이즈가 50MB 를 초과할 수 없습니다');
+  };
+
+  const isAllowImageSize = (file: File) => {
+    if (file.size <= 50000000) {
+      return true;
+    }
+    return false;
+  };
+
+  return (
+    <ModifyProfileBlock>
+      {displayName !== undefined ? (
+        <>
+          <MyPageElementHeader title="프로필 수정" />
+          <div className="avatar">
+            <Badge
+              overlap="circular"
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+              badgeContent={
+                <SmallAvatar
+                  alt="프로필 이미지 수정"
+                  src={Camera}
+                  style={{ cursor: 'pointer' }}
+                  onClick={handleClickBadge}
+                ></SmallAvatar>
+              }
+            >
+              <Avatar
+                src={profileImageUrl}
+                sx={{ width: 118, height: 118 }}
+                alt="프로필 이미지"
+              />
+            </Badge>
+            <input
+              ref={hiddenFileInput}
+              type="file"
+              name="profile_image"
+              id="profile_image"
+              style={{ display: 'none' }}
+              onChange={handleFileInputChange}
+              accept="image/*"
+            />
+          </div>
+          <StyledInput
+            defaultValue={displayName}
+            fullWidth
+            inputProps={{ style: { textAlign: 'center' } }}
+            name="displayName"
+            onChange={onChange}
+          />
+          <div className="help-text">프로필 사진과 닉네임을 입력해주세요</div>
+          <StyledButton type="submit">완료</StyledButton>
+        </>
+      ) : (
+        <ProgressBlock>
+          <CircularProgress />
+        </ProgressBlock>
+      )}
+    </ModifyProfileBlock>
+  );
+};
 
 const ModifyProfileBlock = styled('div')({
   position: 'relative',
@@ -67,46 +165,15 @@ const StyledButton = styled(Button)({
   },
 });
 
-type ModifyProfileType = {
-  displayName: string;
-  onChange: any;
-  profileImageUrl: string;
-};
-
-const ModifyProfile: React.FC<ModifyProfileType> = ({
-  displayName,
-  onChange,
-  profileImageUrl,
-}) => {
-  return (
-    <ModifyProfileBlock>
-      <MyPageElementHeader title="프로필 수정" />
-      <div className="avatar">
-        <Badge
-          overlap="circular"
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-          badgeContent={
-            <SmallAvatar alt="프로필 이미지 수정" src={Camera}></SmallAvatar>
-          }
-        >
-          <Avatar
-            src={profileImageUrl}
-            sx={{ width: 118, height: 118 }}
-            alt="프로필 이미지"
-          />
-        </Badge>
-      </div>
-      <StyledInput
-        defaultValue={displayName}
-        fullWidth
-        inputProps={{ style: { textAlign: 'center' } }}
-        name="displayName"
-        onChange={onChange}
-      />
-      <div className="help-text">프로필 사진과 닉네임을 입력해주세요</div>
-      <StyledButton type="submit">완료</StyledButton>
-    </ModifyProfileBlock>
-  );
-};
+const ProgressBlock = styled('div')({
+  width: '100%',
+  height: '100vh',
+  '& .MuiCircularProgress-root': {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transForm: 'translate(-50%,-50%)',
+  },
+});
 
 export default ModifyProfile;

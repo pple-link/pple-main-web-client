@@ -4,13 +4,17 @@ export const saveComment = (
   jwt: string,
   body: { content: string; donationUuid: string },
 ) => {
-  return customAxios.post('/api/v1/donation/reply/test', body, {
+  return customAxios.post('/api/v1/donation/write/reply', body, {
     headers: { 'X-AUTH-TOKEN': `${jwt}` },
   });
 };
 
-export const deleteComment = (replyUuid: string) => {
-  return customAxios.delete(`/api/v1/reply/delete/${replyUuid}/test`);
+export const deleteComment = (replyUuid: string, jwt: string) => {
+  return customAxios.delete(`/api/v1/reply/delete/${replyUuid}`, {
+    headers: {
+      'X-AUTH-TOKEN': `${jwt}`,
+    },
+  });
 };
 
 export const reportComment = (
