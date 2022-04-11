@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ModifyProfile from '../../components/mypage/ModifyProfile';
 import { getAccountProfile, patchUserDisplayName } from '../../lib/api/account';
-import { getCookie, getUuid } from '../../lib/hooks/CookieUtil';
+import { getCookie } from '../../lib/hooks/CookieUtil';
 import { notifyError } from '../../lib/util/error';
 import { RootState } from '../../models';
 import { setUuid } from '../../models/auth/account';
@@ -52,7 +52,7 @@ const ModifyProfileForm = () => {
         navigate('/page');
       })
       .catch(err => {
-        notifyError(err);
+        alert('이미 등록된 닉네임입니다. 다른 닉네임으로 변경해주세요');
       });
   };
   return (
