@@ -36,7 +36,6 @@ export const postSignUpBody = (body: SignUp, jwt: string) => {
 };
 
 export const patchUserDisplayName = (
-  uuid: string,
   jwt: string,
   displayName: string,
   profileImageFile: File,
@@ -47,7 +46,7 @@ export const patchUserDisplayName = (
   const formData = new FormData();
   formData.append('displayName', displayName);
   formData.append('uploadProfileImage', profileImageFile);
-  return customAxios.patch(`/api/v1/account/${uuid}`, formData, {
+  return customAxios.patch(`/api/v1/account/profile`, formData, {
     headers: {
       'X-AUTH-TOKEN': `${jwt}`,
       'Media-Types': 'application/json',

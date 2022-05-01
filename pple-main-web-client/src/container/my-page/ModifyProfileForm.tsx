@@ -43,7 +43,7 @@ const ModifyProfileForm = () => {
       alert('닉네임을 입력해주세요');
       return;
     }
-    patchUserDisplayName(uuid, jwt, displayName, newProfileImage)
+    patchUserDisplayName(jwt, displayName, newProfileImage)
       .then(res => {
         if (res.status == 202) {
           alert('이미 등록된 닉네임입니다. 다른 닉네임으로 변경해주세요');
