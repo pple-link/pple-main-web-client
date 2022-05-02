@@ -75,15 +75,7 @@ const DetailForm: React.FC = () => {
       });
     }
 
-    getResponse()
-        .then(res=>{
-          console.log("hello");
-          console.log(res);
-        })
-        .catch(err=>{
-          console.log(err);
-          console.log("ERROR");
-        });
+    getResponse();
 
   }, [submitCheck, likeCheck]);
 
