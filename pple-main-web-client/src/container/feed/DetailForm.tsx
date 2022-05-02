@@ -68,7 +68,7 @@ const DetailForm: React.FC = () => {
           console.log(res);
         })
         .catch(err=>{
-          console.error(err);
+          console.error(err);q
         });
   }, [submitCheck, likeCheck]);
 

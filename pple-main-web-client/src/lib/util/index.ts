@@ -52,9 +52,9 @@ export const createTimeFormatForDetailFeedHeader = (time: string) => {
   )}일 오후 ${newHour.toString()}:${minute}`;
 };
 
-export const onClickCopyUrl = () => {
+export const onClickCopyUrl = ()=> {
   const textarea = document.createElement('textarea');
-  textarea.value = window.location.href;
+    textarea.value = window.location.href;
   document.body.appendChild(textarea);
   textarea.focus();
   textarea.select();

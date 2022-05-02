@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import styled2 from 'styled-components';
 import { Avatar, ButtonBase, InputBase, Paper, styled } from '@mui/material';
 import { IconButton } from '@mui/material';
@@ -26,6 +26,7 @@ import { isMobile } from 'react-device-detect';
 import DeviceDetect from '../../../lib/interface/DeviceDetect';
 import { Like } from '../../../lib/interface/Like';
 import { clickHelpButton } from '../../../lib/ampli';
+import {useNavigate, useParams, useRoutes} from "react-router-dom";
 
 const DetailPost: React.FC<IDetailPost> = ({
   bloodProduct,
@@ -50,6 +51,7 @@ const DetailPost: React.FC<IDetailPost> = ({
   const [loginOpen, setLoginOpen] = useState<boolean>(false);
   const { bloodType } = patient;
   const { displayName, profileImageUrl } = writer;
+
 
   const handleConnectionOpen = () => {
     setConnectionOpen(!connectionOpen);
@@ -81,6 +83,7 @@ const DetailPost: React.FC<IDetailPost> = ({
     }
     setLoginOpen(!loginOpen);
   };
+
   return (
     <RequestPostBlock>
       <MobileToolbar title="요청피드" isBack={true} />
