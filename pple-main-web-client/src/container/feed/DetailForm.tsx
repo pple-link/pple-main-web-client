@@ -55,7 +55,7 @@ const DetailForm: React.FC = () => {
   };
 
   async function getResponse(){
-    const response = await fetch(`http://ppledevtest-env.eba-9fa279up.ap-northeast-2.elasticbeanstalk.com//api/v1/donation/detail/${donationUuid}`,{
+    const response = await fetch(`http://ppledevtest-env.eba-9fa279up.ap-northeast-2.elasticbeanstalk.com/api/v1/donation/detail/${donationUuid}`,{
       method: 'GET',
       mode: "no-cors"
     });
