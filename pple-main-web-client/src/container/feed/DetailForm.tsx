@@ -15,6 +15,7 @@ import { likeDonation } from '../../lib/api/like';
 import { showDetailPost } from '../../lib/ampli';
 import amplitude from 'amplitude-js';
 import {getOneDonationByEncodedParameter} from "../../lib/api/donation.test";
+import {throws} from "assert";
 
 const DetailForm: React.FC = () => {
   const jwt = getCookie();
@@ -55,12 +56,14 @@ const DetailForm: React.FC = () => {
   };
 
   async function getResponse(){
-    const response = await fetch(`http://ppledevtest-env.eba-9fa279up.ap-northeast-2.elasticbeanstalk.com/api/v1/donation/detail/${donationUuid}`,{
+    fetch(`http://ppledevtest-env.eba-9fa279up.ap-northeast-2.elasticbeanstalk.com/api/v1/donation/detail/${donationUuid}`,{
       method: 'GET',
       mode: "no-cors"
-    });
-    const data = await response.json();
-    console.log(data);
+    }).then(res => res.text())
+        .then(res=> console.log(res))
+        .catch(err=> {
+          console.error(err);
+        });
   }
 
   useEffect( () => {
