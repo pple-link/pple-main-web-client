@@ -14,6 +14,7 @@ import { Like } from '../../lib/interface/Like';
 import { likeDonation } from '../../lib/api/like';
 import { showDetailPost } from '../../lib/ampli';
 import amplitude from 'amplitude-js';
+import {getOneDonationByEncodedParameter} from "../../lib/api/donation.test";
 
 const DetailForm: React.FC = () => {
   const jwt = getCookie();
@@ -62,11 +63,13 @@ const DetailForm: React.FC = () => {
         setCurrentUserImageUrl(res.data.profileImageUrl);
       });
     }
-    setTimeout(() => {
-      getOneDonation(donationUuid).then(res => {
-        setDetailPostInfo(res.data);
-      });
-    }, 1000);
+    getOneDonationByEncodedParameter(donationUuid)
+        .then(res=>{
+          console.log(res);
+        })
+        .catch(err=>{
+          console.error(err);
+        });
   }, [submitCheck, likeCheck]);
 
   return detailPostInfo ? (
