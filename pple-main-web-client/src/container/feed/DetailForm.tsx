@@ -60,7 +60,7 @@ const DetailForm: React.FC = () => {
       mode: "no-cors"
     });
     const data = await response.json();
-    console.log(data);
+    console.log(data.data);
   }
 
   useEffect( () => {
