@@ -54,7 +54,7 @@ const DetailForm: React.FC = () => {
     }
   };
 
-  useEffect(() => {
+  useEffect( () => {
     showDetailPost();
     amplitude.getInstance().init(`${process.env.REACT_APP_AMPLITUDE_API}`);
     if (jwt && firstCall) {
@@ -63,13 +63,16 @@ const DetailForm: React.FC = () => {
         setCurrentUserImageUrl(res.data.profileImageUrl);
       });
     }
+
     getOneDonationByEncodedParameter(donationUuid)
-        .then(res=>{
-          console.log(res);
-        })
-        .catch(err=>{
-          console.error(err);
-        });
+          .then(res => {
+            console.log(res);
+          })
+          .catch(err => {
+            console.error(err);
+          });
+
+
   }, [submitCheck, likeCheck]);
 
   return detailPostInfo ? (
