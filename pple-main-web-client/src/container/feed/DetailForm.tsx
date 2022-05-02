@@ -66,7 +66,8 @@ const DetailForm: React.FC = () => {
 
     getOneDonationByEncodedParameter(donationUuid)
           .then(res => {
-            console.log(res);
+            const data = res.json();
+            console.log(data);
           })
           .catch(err => {
             console.error(err);
