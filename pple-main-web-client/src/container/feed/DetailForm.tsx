@@ -54,13 +54,15 @@ const DetailForm: React.FC = () => {
     }
   };
 
-  async function getResponse(){
-    const response = await fetch(`http://ppledevtest-env.eba-9fa279up.ap-northeast-2.elasticbeanstalk.com/api/v1/donation/detail/${donationUuid}`,{
+  function getResponse(){
+    fetch(`http://ppledevtest-env.eba-9fa279up.ap-northeast-2.elasticbeanstalk.com/api/v1/donation/detail/${donationUuid}`,{
       method: 'GET',
       mode: "no-cors"
-    });
-    const data = await response.json();
-    console.log(data.data);
+    }).then(response =>
+        console.log(response.json()))
+        .catch(err=>{
+          console.log(err);
+        });
   }
 
   useEffect( () => {
