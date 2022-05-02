@@ -54,6 +54,15 @@ const DetailForm: React.FC = () => {
     }
   };
 
+  async function getResponse(){
+    const response = await fetch(`http://ppledevtest-env.eba-9fa279up.ap-northeast-2.elasticbeanstalk.com//api/v1/donation/detail/${donationUuid}`,{
+      method: 'GET',
+      mode: "no-cors"
+    });
+    const data = await response.json();
+    console.log(data);
+  }
+
   useEffect( () => {
     showDetailPost();
     amplitude.getInstance().init(`${process.env.REACT_APP_AMPLITUDE_API}`);
@@ -64,14 +73,15 @@ const DetailForm: React.FC = () => {
       });
     }
 
-    getOneDonationByEncodedParameter(donationUuid)
-          .then(res => {
-            console.log(res);
-          })
-          .catch(err => {
-            console.error(err);
-          });
-
+    getResponse()
+        .then(res=>{
+          console.log("hello");
+          console.log(res);
+        })
+        .catch(err=>{
+          console.log(err);
+          console.log("ERROR");
+        });
 
   }, [submitCheck, likeCheck]);
 
