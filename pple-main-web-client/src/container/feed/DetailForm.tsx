@@ -59,7 +59,7 @@ const DetailForm: React.FC = () => {
       method: 'GET',
       mode: "no-cors"
     }).then(response =>
-        console.log(response.json()))
+        console.log(response.text()))
         .catch(err=>{
           console.log(err);
         });
