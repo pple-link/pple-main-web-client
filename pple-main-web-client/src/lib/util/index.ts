@@ -52,13 +52,15 @@ export const createTimeFormatForDetailFeedHeader = (time: string) => {
   )}일 오후 ${newHour.toString()}:${minute}`;
 };
 
-export const onClickCopyUrl = ()=> {
-  const textarea = document.createElement('textarea');
-    textarea.value = window.location.href;
-  document.body.appendChild(textarea);
-  textarea.focus();
-  textarea.select();
-  document.execCommand('copy');
-  document.body.removeChild(textarea);
-  alert('클립보드에 URL이 복사되었습니다. 해당 URL을 공유해주세요');
+export const copyUrl = (url: string): void=> {
+    const textarea = document.createElement('textarea');
+    document.body.appendChild(textarea);
+    textarea.value = url;
+    textarea.focus();
+    textarea.select();
+    textarea.setSelectionRange(0,99999);
+    document.execCommand('copy');
+    textarea.setSelectionRange(0,0);
+    document.body.removeChild(textarea);
+    alert('클립보드에 URL이 복사되었습니다. 해당 URL을 공유해주세요');
 };

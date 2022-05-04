@@ -14,19 +14,19 @@ import fullheart from '../../../static/images/feed/fullheart.png';
 import arrowUp from '../../../static/images/feed/arrow-up.png';
 import IDetailPost from '../../../lib/interface/IDetailPost';
 import {
+  copyUrl,
   createBloodProductString,
   createBloodTypeString,
-  onClickCopyUrl,
 } from '../../../lib/util';
 import { useDispatch, useSelector } from 'react-redux';
 import { setComment } from '../../../models/comment';
 import LoginRequestModal from '../../common/modal/LoginRequestModal';
 import { RootState } from '../../../models';
 import { isMobile } from 'react-device-detect';
-import DeviceDetect from '../../../lib/interface/DeviceDetect';
 import { Like } from '../../../lib/interface/Like';
 import { clickHelpButton } from '../../../lib/ampli';
-import {useNavigate, useParams, useRoutes} from "react-router-dom";
+import {getShareUrl} from "../../../lib/api/donation.test";
+import {string} from "prop-types";
 
 const DetailPost: React.FC<IDetailPost> = ({
   bloodProduct,
@@ -84,6 +84,18 @@ const DetailPost: React.FC<IDetailPost> = ({
     setLoginOpen(!loginOpen);
   };
 
+  const copyDonationUrl = (): void =>{
+    getShareUrl(uuid,jwt)
+         .then(async res=>{
+           const url = await res.data;
+           copyUrl(url);
+         })
+         .catch(err=>{
+           alert("URL 복사를 실패했습니다. 관리자에게 문의해주세요");
+           console.error(err);
+         });
+  }
+
   return (
     <RequestPostBlock>
       <MobileToolbar title="요청피드" isBack={true} />
@@ -129,7 +141,7 @@ const DetailPost: React.FC<IDetailPost> = ({
           />
           <span>응원하기</span>
         </StyledButton>
-        <StyledButton onClick={onClickCopyUrl}>
+        <StyledButton onClick={copyDonationUrl}>
           <img
             style={{ marginRight: '7px' }}
             src={clipboard}
