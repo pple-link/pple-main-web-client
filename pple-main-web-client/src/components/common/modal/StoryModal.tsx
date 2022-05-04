@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useCallback, useState} from 'react';
 import Modal from 'react-modal';
 import { styled, Paper, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
@@ -76,19 +76,16 @@ const StoryModal: React.FC<Props> = ({ open, setOpen, donationUuid, jwt }) => {
     setOpen(!open);
   };
 
-  const handleUpdate = () => {
+  const handleUpdate =useCallback(() => {
     updateExpiredDonation(donationUuid, jwt);
     setOpen(!open);
     setExtensionConfirmOpen(!extensionConfirmOpen);
-  };
+  },[]);
 
-  const handleDelete = () => {
+  const handleDelete = useCallback (() => {
     deleteExpiredDonation(donationUuid, jwt);
-    setTimeout(function () {
-      setOpen(!open);
-      location.reload();
-    }, 2000);
-  };
+    setOpen(!open);
+  },[]);
 
   return (
     <>
