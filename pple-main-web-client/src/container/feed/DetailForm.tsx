@@ -1,7 +1,7 @@
 import { CircularProgress, styled } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import DetailPost from '../../components/request/post/DetailPost';
 import { getAccountProfile } from '../../lib/api/account';
 import { saveComment } from '../../lib/api/comment';
@@ -14,10 +14,13 @@ import { Like } from '../../lib/interface/Like';
 import { likeDonation } from '../../lib/api/like';
 import { showDetailPost } from '../../lib/ampli';
 import amplitude from 'amplitude-js';
+import {getOneDonationByEncodedParameter} from "../../lib/api/donation.test";
+import {errorNoExistDonation} from "../../lib/util/error";
 
 const DetailForm: React.FC = () => {
   const jwt = getCookie();
   const param = useParams();
+  const navigate = useNavigate();
   const commentValue = useSelector((state: RootState) => state.comment.comment);
   const donationUuid = param.donationUuid;
   const [detailPostInfo, setDetailPostInfo] = useState<IDetailPost>();
@@ -53,7 +56,7 @@ const DetailForm: React.FC = () => {
     }
   };
 
-  useEffect(() => {
+  useEffect( () => {
     showDetailPost();
     amplitude.getInstance().init(`${process.env.REACT_APP_AMPLITUDE_API}`);
     if (jwt && firstCall) {
@@ -62,11 +65,27 @@ const DetailForm: React.FC = () => {
         setCurrentUserImageUrl(res.data.profileImageUrl);
       });
     }
-    setTimeout(() => {
-      getOneDonation(donationUuid).then(res => {
-        setDetailPostInfo(res.data);
-      });
-    }, 1000);
+    if(donationUuid.length > 14){
+      getOneDonation(donationUuid)
+          .then(res=>{
+            console.log(res);
+            setDetailPostInfo(res.data);
+          })
+          .catch(err=>{
+            errorNoExistDonation(navigate);
+          });
+    }
+    else{
+      getOneDonationByEncodedParameter(donationUuid)
+          .then(res=>{
+            console.log(res);
+            setDetailPostInfo(res.data);
+          })
+          .catch(err=>{
+            errorNoExistDonation(navigate);
+          });
+    }
+
   }, [submitCheck, likeCheck]);
 
   return detailPostInfo ? (

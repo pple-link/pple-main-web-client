@@ -1,4 +1,11 @@
+import {NavigateFunction} from "react-router-dom";
 import { AxiosError } from 'axios';
+
+export const errorNoExistDonation = (router: NavigateFunction): void=>{
+    alert("존재하지 않는 게시물입니다.");
+    router('/intro');
+}
+
 
 export const notifyError = (err: Error) => {
   const error = err as AxiosError;
