@@ -1,3 +1,5 @@
+import {USER_AGENT} from "./Constant";
+
 export const createBloodTypeString = (
   abo: 'A' | 'B' | 'O' | 'AB',
   rh: 'POSITIVE' | 'NEGATIVE',
@@ -64,3 +66,15 @@ export const copyUrl = (url: string): void=> {
     document.body.removeChild(textarea);
     alert('클립보드에 URL이 복사되었습니다. 해당 URL을 공유해주세요');
 };
+
+export const getUserAgent = (): string => {
+    const userAgent = navigator.userAgent
+    if (/android/i.test(userAgent)) {
+        return USER_AGENT.ANDROID
+    }
+    else if (/iPad|iPhone|iPod/.test(userAgent)
+        || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
+        return USER_AGENT.IOS
+    }
+    return USER_AGENT.WEB
+}

@@ -14,9 +14,9 @@ import fullheart from '../../../static/images/feed/fullheart.png';
 import arrowUp from '../../../static/images/feed/arrow-up.png';
 import IDetailPost from '../../../lib/interface/IDetailPost';
 import {
-  copyUrl,
-  createBloodProductString,
-  createBloodTypeString,
+    copyUrl,
+    createBloodProductString,
+    createBloodTypeString, getUserAgent,
 } from '../../../lib/util';
 import { useDispatch, useSelector } from 'react-redux';
 import { setComment } from '../../../models/comment';
@@ -27,6 +27,7 @@ import { Like } from '../../../lib/interface/Like';
 import { clickHelpButton } from '../../../lib/ampli';
 import {getShareUrl} from "../../../lib/api/donation.test";
 import {string} from "prop-types";
+import {DOWNLOAD_URL, USER_AGENT} from "../../../lib/util/Constant";
 
 const DetailPost: React.FC<IDetailPost> = ({
   bloodProduct,
@@ -51,16 +52,23 @@ const DetailPost: React.FC<IDetailPost> = ({
   const [loginOpen, setLoginOpen] = useState<boolean>(false);
   const { bloodType } = patient;
   const { displayName, profileImageUrl } = writer;
+  const [storeUrl, setStoreUrl] = useState<string>("");
 
 
-  const handleConnectionOpen = () => {
-    setConnectionOpen(!connectionOpen);
-    clickHelpButton();
-  };
+  // todo : 모바일에서 디버깅 해보기
+  const redirectToStore = (): void => {
+      window.open(storeUrl)
+      return;
+  }
 
-  const handleLoginOpen = () => {
-    setLoginOpen(!loginOpen);
-  };
+  // const handleConnectionOpen = () => {
+  //   setConnectionOpen(!connectionOpen);
+  //   clickHelpButton();
+  // };
+  //
+  // const handleLoginOpen = () => {
+  //   setLoginOpen(!loginOpen);
+  // };
 
   const onChangeCommentValue = (event: any) => {
     setCommentValue(event.target.value);
@@ -96,11 +104,26 @@ const DetailPost: React.FC<IDetailPost> = ({
          });
   }
 
+  useEffect(()=>{
+      const userAgent: string = getUserAgent();
+      switch (userAgent) {
+          case  USER_AGENT.IOS :
+              setStoreUrl(DOWNLOAD_URL.APPLE)
+              break
+          case USER_AGENT.ANDROID :
+              setStoreUrl(DOWNLOAD_URL.PLAY_STORE)
+              break
+          default:
+              setStoreUrl("http://localhost:3000/post/dcd572d3-1731-45cc-b109-cc0952eadf34")
+              break
+      }
+  },[])
+
   return (
     <RequestPostBlock>
       <MobileToolbar title="요청피드" isBack={true} />
       <DetailFeedHeader
-        onClick={jwt ? handleConnectionOpen : handleLoginOpen}
+        onClick={redirectToStore}
         bloodType={createBloodTypeString(bloodType.abo, bloodType.rh)}
         sort={createBloodProductString(bloodProduct)}
         buttonText="도움주기"
@@ -190,12 +213,12 @@ const DetailPost: React.FC<IDetailPost> = ({
         </Paper>
       </InputCommentBlock>
 
-      <ConnectionModal
-        open={connectionOpen}
-        handleOpen={handleConnectionOpen}
-        phoneNumber={phoneNumber}
-      />
-      <LoginRequestModal open={loginOpen} onClick={handleLoginOpen} />
+      {/*<ConnectionModal*/}
+      {/*  open={connectionOpen}*/}
+      {/*  handleOpen={handleConnectionOpen}*/}
+      {/*  phoneNumber={phoneNumber}*/}
+      {/*/>*/}
+      {/*<LoginRequestModal open={loginOpen} onClick={handleLoginOpen} />*/}
     </RequestPostBlock>
   );
 };
