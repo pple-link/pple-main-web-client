@@ -68,56 +68,56 @@ const App: React.FC = () => {
       {isMobile ? (
         <AppBlock style={{ background: 'white' }}>
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/post" element={<RequestPostPage />} />
+            <Route path="/" element={<Introduce />} />
+            {/*<Route path="/login" element={<LoginPage />} />*/}
+            {/*<Route path="/register" element={<RegisterPage />} />*/}
+            {/*<Route path="/post" element={<RequestPostPage />} />*/}
             <Route path="/post/:donationUuid" element={<DetailForm />} />
-            <Route path="/post/register" element={<RequestRegisterPage />} />
-            <Route path="/page" element={<MyPage />} />
-            <Route path="/page/modify" element={<ModifyProfileForm />} />
-            <Route path="/page/faq" element={<FAQ />} />
-            <Route path="/page/helper" element={<Helped />} />
-            <Route path="/page/story" element={<MyStoryForm />} />
-            <Route path="/etc/1" element={<DesignatedBloodDonation />} />
-            <Route path="/etc/2" element={<PrivacyPolicy />} />
-            <Route path="/etc/3" element={<TermsOfService />} />
+            {/*<Route path="/post/register" element={<RequestRegisterPage />} />*/}
+            {/*<Route path="/page" element={<MyPage />} />*/}
+            {/*<Route path="/page/modify" element={<ModifyProfileForm />} />*/}
+            {/*<Route path="/page/faq" element={<FAQ />} />*/}
+            {/*<Route path="/page/helper" element={<Helped />} />*/}
+            {/*<Route path="/page/story" element={<MyStoryForm />} />*/}
+            {/*<Route path="/etc/1" element={<DesignatedBloodDonation />} />*/}
+            {/*<Route path="/etc/2" element={<PrivacyPolicy />} />*/}
+            {/*<Route path="/etc/3" element={<TermsOfService />} />*/}
             <Route path="/intro" element={<Introduce />} />
-            <Route
-              path="/page/story/modify/:donationUuid"
-              element={<ModifyStoryForm />}
-            />
-            <Route
-              path="/login/oauth2/kakao/callback"
-              element={<HandleOAuthRedirectUrl />}
-            />
+            {/*<Route*/}
+            {/*  path="/page/story/modify/:donationUuid"*/}
+            {/*  element={<ModifyStoryForm />}*/}
+            {/*/>*/}
+            {/*<Route*/}
+            {/*  path="/login/oauth2/kakao/callback"*/}
+            {/*  element={<HandleOAuthRedirectUrl />}*/}
+            {/*/>*/}
           </Routes>
         </AppBlock>
       ) : (
         <PCBlock>
           <PCBox style={{ background: 'white' }}>
             <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
-              <Route path="/post" element={<RequestPostPage />} />
+              <Route path="/" element={<Introduce />} />
+              {/*<Route path="/login" element={<LoginPage />} />*/}
+              {/*<Route path="/register" element={<RegisterPage />} />*/}
+              {/*<Route path="/post" element={<RequestPostPage />} />*/}
               <Route path="/post/:donationUuid" element={<DetailForm />} />
-              <Route path="/post/register" element={<RequestRegisterPage />} />
-              <Route path="/page" element={<MyPage />} />
-              <Route path="/page/modify" element={<ModifyProfileForm />} />
-              <Route path="/page/faq" element={<FAQ />} />
-              <Route path="/page/helper" element={<Helped />} />
-              <Route path="/page/story" element={<MyStoryForm />} />
+              {/*<Route path="/post/register" element={<RequestRegisterPage />} />*/}
+              {/*<Route path="/page" element={<MyPage />} />*/}
+              {/*<Route path="/page/modify" element={<ModifyProfileForm />} />*/}
+              {/*<Route path="/page/faq" element={<FAQ />} />*/}
+              {/*<Route path="/page/helper" element={<Helped />} />*/}
+              {/*<Route path="/page/story" element={<MyStoryForm />} />*/}
               <Route path="/intro" element={<Introduce />} />
-              <Route path="/etc/1" element={<DesignatedBloodDonation />} />
-              <Route
-                path="/page/story/modify/:donationUuid"
-                element={<ModifyStoryForm />}
-              />
-              <Route
-                path="/login/oauth2/kakao/callback"
-                element={<HandleOAuthRedirectUrl />}
-              />
+              {/*<Route path="/etc/1" element={<DesignatedBloodDonation />} />*/}
+              {/*<Route*/}
+              {/*  path="/page/story/modify/:donationUuid"*/}
+              {/*  element={<ModifyStoryForm />}*/}
+              {/*/>*/}
+              {/*<Route*/}
+              {/*  path="/login/oauth2/kakao/callback"*/}
+              {/*  element={<HandleOAuthRedirectUrl />}*/}
+              {/*/>*/}
             </Routes>
           </PCBox>
         </PCBlock>
