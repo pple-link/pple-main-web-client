@@ -1,5 +1,4 @@
 export default interface IDetailPost {
-  jwt: string | undefined;
   bloodProduct: string;
   content: string;
   createdAt: string;
@@ -26,7 +25,6 @@ export default interface IDetailPost {
     providerType: string;
   };
   currentUserImageUrl: string;
-  onSubmitComment: any;
   currenUuid: string;
   onClickLike: any;
 }

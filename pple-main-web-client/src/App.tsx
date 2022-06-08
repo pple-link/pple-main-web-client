@@ -3,22 +3,6 @@ import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 import styled from 'styled-components';
 import { Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
-import RequestPostPage from './pages/RequestPostPage';
-import RequestRegisterPage from './pages/RequestRegisterPage';
-import MyPage from './pages/MyPage';
-import FAQ from './components/mypage/faq/FAQ';
-import Helped from './components/mypage/help/Helped';
-import ModifyProfileForm from './container/my-page/ModifyProfileForm';
-import MyStoryForm from './container/my-page/MyStoryForm';
-import DesignatedBloodDonation from './components/mypage/etc/DesignatedBloodDonation';
-import PrivacyPolicy from './components/mypage/etc/PrivacyPolicy';
-import TermsOfService from './components/mypage/etc/TermsOfService';
-import ModifyStoryForm from './container/my-page/ModifyStoryForm';
-import HandleOAuthRedirectUrl from './container/auth/HandleOAuthRedirectUrl';
-import DetailPost from './components/request/post/DetailPost';
 import './static/fonts/fonts.css';
 import Introduce from './pages/Introduce';
 import { isMobile } from 'react-device-detect';
@@ -69,7 +53,7 @@ const App: React.FC = () => {
         <AppBlock style={{ background: 'white' }}>
           <Routes>
             <Route path="/" element={<Introduce />} />
-            {/*<Route path="/login" element={<LoginPage />} />*/}
+            {/*<Route path="/ login" element={<LoginPage />} />*/}
             {/*<Route path="/register" element={<RegisterPage />} />*/}
             {/*<Route path="/post" element={<RequestPostPage />} />*/}
             <Route path="/post/:donationUuid" element={<DetailForm />} />

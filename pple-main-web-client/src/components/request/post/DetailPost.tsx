@@ -42,82 +42,32 @@ const DetailPost: React.FC<IDetailPost> = ({
   uuid,
   viewsCount,
   currentUserImageUrl,
-  jwt,
   onClickLike,
 }) => {
-  const dispatch = useDispatch();
   const currentUuid = useSelector((state: RootState) => state.account.uuid);
-  const [commentValue, setCommentValue] = useState('');
-  const [connectionOpen, setConnectionOpen] = useState<boolean>(false);
-  const [loginOpen, setLoginOpen] = useState<boolean>(false);
+
   const { bloodType } = patient;
   const { displayName, profileImageUrl } = writer;
-  const [storeUrl, setStoreUrl] = useState<string>("");
 
-
-  // todo : 모바일에서 디버깅 해보기
   const redirectToStore = (): void => {
-      window.open(storeUrl)
-      return;
-  }
-
-  // const handleConnectionOpen = () => {
-  //   setConnectionOpen(!connectionOpen);
-  //   clickHelpButton();
-  // };
-  //
-  // const handleLoginOpen = () => {
-  //   setLoginOpen(!loginOpen);
-  // };
-
-  const onChangeCommentValue = (event: any) => {
-    setCommentValue(event.target.value);
-  };
-
-  const onClickCommentSubmit = () => {
-    dispatch(setComment(commentValue));
-    setCommentValue('');
-  };
-
-  const handleLikeDonation = () => {
-    if (jwt) {
-      const donationData: Like = {
-        donationUuid: uuid,
-        likes: likes,
-        jwt: jwt,
-      };
-      onClickLike(donationData);
-      return;
-    }
-    setLoginOpen(!loginOpen);
-  };
-
-  const copyDonationUrl = (): void =>{
-    getShareUrl(uuid,jwt)
-         .then(async res=>{
-           const url = await res.data;
-           copyUrl(url);
-         })
-         .catch(err=>{
-           alert("URL 복사를 실패했습니다. 관리자에게 문의해주세요");
-           console.error(err);
-         });
-  }
-
-  useEffect(()=>{
       const userAgent: string = getUserAgent();
       switch (userAgent) {
-          case  USER_AGENT.IOS :
-              setStoreUrl(DOWNLOAD_URL.APPLE)
-              break
-          case USER_AGENT.ANDROID :
-              setStoreUrl(DOWNLOAD_URL.PLAY_STORE)
-              break
+          case USER_AGENT.ANDROID:
+              window.open(DOWNLOAD_URL.PLAY_STORE)
+              break;
+          case USER_AGENT.IOS:
+              window.open(DOWNLOAD_URL.APPLE)
+              break;
           default:
-              setStoreUrl("http://localhost:3000/post/dcd572d3-1731-45cc-b109-cc0952eadf34")
-              break
+              window.open(DOWNLOAD_URL.APPLE)
+              break;
       }
-  },[])
+  }
+
+  const copyDonationUrl = (): void =>{
+      const url = `pple.link/post/${uuid}`;
+      copyUrl(url);
+  }
 
   return (
     <RequestPostBlock>
@@ -155,7 +105,7 @@ const DetailPost: React.FC<IDetailPost> = ({
       </PostState>
 
       <FunctionButton>
-        <StyledButton onClick={handleLikeDonation}>
+        <StyledButton onClick={redirectToStore}>
           <img
             style={{ marginRight: '7px' }}
             src={heart}
@@ -171,7 +121,7 @@ const DetailPost: React.FC<IDetailPost> = ({
             width={16}
             height={16}
           />
-          <span>사연복사</span>
+          <span>공유로 도와줄래요</span>
         </StyledButton>
       </FunctionButton>
 
@@ -182,36 +132,36 @@ const DetailPost: React.FC<IDetailPost> = ({
           reply={reply}
           currentUuid={currentUuid}
           donationUuid={uuid}
-          jwt={jwt}
+          jwt={"jwt"}
         />
       </CommentBlock>
-      <InputCommentBlock isMobile={isMobile}>
-        <Avatar
-          src={currentUserImageUrl}
-          sx={{ width: '40px', height: '40px', marginRight: '10px' }}
-        />
-        <Paper
-          elevation={0}
-          sx={{
-            background: '#F9F9F9',
-            border: '1px solid #EDEDED',
-            borderRadius: '100px',
-            width: '100%',
-            display: 'flex',
-            alignContent: 'center',
-          }}
-        >
-          <StyledInput
-            sx={{ ml: 1, flex: 1, width: '100%' }}
-            placeholder="댓글을 남겨주세요"
-            value={commentValue}
-            onChange={onChangeCommentValue}
-          />
-          <IconButton type="submit" onClick={onClickCommentSubmit}>
-            <img src={arrowUp} width={30} height={30} />
-          </IconButton>
-        </Paper>
-      </InputCommentBlock>
+      {/*<InputCommentBlock isMobile={isMobile}>*/}
+      {/*  <Avatar*/}
+      {/*    src={currentUserImageUrl}*/}
+      {/*    sx={{ width: '40px', height: '40px', marginRight: '10px' }}*/}
+      {/*  />*/}
+      {/*  <Paper*/}
+      {/*    elevation={0}*/}
+      {/*    sx={{*/}
+      {/*      background: '#F9F9F9',*/}
+      {/*      border: '1px solid #EDEDED',*/}
+      {/*      borderRadius: '100px',*/}
+      {/*      width: '100%',*/}
+      {/*      display: 'flex',*/}
+      {/*      alignContent: 'center',*/}
+      {/*    }}*/}
+      {/*  >*/}
+      {/*    <StyledInput*/}
+      {/*      sx={{ ml: 1, flex: 1, width: '100%' }}*/}
+      {/*      placeholder="댓글을 남겨주세요"*/}
+      {/*      value={commentValue}*/}
+      {/*      onChange={onChangeCommentValue}*/}
+      {/*    />*/}
+      {/*    <IconButton type="submit" onClick={onClickCommentSubmit}>*/}
+      {/*      <img src={arrowUp} width={30} height={30} />*/}
+      {/*    </IconButton>*/}
+      {/*  </Paper>*/}
+      {/*</InputCommentBlock>*/}
 
       {/*<ConnectionModal*/}
       {/*  open={connectionOpen}*/}
